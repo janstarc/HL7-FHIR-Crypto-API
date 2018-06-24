@@ -4,7 +4,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-/*
+
 @WebFilter(urlPatterns = { "*.do" })
 public class LoginRequiredFilter implements Filter {
 
@@ -19,19 +19,19 @@ public class LoginRequiredFilter implements Filter {
 
         System.out.println(request.getRequestURI());
         filterChain.doFilter(servletRequest, servletResponse);
-        */
+
         /*
         if(request.getSession().getAttribute("name") != null){
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             request.getRequestDispatcher("/login.do").forward(servletRequest, servletResponse);
         }
-        *//*
+        */
     }
 
     @Override
     public void destroy() {
 
     }
-}*/
+}
 
