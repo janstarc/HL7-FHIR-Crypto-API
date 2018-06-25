@@ -1,16 +1,11 @@
 package com.todo.encryptDecrypt;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-
 import javax.crypto.*;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletOutputStream;
 import java.io.*;
-import java.net.SocketTimeoutException;
 import java.security.*;
 import java.security.cert.CertificateException;
-import java.util.Arrays;
-import com.todo.encryptDecrypt.Base64;
 
 public class cryptoService {
 
@@ -24,13 +19,8 @@ public class cryptoService {
         // Cipher - represents a cryptographic algorithm --> Algorithm is set here
         cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
 
-
-        // Try to get the key from the keystore
         // Create/Load a KeyStore
-        //Path currentRelativePath = Paths.get("");
-        //System.out.println("Current relative path = " + currentRelativePath.toRealPath().toString());
-
-
+            // TODO Figure out what to do if the keystore is not avaliable!
         KeyStore keyStore = getKeyStore("123abc", "/WEB-INF/crypto/keystore.ks", context);
         System.out.println("KeyStore: " + keyStore);
 
@@ -43,18 +33,14 @@ public class cryptoService {
             secretKey = (SecretKey) keyEntry;
             System.out.println("Secret key HASH: " + secretKey.hashCode());
         } else {
+            // TODO Probably not OK approach
             // Generate key - safely
             secretKey = generateSecretKey("AES", 256);
             // Get the entry pass object. keyPassword & entryPassword - password of the entry, not the entire keyStore
             saveKeyToKeystore(secretKey, "keyPassword", "keyAlias", keyStore);
 
             // Save the keystore to file
-            //File catalinaBase = new File(System.getProperty("catalina.base")).getAbsoluteFile();
-            //System.out.println("CatlinaBase: "  + catalinaBase.getAbsoluteFile().toString());
-            //File keyStorePath = new File(catalinaBase, "crypto/keystore.ks");
-            //System.out.println("KeyStorePath: " + keyStorePath.getAbsolutePath());
-            //String keyStorePathString = keyStorePath.getAbsolutePath();
-            String keyStorePath = context.getRealPath("/WEB-INF/crypto/keystore.ks");
+            String keyStorePath = context.getRealPath("/WEB-INF/crypto/keystore.ks");       // https://stackoverflow.com/questions/4340653/file-path-to-resource-in-our-war-web-inf-folder; https://stackoverflow.com/questions/35837285/different-ways-to-get-servlet-context
             System.out.println("KeyStorePath - SAVE: " + keyStorePath);
 
             try (FileOutputStream keyStoreOutputStream = new FileOutputStream(keyStorePath)){
@@ -70,27 +56,19 @@ public class cryptoService {
     public static String encrypt(String plainText) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
 
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-        byte[] textToArray = plainText.getBytes();
-        //System.out.println("Original text --> Array " + Arrays.toString(textToArray));
-        byte[] cipherText = cipher.doFinal(textToArray);
-        //System.out.println("Cipher: " + Arrays.toString(cipherText));
-        String cipherString = Base64.encodeToString(cipherText, Base64.NO_WRAP);
-
-        //System.out.println("Cipher text: " + cipherString);
+        byte[] textToArray = plainText.getBytes();                          // Convert from plainText to byte[]
+        byte[] cipherText = cipher.doFinal(textToArray);                    // Encrypt to byte[]
+        String cipherString = Base64.encodeToString(cipherText, Base64.NO_WRAP);        // Convert byte[] to hash String without loss
 
         return cipherString;
     }
 
     public static String decrypt(String cipherText) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
-        cipher.init(Cipher.DECRYPT_MODE, secretKey);
-        //System.out.println("To decrypt - cipherText: " + cipherText);
-        byte[] encryptedArray = Base64.decode(cipherText, Base64.NO_WRAP);
-        //System.out.println("EncryptedArray: " + Arrays.toString(encryptedArray));
-        byte[] decryptedArray = cipher.doFinal(encryptedArray);
-        //System.out.println("DecryptedArray:" + Arrays.toString(decryptedArray));
-        //System.out.println("Decrypted text: " + new String(decryptedArray));
-        String decryptedString = new String(decryptedArray);
-        //System.out.println("Decrypted Array: " + decryptedString);
+
+        cipher.init(Cipher.DECRYPT_MODE, secretKey);                            // Set DECRYPT mode
+        byte[] encryptedArray = Base64.decode(cipherText, Base64.NO_WRAP);      // 1 to 1 conversion from hash String to byte[]
+        byte[] decryptedArray = cipher.doFinal(encryptedArray);                 // Decryption of byte[]
+        String decryptedString = new String(decryptedArray);                    // Convert from byte[] to plainText
 
         return decryptedString;
     }
@@ -106,6 +84,7 @@ public class cryptoService {
 
     // Message digest - check if the message was modified during transport
     private static void calculateMessageDigest(byte[] plainText) throws NoSuchAlgorithmException {
+
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
         byte[] digest = messageDigest.digest(plainText);
         System.out.println("Digest : " + new String(digest));
@@ -114,8 +93,7 @@ public class cryptoService {
 
     private static Key getEntryFromKeyStore(String keyAlias, String entryPass, KeyStore keyStore) throws UnrecoverableEntryException, NoSuchAlgorithmException, KeyStoreException {
 
-        KeyStore.ProtectionParameter entryPassword = new KeyStore.PasswordProtection(entryPass.toCharArray());
-        //KeyStore.Entry keyEntry = keyStore.getEntry(keyAlias, entryPassword);
+        //KeyStore.ProtectionParameter entryPassword = new KeyStore.PasswordProtection(entryPass.toCharArray());
         Key keyEntry = keyStore.getKey(keyAlias, entryPass.toCharArray());
 
         return keyEntry;
@@ -133,17 +111,9 @@ public class cryptoService {
 
 
     // Creates an empty keystore if it does not exist on disk/loads existing keystore
-    // pass - Password of the entire keystore
     private static KeyStore getKeyStore(String keyStorePass, String keyStoreFile, ServletContext context) throws KeyStoreException, CertificateException, NoSuchAlgorithmException, IOException {
-        //File catalinaBase = new File(System.getProperty("catalina.base")).getAbsoluteFile();
-        //System.out.println("CatlinaBase: "  + catalinaBase.getAbsoluteFile().toString());
-        //File keyStorePath = new File(catalinaBase, keyStoreFile);
-        //System.out.println("KeyStorePath: " + keyStorePath.getAbsolutePath());
 
         String keyStorePath = context.getRealPath(keyStoreFile);
-        System.out.println("KeyStorePath - READ: " + keyStorePath);
-
-        //InputStream inputStream = new FileInputStream( propertyFile );
 
         KeyStore keyStore = KeyStore.getInstance("PKCS12");
         char[] keyStorePassword = keyStorePass.toCharArray();
@@ -159,7 +129,7 @@ public class cryptoService {
         return keyStore;
     }
 
-    // Generates secret key for encryption
+    // Generates secret key for symmetric encryption
     private static SecretKey generateSecretKey(String algorithm, int keyBitSize) throws NoSuchAlgorithmException {
         KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
         SecureRandom secureRandom = new SecureRandom();
