@@ -3,7 +3,10 @@ package com.todo.encryptDecrypt;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.*;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
 import java.io.*;
+import java.net.SocketTimeoutException;
 import java.security.*;
 import java.security.cert.CertificateException;
 import java.util.Arrays;
@@ -15,7 +18,7 @@ public class cryptoService {
     private static SecretKey secretKey;
 
 
-    public void init() throws NoSuchPaddingException, NoSuchAlgorithmException, KeyStoreException, UnrecoverableEntryException, CertificateException, IOException {
+    public void init(ServletContext context) throws NoSuchPaddingException, NoSuchAlgorithmException, KeyStoreException, UnrecoverableEntryException, CertificateException, IOException {
         Security.addProvider(new BouncyCastleProvider());
 
         // Cipher - represents a cryptographic algorithm --> Algorithm is set here
@@ -28,7 +31,7 @@ public class cryptoService {
         //System.out.println("Current relative path = " + currentRelativePath.toRealPath().toString());
 
 
-        KeyStore keyStore = getKeyStore("123abc", "crypto/keystore.ks");
+        KeyStore keyStore = getKeyStore("123abc", "/WEB-INF/crypto/keystore.ks", context);
         System.out.println("KeyStore: " + keyStore);
 
         // Get the key from the keystore
@@ -46,11 +49,13 @@ public class cryptoService {
             saveKeyToKeystore(secretKey, "keyPassword", "keyAlias", keyStore);
 
             // Save the keystore to file
-            File catalinaBase = new File(System.getProperty("catalina.base")).getAbsoluteFile();
-            System.out.println("CatlinaBase: "  + catalinaBase.getAbsoluteFile().toString());
-            File keyStorePath = new File(catalinaBase, "crypto/keystore.ks");
-            System.out.println("KeyStorePath: " + keyStorePath.getAbsolutePath());
+            //File catalinaBase = new File(System.getProperty("catalina.base")).getAbsoluteFile();
+            //System.out.println("CatlinaBase: "  + catalinaBase.getAbsoluteFile().toString());
+            //File keyStorePath = new File(catalinaBase, "crypto/keystore.ks");
+            //System.out.println("KeyStorePath: " + keyStorePath.getAbsolutePath());
             //String keyStorePathString = keyStorePath.getAbsolutePath();
+            String keyStorePath = context.getRealPath("/WEB-INF/crypto/keystore.ks");
+            System.out.println("KeyStorePath - SAVE: " + keyStorePath);
 
             try (FileOutputStream keyStoreOutputStream = new FileOutputStream(keyStorePath)){
                 keyStore.store(keyStoreOutputStream, "123abc".toCharArray());
@@ -66,26 +71,26 @@ public class cryptoService {
 
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
         byte[] textToArray = plainText.getBytes();
-        System.out.println("Original text --> Array " + Arrays.toString(textToArray));
+        //System.out.println("Original text --> Array " + Arrays.toString(textToArray));
         byte[] cipherText = cipher.doFinal(textToArray);
-        System.out.println("Cipher: " + Arrays.toString(cipherText));
+        //System.out.println("Cipher: " + Arrays.toString(cipherText));
         String cipherString = Base64.encodeToString(cipherText, Base64.NO_WRAP);
 
-        System.out.println("Cipher text: " + cipherString);
+        //System.out.println("Cipher text: " + cipherString);
 
         return cipherString;
     }
 
     public static String decrypt(String cipherText) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
         cipher.init(Cipher.DECRYPT_MODE, secretKey);
-        System.out.println("To decrypt - cipherText: " + cipherText);
+        //System.out.println("To decrypt - cipherText: " + cipherText);
         byte[] encryptedArray = Base64.decode(cipherText, Base64.NO_WRAP);
-        System.out.println("EncryptedArray: " + Arrays.toString(encryptedArray));
+        //System.out.println("EncryptedArray: " + Arrays.toString(encryptedArray));
         byte[] decryptedArray = cipher.doFinal(encryptedArray);
-        System.out.println("DecryptedArray:" + Arrays.toString(decryptedArray));
-        System.out.println("Decrypted text: " + new String(decryptedArray));
+        //System.out.println("DecryptedArray:" + Arrays.toString(decryptedArray));
+        //System.out.println("Decrypted text: " + new String(decryptedArray));
         String decryptedString = new String(decryptedArray);
-        System.out.println("Decrypted Array: " + decryptedString);
+        //System.out.println("Decrypted Array: " + decryptedString);
 
         return decryptedString;
     }
@@ -129,11 +134,14 @@ public class cryptoService {
 
     // Creates an empty keystore if it does not exist on disk/loads existing keystore
     // pass - Password of the entire keystore
-    private static KeyStore getKeyStore(String keyStorePass, String keyStoreFile) throws KeyStoreException, CertificateException, NoSuchAlgorithmException, IOException {
-        File catalinaBase = new File(System.getProperty("catalina.base")).getAbsoluteFile();
+    private static KeyStore getKeyStore(String keyStorePass, String keyStoreFile, ServletContext context) throws KeyStoreException, CertificateException, NoSuchAlgorithmException, IOException {
+        //File catalinaBase = new File(System.getProperty("catalina.base")).getAbsoluteFile();
         //System.out.println("CatlinaBase: "  + catalinaBase.getAbsoluteFile().toString());
-        File keyStorePath = new File(catalinaBase, keyStoreFile);
-        //System.out.println("KeyStorePath: " + keyStorePath.getAbsolutePath().toString());
+        //File keyStorePath = new File(catalinaBase, keyStoreFile);
+        //System.out.println("KeyStorePath: " + keyStorePath.getAbsolutePath());
+
+        String keyStorePath = context.getRealPath(keyStoreFile);
+        System.out.println("KeyStorePath - READ: " + keyStorePath);
 
         //InputStream inputStream = new FileInputStream( propertyFile );
 
@@ -143,6 +151,7 @@ public class cryptoService {
             keyStore.load(keyStoreData, keyStorePassword);
             System.out.println("Keystore found on disk");
         } catch (Exception e){
+            e.printStackTrace();
             System.out.println("New keystore initialized");
             keyStore.load(null, keyStorePassword);
         }

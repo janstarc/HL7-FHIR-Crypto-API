@@ -3,8 +3,12 @@ com\todo\login\LoginServlet.class
 com\todo\camel\ContentEnricher$1.class
 com\todo\camel\enrichmentBean.class
 com\todo\camel\FromToFile$1.class
+com\todo\encryptDecrypt\Base64$Encoder.class
+com\todo\encryptDecrypt\Base64$Coder.class
 com\todo\login\LoginService.class
+com\todo\encryptDecrypt\Base64$Decoder.class
 com\todo\camel\FromToFile.class
+com\todo\encryptDecrypt\Base64.class
 com\todo\todo\Todo.class
 com\todo\logout\LogoutServlet.class
 com\todo\todo\TodoService.class
@@ -14,6 +18,7 @@ com\todo\camel\ContentEnricher$1$2.class
 com\todo\intercept\RequestInterceptServlet.class
 com\todo\filter\LoginRequiredFilter.class
 com\todo\camel\ContentEnricher.class
+com\todo\encryptDecrypt\cryptoService.class
 com\todo\camel\ContentEnricher$1$1.class
 com\todo\todo\ListTodoServlet.class
 com\todo\encryptDecrypt\EncryptDecryptServlet.class

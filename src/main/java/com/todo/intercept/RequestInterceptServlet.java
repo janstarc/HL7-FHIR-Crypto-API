@@ -9,6 +9,7 @@ import com.todo.encryptDecrypt.cryptoService;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -54,8 +55,9 @@ public class RequestInterceptServlet extends HttpServlet {
         System.out.println("Json Element = " + jsonString);
         String id = jObject.getAsJsonPrimitive("id").toString();
         String decryptedId = null;
+        ServletContext context = getServletContext();
         try {
-            crypto.init();
+            crypto.init(context);
             id = crypto.encrypt(id);
             decryptedId = crypto.decrypt(id);
         } catch (NoSuchPaddingException | NoSuchAlgorithmException | KeyStoreException | UnrecoverableEntryException |
