@@ -1,4 +1,4 @@
-package com.todo.camel;
+package com.diplomska.camel;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.camel.CamelContext;

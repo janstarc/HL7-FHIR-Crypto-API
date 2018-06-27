@@ -1,4 +1,4 @@
-package com.todo.todo;
+package com.diplomska.todo;
 
 import java.util.ArrayList;
 import java.util.List;

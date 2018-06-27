@@ -1,4 +1,4 @@
-package com.todo.camel;
+package com.diplomska.camel;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;

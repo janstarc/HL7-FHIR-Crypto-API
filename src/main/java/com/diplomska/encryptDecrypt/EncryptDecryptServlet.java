@@ -1,4 +1,4 @@
-package com.todo.encryptDecrypt;
+package com.diplomska.encryptDecrypt;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;

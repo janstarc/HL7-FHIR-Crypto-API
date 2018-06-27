@@ -1,4 +1,4 @@
-package com.todo.todo;
+package com.diplomska.todo;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,16 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/delete-todo.do")
-public class DeleteTodoServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/list-todo.do")
+public class ListTodoServlet extends HttpServlet {
 
     private TodoService todoService = new TodoService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String todoToDelete = request.getParameter("todo");
-        String category = request.getParameter("category");
-        todoService.deleteTodo(new Todo(todoToDelete, category));
-        response.sendRedirect("/list-todo.do");
+        request.setAttribute("todos", todoService.retrieveTodos());
+        request.getRequestDispatcher("/WEB-INF/view/list-todos.jsp").forward(request, response);
     }
 }

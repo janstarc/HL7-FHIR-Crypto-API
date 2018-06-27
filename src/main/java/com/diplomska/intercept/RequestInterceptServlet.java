@@ -1,4 +1,4 @@
-package com.todo.intercept;
+package com.diplomska.intercept;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
@@ -7,8 +7,7 @@ import ca.uhn.fhir.model.dstu2.valueset.BundleTypeEnum;
 import ca.uhn.fhir.model.dstu2.valueset.HTTPVerbEnum;
 import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
-import com.google.gson.*;
-import com.todo.encryptDecrypt.cryptoService;
+import com.diplomska.encryptDecrypt.cryptoService;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 //import org.json.JSONObject;
 
@@ -17,7 +16,6 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +29,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableEntryException;
 import java.security.cert.CertificateException;
 import java.util.ArrayList;
-import java.util.List;
 
 @WebServlet(urlPatterns = "/addResource.do")
 public class RequestInterceptServlet extends HttpServlet {
@@ -40,6 +37,7 @@ public class RequestInterceptServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         request.getRequestDispatcher("/WEB-INF/view/addResource.jsp").forward(request, response);
     }
 
@@ -57,13 +55,12 @@ public class RequestInterceptServlet extends HttpServlet {
         String familyName = null;
         String givenName = null;
 
-
         try {
             familyName = p.getName().get(0).getFamilyAsSingleString();
             givenName = p.getName().get(0).getGivenAsSingleString();
             System.out.println("Family: " + familyName + " | Given: " + givenName);
         } catch (Exception e){
-            System.out.println("JSON Parser Error - Invalid resource. Exit 1");
+            System.out.println("JSON Parser Error - Invalid resource");
             e.printStackTrace();
             return;
         }
@@ -75,8 +72,8 @@ public class RequestInterceptServlet extends HttpServlet {
             givenName = crypto.encrypt(givenName);
         } catch (NoSuchPaddingException | NoSuchAlgorithmException | KeyStoreException | UnrecoverableEntryException |
                  CertificateException | BadPaddingException | IllegalBlockSizeException | InvalidKeyException e) {
+            System.out.println("Encryption Error");
             e.printStackTrace();
-            System.out.println("Encryption Error. Exit 1");
             return;
         }
 
@@ -85,7 +82,6 @@ public class RequestInterceptServlet extends HttpServlet {
         family.add(new StringDt(familyName));
         ArrayList<StringDt> given = new ArrayList<>();
         given.add(new StringDt(givenName));
-
 
         try{
             p.getName().get(0).setFamily(family);
@@ -121,6 +117,10 @@ public class RequestInterceptServlet extends HttpServlet {
 
         // Log the response
         System.out.println("------------RESPONSE------------");
-        System.out.println(ctx.newXmlParser().setPrettyPrint(true).encodeResourceToString(resp));
+        String responseString = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(resp);
+        System.out.println(responseString);
+        //response.setStatus(HttpServletResponse.SC_OK);
+        PrintWriter out = response.getWriter();
+        out.println(responseString);
     }
 }

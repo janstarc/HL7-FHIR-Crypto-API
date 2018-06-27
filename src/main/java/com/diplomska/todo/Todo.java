@@ -1,4 +1,4 @@
-package com.todo.todo;
+package com.diplomska.todo;
 
 public class Todo {
 

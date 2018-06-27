@@ -1,4 +1,4 @@
-package com.todo.filter;
+package com.diplomska.filter;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

@@ -1,4 +1,4 @@
-package com.todo.camel;
+package com.diplomska.camel;
 
 public class enrichmentBean {
 

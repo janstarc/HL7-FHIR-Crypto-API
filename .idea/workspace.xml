@@ -7,92 +7,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09cfb8d0-a032-49fd-8d82-a8b218719caa" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/Saxon-HE-9.5.1-5.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/activation-1.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/animal-sniffer-annotations-1.14.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/antlr-2.7.7.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/aspectjrt-1.8.10.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/attoparser-2.0.4.RELEASE.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/byte-buddy-1.6.6.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/classmate-1.3.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/commons-io-2.5.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/commons-lang3-3.6.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/dom4j-1.6.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/ehcache-2.10.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/error_prone_annotations-2.0.18.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/guava-23.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/hapi-fhir-client-3.2.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/hapi-fhir-jpaserver-base-3.2.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/hapi-fhir-server-3.2.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/hapi-fhir-structures-dstu2-3.2.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/hapi-fhir-structures-dstu3-3.4.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/hapi-fhir-structures-hl7org-dstu2-3.2.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/hapi-fhir-structures-r4-3.2.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/hapi-fhir-utilities-3.2.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/hapi-fhir-validation-3.2.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/hapi-fhir-validation-resources-dstu2-3.2.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/hapi-fhir-validation-resources-dstu3-3.4.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/hapi-fhir-validation-resources-r4-3.2.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/hibernate-commons-annotations-5.0.1.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/hibernate-core-5.2.10.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/hibernate-ehcache-5.2.10.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/hibernate-entitymanager-5.2.10.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/hibernate-jpa-2.1-api-1.0.0.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/hibernate-search-engine-5.7.1.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/hibernate-search-orm-5.7.1.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/hibernate-validator-5.4.1.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/j2objc-annotations-1.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/jackson-annotations-2.9.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/jandex-2.0.3.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/javassist-3.20.0-GA.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/javax.el-3.0.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/javax.mail-1.6.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/javax.transaction-api-1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/javolution-5.2.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/jaxen-1.1.6.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/jboss-logging-3.3.0.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/jcl-over-slf4j-1.7.25.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/jdom2-2.0.6.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/jopt-simple-4.9.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/jscience-4.3.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/json_patch-0.0.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/jsr305-1.3.9.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/lucene-analyzers-common-5.5.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/lucene-analyzers-phonetic-5.5.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/lucene-core-5.5.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/lucene-facet-5.5.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/lucene-highlighter-5.5.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/lucene-join-5.5.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/lucene-memory-5.5.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/lucene-misc-5.5.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/lucene-queries-5.5.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/ognl-3.1.12.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/spring-context-support-5.0.0.RELEASE.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/spring-data-commons-1.13.6.RELEASE.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/spring-data-jpa-1.11.6.RELEASE.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/spring-messaging-5.0.0.RELEASE.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/spring-web-5.0.0.RELEASE.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/spring-webmvc-5.0.0.RELEASE.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/spring-websocket-5.0.0.RELEASE.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/stax-api-1.0-2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/thymeleaf-3.0.7.RELEASE.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/thymeleaf-spring4-3.0.7.RELEASE.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/unbescape-1.1.5.RELEASE.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/validation-api-1.1.0.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/xml-patch-0.3.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/xpp3_min-1.1.4c.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/getResource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/todo/intercept/RequestInterceptServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/todo/intercept/RequestInterceptServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/request-intercept.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/addResource.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/todo/encryptDecrypt/cryptoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/todo/encryptDecrypt/cryptoService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/todo/intercept/RequestInterceptServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/todo/intercept/RequestInterceptServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/classes/com/todo/encryptDecrypt/cryptoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/classes/com/todo/encryptDecrypt/cryptoService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/classes/com/todo/intercept/RequestInterceptServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/classes/com/todo/intercept/RequestInterceptServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/jackson-annotations-2.4.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/todo-app-0.0.1-SNAPSHOT/WEB-INF/lib/spring-messaging-4.1.6.RELEASE.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todo/camel/ContentEnricher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/camel/ContentEnricher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todo/camel/FromToFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/camel/FromToFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todo/camel/MyTransformer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/camel/MyTransformer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todo/camel/enrichmentBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/camel/enrichmentBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todo/encryptDecrypt/Base64.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/Base64.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todo/encryptDecrypt/EncryptDecryptServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/EncryptDecryptServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todo/encryptDecrypt/cryptoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/cryptoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todo/filter/LoginRequiredFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/filter/LoginRequiredFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todo/intercept/RequestInterceptServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/RequestInterceptServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todo/login/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/login/LoginService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todo/login/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/login/LoginServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todo/logout/LogoutServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/logout/LogoutServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todo/todo/AddTodoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/todo/AddTodoServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todo/todo/DeleteTodoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/todo/DeleteTodoServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todo/todo/ListTodoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/todo/ListTodoServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todo/todo/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/todo/Todo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/todo/todo/TodoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/todo/TodoService.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -105,11 +39,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RequestInterceptServlet.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/intercept/RequestInterceptServlet.java">
+      <file leaf-file-name="testniPrimeri.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1340">
-              <caret line="42" column="63" selection-start-line="42" selection-start-column="63" selection-end-line="42" selection-end-column="63" />
+            <state relative-caret-position="202">
+              <caret line="57" column="14" selection-start-line="57" selection-start-column="14" selection-end-line="57" selection-end-column="14" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#710#711#0" expanded="true" />
+                <element signature="e#738#739#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RequestInterceptServlet.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/RequestInterceptServlet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1138">
+              <caret line="119" column="14" lean-forward="true" selection-start-line="119" selection-start-column="14" selection-end-line="119" selection-end-column="14" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -117,8 +65,17 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="getResource.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/getResource.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="9" column="38" lean-forward="true" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="EncryptDecryptServlet.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/encryptDecrypt/EncryptDecryptServlet.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/EncryptDecryptServlet.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="352">
               <caret line="16" column="56" selection-start-line="16" selection-start-column="56" selection-end-line="16" selection-end-column="56" />
@@ -133,7 +90,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/crypto/keystore.ks">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="220">
-              <caret line="10" column="37" lean-forward="true" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
+              <caret line="10" column="37" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -151,13 +108,13 @@
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/addResource.jsp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="286">
-              <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+              <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="LoginRequiredFilter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/filter/LoginRequiredFilter.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/filter/LoginRequiredFilter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="364">
               <caret line="20" selection-start-line="20" selection-end-line="20" />
@@ -175,7 +132,7 @@
         </entry>
       </file>
       <file leaf-file-name="cryptoService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/encryptDecrypt/cryptoService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/cryptoService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1517">
               <caret line="42" column="187" selection-start-line="42" selection-start-column="187" selection-end-line="42" selection-end-column="187" />
@@ -254,6 +211,12 @@
         <option value="$PROJECT_DIR$/src/main/java/com/todo/encryptDecrypt/cryptoService.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/todo/intercept/RequestInterceptServlet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/todo/intercept/getResource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/todo/testniPrimeri/testniPrimeri.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/todo/testniPrimeri/intercept/RequestInterceptServlet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/intercept/RequestInterceptServlet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/RequestInterceptServlet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java" />
       </list>
     </option>
   </component>
@@ -339,22 +302,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="camel" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ToDoApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ToDoApp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="encryptDecrypt" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ToDoApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ToDoApp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="filter" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -387,7 +334,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="todo" type="462c0819:PsiDirectoryNode" />
+              <item name="testniPrimeri" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ToDoApp" type="b2602c69:ProjectViewProjectNode" />
@@ -430,11 +377,6 @@
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ToDoApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ToDoApp" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -511,9 +453,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.testniPrimeri (1)">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration name="testniPrimeri (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.diplomska.testniPrimeri.testniPrimeri" />
+      <module name="todo-app" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.diplomska.testniPrimeri.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -626,6 +579,15 @@
         </option>
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Tomcat Server.Tomcat 9" />
+      <item itemvalue="Application.testniPrimeri (1)" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.testniPrimeri (1)" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -645,15 +607,15 @@
       <workItem from="1528899824558" duration="519000" />
       <workItem from="1529585702623" duration="661000" />
       <workItem from="1529588798667" duration="40251000" />
-      <workItem from="1529858718939" duration="33205000" />
+      <workItem from="1529858718939" duration="44436000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="136013000" />
+    <option name="totallyTimeSpent" value="147244000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
@@ -677,10 +639,10 @@
       <window_info anchor="bottom" id="Java Enterprise" order="10" weight="0.32942098" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Version Control" order="12" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.35620916" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.42879498" />
       <window_info anchor="bottom" id="Spring" order="14" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.29738563" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49857143" visible="true" weight="0.19029851" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.33551198" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49857143" visible="true" weight="0.1418919" />
       <window_info anchor="right" id="Bean Validation" order="10" />
       <window_info id="Web" order="6" sideWeight="0.50142854" side_tool="true" weight="0.18600954" />
       <window_info anchor="right" id="Theme Preview" order="9" />
@@ -700,14 +662,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/login.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/view/welcome.jsp" />
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/list-todos.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
@@ -736,7 +690,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/login/LoginServlet.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/login/LoginServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
           <caret line="18" column="65" selection-start-line="18" selection-start-column="65" selection-end-line="18" selection-end-column="65" />
@@ -764,7 +718,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/login/LoginServlet.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/login/LoginServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
           <caret line="18" column="65" selection-start-line="18" selection-start-column="65" selection-end-line="18" selection-end-column="65" />
@@ -821,7 +775,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/todo/DeleteTodoServlet.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/todo/DeleteTodoServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
           <caret line="18" column="62" selection-start-line="18" selection-start-column="62" selection-end-line="18" selection-end-column="62" />
@@ -886,21 +840,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/logout/LogoutServlet.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/logout/LogoutServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
           <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/camel/enrichmentBean.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/camel/enrichmentBean.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/todo/ListTodoServlet.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/todo/ListTodoServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
@@ -910,14 +864,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/camel/FromToFile.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/camel/FromToFile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/camel/ContentEnricher.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/camel/ContentEnricher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="594">
           <caret line="27" selection-start-line="27" selection-end-line="27" />
@@ -929,14 +883,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/todo/Todo.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/todo/Todo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
           <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/login/LoginServlet.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/login/LoginServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="12" column="45" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
@@ -960,14 +914,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/login/LoginService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/login/LoginService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/todo/TodoService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/todo/TodoService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
           <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
@@ -977,14 +931,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/todo/AddTodoServlet.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/todo/AddTodoServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/encryptDecrypt/Base64.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/Base64.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3614">
           <caret line="453" column="25" selection-start-line="453" selection-start-column="25" selection-end-line="453" selection-end-column="25" />
@@ -996,24 +950,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/encryptDecrypt/cryptoService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1517">
-          <caret line="42" column="187" selection-start-line="42" selection-start-column="187" selection-end-line="42" selection-end-column="187" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/crypto/keystore.ks">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
-          <caret line="10" column="37" lean-forward="true" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
+          <caret line="10" column="37" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/filter/LoginRequiredFilter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/filter/LoginRequiredFilter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="364">
           <caret line="20" selection-start-line="20" selection-end-line="20" />
@@ -1027,16 +971,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/encryptDecrypt/EncryptDecryptServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="16" column="56" selection-start-line="16" selection-start-column="56" selection-end-line="16" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/encryptDecrypt.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -1047,16 +981,55 @@
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/addResource.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
-          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+          <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/todo/intercept/RequestInterceptServlet.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/cryptoService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1340">
-          <caret line="42" column="63" selection-start-line="42" selection-start-column="63" selection-end-line="42" selection-end-column="63" />
+        <state relative-caret-position="-1517">
+          <caret line="42" column="187" selection-start-line="42" selection-start-column="187" selection-end-line="42" selection-end-column="187" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/EncryptDecryptServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="16" column="56" selection-start-line="16" selection-start-column="56" selection-end-line="16" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/getResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="38" lean-forward="true" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/RequestInterceptServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1138">
+          <caret line="119" column="14" lean-forward="true" selection-start-line="119" selection-start-column="14" selection-end-line="119" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="57" column="14" selection-start-line="57" selection-start-column="14" selection-end-line="57" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#710#711#0" expanded="true" />
+            <element signature="e#738#739#0" expanded="true" />
           </folding>
         </state>
       </provider>

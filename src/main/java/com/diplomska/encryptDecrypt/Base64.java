@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.todo.encryptDecrypt;
+package com.diplomska.encryptDecrypt;
 
 import java.io.UnsupportedEncodingException;
 

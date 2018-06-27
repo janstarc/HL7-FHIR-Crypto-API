@@ -1,4 +1,4 @@
-package com.todo.todo;
+package com.diplomska.todo;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

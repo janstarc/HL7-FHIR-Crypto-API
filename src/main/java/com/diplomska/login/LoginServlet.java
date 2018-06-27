@@ -1,4 +1,4 @@
-package com.todo.login;
+package com.diplomska.login;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

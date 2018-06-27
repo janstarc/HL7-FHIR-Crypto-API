@@ -1,4 +1,4 @@
-package com.todo.encryptDecrypt;
+package com.diplomska.encryptDecrypt;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import javax.crypto.*;

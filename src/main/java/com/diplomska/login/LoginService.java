@@ -1,4 +1,4 @@
-package com.todo.login;
+package com.diplomska.login;
 
 public class LoginService {
 
