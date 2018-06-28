@@ -1,25 +1,30 @@
 package com.diplomska.testniPrimeri;
 
 import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.model.dstu2.resource.Bundle;
-import ca.uhn.fhir.model.dstu2.resource.Goal;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
-import ca.uhn.fhir.model.dstu2.valueset.BundleTypeEnum;
-import ca.uhn.fhir.model.dstu2.valueset.HTTPVerbEnum;
-import ca.uhn.fhir.model.primitive.IdDt;
-import ca.uhn.fhir.rest.client.api.IGenericClient;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+
 public class testniPrimeri {
 
-    public static void main(String[] args){
-        addPatient();
+    public static void main(String[] args) throws IOException, URISyntaxException {
+        //addPatient();
+        getPatient();
     }
 
     public static void addPatient(){
@@ -69,9 +74,71 @@ public class testniPrimeri {
         //System.out.println("Got ID: " + id.getValue());
     }
 
-    public static void getPatient(){
+    public static void getPatient() throws IOException, URISyntaxException {
 
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        URIBuilder url = new URIBuilder("http://localhost:8080/getResource.do/Patient");
+        url.setParameter("family", "Novak");
+        HttpGet request = new HttpGet(String.valueOf(url));
+        HttpResponse response = httpClient.execute(request);
+        HttpEntity entity = response.getEntity();
+        String responseString = EntityUtils.toString(entity, "UTF-8");
+        System.out.println("----- RESPONSE -----\n" + responseString);
+        /*
+        Bundle search = client
+		      .search()
+		      .forResource(Patient.class)
+		      .where(Patient.FAMILY.matches().value("Perc"))
+		      .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
+		      .execute();
+         */
+        /*
+        BasicConfigurator.configure();
         FhirContext ctx = FhirContext.forDstu2();
-        //String requestBody = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString();
+
+
+        SearchParameterMap paramMap = new SearchParameterMap();
+        Bundle b = new Bundle();
+        b.setType(BundleTypeEnum.MESSAGE).getAllPopulatedChildElementsOfType(Patient.class);
+        String requestBody = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(b);
+        Bundle.EntrySearch b2 = new Bundle.EntrySearch();
+        //b2.getAllPopulatedChildElementsOfType(Patient.class).
+
+        //IGenericClient client = ctx.newRestfulGenericClient("http://hapi.fhir.org/baseDstu2");
+        IGenericClient client = ctx.newRestfulGenericClient("http://localhost:8080/getResource.do/");
+        //IGenericClient cli = ctx.newJsonParser().;
+        //GenericClient client = new GenericClient(ctx);
+        Bundle search = client
+                .search()
+                .forResource(Patient.class)
+                .where(Patient.FAMILY.matches().value("Novak"))
+                .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
+                .andLogRequestAndResponse(true)
+                .execute();
+
+        System.out.println("Found " + search.getEntry().size() + " results.");
+        */
+        //StringBuilder result = new StringBuilder();
+        //URL url = new URL("http://localhost:8080/getResource.do/Patient");
+        //HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        //conn.setRequestMethod("GET");
+        //URIBuilder url = new URIBuilder("http://localhost:8080/getResource.do/Patient");
+        //url.setParameter("family", "Novak");
+        //HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        //conn.setRequestMethod("GET");
+        //HttpGet get = new HttpGet(String.valueOf(url));
+
+
+        //URIBuilder builder = new URIBuilder();
+        //builder.setScheme("http").setHost("localhost:8080").setPath("/getResource.do/Patient")
+        //        .setParameter("family", "Novak");
+
+        //URI uri = builder.build();
+        //String urlString = String.valueOf(httpget.getURI());
+        //URL url = new URL(urlString);
+        //HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        //conn.setRequestMethod("GET");
+        //HttpResponse response = http
+
     }
 }
