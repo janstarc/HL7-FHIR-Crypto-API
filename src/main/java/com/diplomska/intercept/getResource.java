@@ -36,30 +36,30 @@ public class getResource extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        //BufferedReader krneki = request.getReader();
-        //String test = krneki.readLine();
-        System.out.println("Test: " + request.getParameter("family"));
 
+        String family = request.getParameter("family");
+        System.out.println("Test: " + request.getParameter(family));
+
+
+        FhirContext ctx = FhirContext.forDstu2();
+        IGenericClient client = ctx.newRestfulGenericClient("http://hapi.fhir.org/baseDstu2");
+
+        Bundle search = client
+		      .search()
+		      .forResource(Patient.class)
+		      .where(Patient.FAMILY.matches().value(family))
+		      .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
+                .encodedJson()
+		      .execute();
+
+        System.out.println("Found " + search.getEntry().size() + " results.");
+        String result = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(search);
+        System.out.println("Result: " + result);
+
+        // Response
         PrintWriter out = response.getWriter();
         out.println("Test success " + request.getParameter("family"));
-        /*
-        out.println("{\n" +
-                "    \"resourceType\": \"Bundle\",\n" +
-                "    \"id\": \"cc083b96-67fc-444b-83a4-6a007865fdcd\",\n" +
-                "    \"meta\": {\n" +
-                "        \"lastUpdated\": \"2018-06-27T23:35:26.803+00:00\"\n" +
-                "    },\n" +
-                "    \"type\": \"searchset\",\n" +
-                "    \"total\": 0,\n" +
-                "    \"link\": [\n" +
-                "        {\n" +
-                "            \"relation\": \"self\",\n" +
-                "            \"url\": \"http://hapi.fhir.org/baseDstu2/Patient?family=Perc\"\n" +
-                "        }\n" +
-                "    ]\n" +
-                "}");
 
-         */
     }
 
     @Override
