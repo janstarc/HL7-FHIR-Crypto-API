@@ -2,7 +2,6 @@ package com.diplomska.testniPrimeri;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
-import ca.uhn.fhir.rest.client.api.IGenericClient;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -12,20 +11,14 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 
 public class testniPrimeri {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
         //addPatient();
-        getPatient("family", "Novak");
+        getPatient("family", "Perc");
     }
 
     public static void getPatient(String parameter, String value) throws IOException, URISyntaxException {
@@ -104,7 +97,7 @@ public class testniPrimeri {
         Patient patient = new Patient();
         // ..populate the patient object..
         patient.addIdentifier().setSystem("urn:system").setValue("17061996");
-        patient.addName().addFamily("Perc").addGiven("Betka");
+        patient.addName().addFamily("Starc").addGiven("Jan");
 
         // Log the request
         FhirContext ctx = FhirContext.forDstu2();
