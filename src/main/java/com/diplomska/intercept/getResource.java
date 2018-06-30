@@ -1,31 +1,20 @@
 package com.diplomska.intercept;
 
 import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.model.api.IResource;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
-import ca.uhn.fhir.model.dstu2.resource.ListResource;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
-import ca.uhn.fhir.util.BundleUtil;
 import com.diplomska.encryptDecrypt.cryptoService;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.hl7.fhir.instance.model.api.IBaseBundle;
-import org.hl7.fhir.instance.model.api.IBaseResource;
-
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.InvalidKeyException;
@@ -35,7 +24,6 @@ import java.security.UnrecoverableEntryException;
 import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListResourceBundle;
 
 @WebServlet(urlPatterns = "/getResource.do/Patient")
 public class getResource extends HttpServlet {
@@ -45,13 +33,15 @@ public class getResource extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
+        // Get the parameter
         String family = request.getParameter("family");
-        System.out.println("Test: " + request.getParameter(family));
-
+        String given = request.getParameter("given");
         ServletContext context = getServletContext();
+
+        // Encrypt the parameter to the hashed value
         try {
             crypto.init(context);
+            given = crypto.encrypt(given);
             family = crypto.encrypt(family);
         } catch (NoSuchPaddingException | NoSuchAlgorithmException | KeyStoreException | UnrecoverableEntryException |
                 CertificateException | BadPaddingException | IllegalBlockSizeException | InvalidKeyException e) {
@@ -60,114 +50,59 @@ public class getResource extends HttpServlet {
             return;
         }
 
-        System.out.println("Crypto test: " + family);
-
         FhirContext ctx = FhirContext.forDstu2();
         IGenericClient client = ctx.newRestfulGenericClient("http://hapi.fhir.org/baseDstu2");
 
+        // Search for the Patient - hashed value
         Bundle search = client
 		      .search()
 		      .forResource(Patient.class)
 		      .where(Patient.FAMILY.matches().value(family))
+              .and(Patient.GIVEN.matches().value(given))
 		      .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
               .encodedJson()
 		      .execute();
 
-
-
-        List<IBaseResource> retVal = new ArrayList<IBaseResource>();
+        // Convert bundle to List<Patient> - prep to edit the values
         List<Patient> resultArray = search.getAllPopulatedChildElementsOfType(Patient.class);
-        Bundle toReturn = new Bundle();
-
-        /**
-         *  TODO jutri
-         *      --> Desifriranje je ze ok, treba je samo se spremeniti, da se posodobljeno ime napise v Bundle
-         *
-         *
-         */
 
         for (Patient p : resultArray) {
             String fam = p.getName().get(0).getFamilyAsSingleString();
             String giv = p.getName().get(0).getGivenAsSingleString();
+
             try {
+                // Decrypt the values
                 String famDecrypt = crypto.decrypt(fam);
                 String givDecrypt = crypto.decrypt(giv);
-                System.out.println("Family = " + famDecrypt + " Given = " + givDecrypt);
 
+                // Handle the resource conversion and change the value of object p
                 ArrayList<StringDt> famArray = new ArrayList<>();
                 famArray.add(new StringDt(famDecrypt));
                 p.getName().get(0).setFamily(famArray);
                 ArrayList<StringDt> givArray = new ArrayList<>();
                 givArray.add(new StringDt(givDecrypt));
                 p.getName().get(0).setGiven(givArray);
-                retVal.add(p);
-
-                // Bundle handling
-                IResource decResource = p;
-                Bundle.Entry decEntry = new Bundle.Entry();
-                decEntry.setResource(decResource);
-                toReturn.addEntry(decEntry);
-
 
             } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
                 e.printStackTrace();
             }
         }
 
-
-        Bundle bun = new Bundle();
-        Patient p = null;
-        IResource pRes = p;
-        Bundle.Entry bunEntry = new Bundle.Entry();
-        bunEntry.setResource(pRes);
-        bun.addEntry(bunEntry);
-        //Bundle.Entry bunEntry = (Bundle.Entry) pRes;
-        //bun.addEntry(bunEntry);
-
-
-        //System.out.println(ctx.newJsonParser().setPrettyPrint(true).encode);
-
-
-        //System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString((IBaseResource) resultArray));
-
-        //BundleUtil.toListOfResources(f)
-
+        // Write log
         System.out.println("Found " + search.getEntry().size() + " results.");
         String result = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(search);
-        System.out.println("Result: " + result);
-        System.out.println("----------------------------------");
-        String result2 = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(toReturn);
-        System.out.println(result2);
-        System.out.println("-------------FINAL---------------------");
-        for(int i = 0; i < resultArray.size(); i++){
-            Patient pa = resultArray.get(i);
-            System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(pa));
-        }
-        // Response
+        System.out.println("RESULT: " + result);
+
+        // Send response
         PrintWriter out = response.getWriter();
-        //out.println("Test success " + request.getParameter("family"));
-        out.println("Result: " + result);
+        out.println(result);
 
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        System.out.println("---Request intercept START---");
-        FhirContext ctx = FhirContext.forDstu2();
-        //IBaseResource resource = ctx.newJsonParser().parseResource(new InputStreamReader(request.getInputStream()));
-        //Patient p = (Patient) resource;
-
-        HttpClient httpClient = HttpClientBuilder.create().build();
-        HttpPost httpPost = new HttpPost("http://hapi.fhir.org/baseDstu2");
-        //StringEntity params = new StringEntity(new InputStreamReader(request.getInputStream()))
-        BufferedReader krneki = request.getReader();
-        String test = krneki.toString();
-        System.out.println("Test" + test);
-
-
-
-
-
+        PrintWriter out = response.getWriter();
+        out.println("Use GET");
     }
 }

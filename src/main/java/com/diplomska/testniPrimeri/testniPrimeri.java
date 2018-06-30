@@ -18,82 +18,24 @@ public class testniPrimeri {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
         //addPatient();
-        getPatient("family", "Perc");
+        getPatient("Betka", "Perc");
     }
 
-    public static void getPatient(String parameter, String value) throws IOException, URISyntaxException {
+    public static void getPatient(String given, String family) throws IOException, URISyntaxException {
 
         HttpClient httpClient = HttpClientBuilder.create().build();
         URIBuilder url = new URIBuilder("http://localhost:8080/getResource.do/Patient");
-        url.setParameter(parameter, value);
+        url.setParameter("given", given);
+        url.setParameter("family", family);
         HttpGet request = new HttpGet(String.valueOf(url));
         HttpResponse response = httpClient.execute(request);
         HttpEntity entity = response.getEntity();
         String responseString = EntityUtils.toString(entity, "UTF-8");
         System.out.println("----- RESPONSE -----\n" + responseString);
 
-
-        //FhirContext ctx = FhirContext.forDstu2();
-        //IGenericClient client = ctx.newRestfulGenericClient("http://localhost:8080/getResource.do/");
-
-        /*
-        Bundle search = client
-		      .search()
-		      .forResource(Patient.class)
-		      .where(Patient.FAMILY.matches().value("Perc"))
-		      .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
-		      .execute();
-         */
-        /*
-        BasicConfigurator.configure();
-        FhirContext ctx = FhirContext.forDstu2();
-
-
-        SearchParameterMap paramMap = new SearchParameterMap();
-        Bundle b = new Bundle();
-        b.setType(BundleTypeEnum.MESSAGE).getAllPopulatedChildElementsOfType(Patient.class);
-        String requestBody = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(b);
-        Bundle.EntrySearch b2 = new Bundle.EntrySearch();
-        //b2.getAllPopulatedChildElementsOfType(Patient.class).
-
-        //IGenericClient client = ctx.newRestfulGenericClient("http://hapi.fhir.org/baseDstu2");
-        IGenericClient client = ctx.newRestfulGenericClient("http://localhost:8080/getResource.do/");
-        //IGenericClient cli = ctx.newJsonParser().;
-        //GenericClient client = new GenericClient(ctx);
-        Bundle search = client
-                .search()
-                .forResource(Patient.class)
-                .where(Patient.FAMILY.matches().value("Novak"))
-                .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
-                .andLogRequestAndResponse(true)
-                .execute();
-
-        System.out.println("Found " + search.getEntry().size() + " results.");
-        */
-        //StringBuilder result = new StringBuilder();
-        //URL url = new URL("http://localhost:8080/getResource.do/Patient");
-        //HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        //conn.setRequestMethod("GET");
-        //URIBuilder url = new URIBuilder("http://localhost:8080/getResource.do/Patient");
-        //url.setParameter("family", "Novak");
-        //HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        //conn.setRequestMethod("GET");
-        //HttpGet get = new HttpGet(String.valueOf(url));
-
-
-        //URIBuilder builder = new URIBuilder();
-        //builder.setScheme("http").setHost("localhost:8080").setPath("/getResource.do/Patient")
-        //        .setParameter("family", "Novak");
-
-        //URI uri = builder.build();
-        //String urlString = String.valueOf(httpget.getURI());
-        //URL url = new URL(urlString);
-        //HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        //conn.setRequestMethod("GET");
-        //HttpResponse response = http
     }
 
-    public static void addPatient(){
+    public static void addPatient(String family, String given){
         Patient patient = new Patient();
         // ..populate the patient object..
         patient.addIdentifier().setSystem("urn:system").setValue("17061996");
@@ -114,28 +56,9 @@ public class testniPrimeri {
             HttpEntity entity = response.getEntity();
             String responseString = EntityUtils.toString(entity, "UTF-8");
             System.out.println("----- RESPONSE -----\n" + responseString);
-            //Goal.Outcome o = ctx.newBundleFactory()responseString;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        // Invoke the server create method (and send pretty-printed JSON
-        // encoding to the server
-        // instead of the default which is non-pretty printed XML)
-
-		/*
-		MethodOutcome outcome = client.create()
-		   .resource(patient)
-		   .prettyPrint()
-		   .encodedJson()
-		   .execute();
-		*/
-        // The MethodOutcome object will contain information about the
-        // response from the server, including the ID of the created
-        // resource, the OperationOutcome response, etc. (assuming that
-        // any of these things were provided by the server! They may not
-        // always be)
-        //IdDt id = (IdDt) outcome.getId();
-        //System.out.println("Got ID: " + id.getValue());
     }
 }
