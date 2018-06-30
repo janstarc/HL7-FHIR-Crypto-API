@@ -77,6 +77,15 @@ public class getResource extends HttpServlet {
 
         List<IBaseResource> retVal = new ArrayList<IBaseResource>();
         List<Patient> resultArray = search.getAllPopulatedChildElementsOfType(Patient.class);
+        Bundle toReturn = new Bundle();
+
+        /**
+         *  TODO jutri
+         *      --> Desifriranje je ze ok, treba je samo se spremeniti, da se posodobljeno ime napise v Bundle
+         *
+         *
+         */
+
         for (Patient p : resultArray) {
             String fam = p.getName().get(0).getFamilyAsSingleString();
             String giv = p.getName().get(0).getGivenAsSingleString();
@@ -87,9 +96,18 @@ public class getResource extends HttpServlet {
 
                 ArrayList<StringDt> famArray = new ArrayList<>();
                 famArray.add(new StringDt(famDecrypt));
+                p.getName().get(0).setFamily(famArray);
                 ArrayList<StringDt> givArray = new ArrayList<>();
                 givArray.add(new StringDt(givDecrypt));
+                p.getName().get(0).setGiven(givArray);
                 retVal.add(p);
+
+                // Bundle handling
+                IResource decResource = p;
+                Bundle.Entry decEntry = new Bundle.Entry();
+                decEntry.setResource(decResource);
+                toReturn.addEntry(decEntry);
+
 
             } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
                 e.printStackTrace();
@@ -117,7 +135,14 @@ public class getResource extends HttpServlet {
         System.out.println("Found " + search.getEntry().size() + " results.");
         String result = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(search);
         System.out.println("Result: " + result);
-
+        System.out.println("----------------------------------");
+        String result2 = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(toReturn);
+        System.out.println(result2);
+        System.out.println("-------------FINAL---------------------");
+        for(int i = 0; i < resultArray.size(); i++){
+            Patient pa = resultArray.get(i);
+            System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(pa));
+        }
         // Response
         PrintWriter out = response.getWriter();
         //out.println("Test success " + request.getParameter("family"));

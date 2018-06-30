@@ -9,8 +9,6 @@
     <list default="true" id="09cfb8d0-a032-49fd-8d82-a8b218719caa" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/getResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/getResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/krnekiLogback.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -28,8 +26,8 @@
           <file leaf-file-name="testniPrimeri.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="54">
-                  <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+                <state relative-caret-position="1296">
+                  <caret line="72" column="47" selection-start-line="72" selection-start-column="47" selection-end-line="72" selection-end-column="47" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -41,7 +39,7 @@
             <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/RequestInterceptServlet.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="494">
-                  <caret line="83" column="43" lean-forward="true" selection-start-line="80" selection-start-column="8" selection-end-line="83" selection-end-column="43" />
+                  <caret line="83" column="43" selection-start-line="80" selection-start-column="8" selection-end-line="83" selection-end-column="43" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -52,8 +50,8 @@
           <file leaf-file-name="getResource.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/getResource.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="319">
-                  <caret line="124" lean-forward="true" selection-start-line="124" selection-end-line="124" />
+                <state relative-caret-position="3256">
+                  <caret line="149" selection-start-line="149" selection-end-line="149" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -64,7 +62,7 @@
           <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/pom.xml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="759">
+                <state relative-caret-position="7172">
                   <caret line="326" column="19" selection-start-line="326" selection-start-column="19" selection-end-line="326" selection-end-column="19" />
                 </state>
               </provider>
@@ -73,8 +71,8 @@
           <file leaf-file-name="LoginRequiredFilter.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/filter/LoginRequiredFilter.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="78">
-                  <caret line="7" column="36" lean-forward="true" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
+                <state relative-caret-position="88">
+                  <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
                 </state>
               </provider>
             </entry>
@@ -112,7 +110,7 @@
           <file leaf-file-name="cryptoService.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/cryptoService.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1517">
+                <state relative-caret-position="924">
                   <caret line="42" column="187" selection-start-line="42" selection-start-column="187" selection-end-line="42" selection-end-column="187" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -124,15 +122,15 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="getResource.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/getResource.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="445">
-                  <caret line="91" column="30" selection-start-line="91" selection-start-column="30" selection-end-line="91" selection-end-column="30" />
+                <state relative-caret-position="81">
+                  <caret line="98" column="38" selection-start-line="98" selection-start-column="38" selection-end-line="98" selection-end-column="38" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#2918#2933#0" expanded="true" />
+                    <element signature="e#2958#2973#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -270,6 +268,34 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="in28Minutesfirstwebapp" type="58d84e3e:PackageViewProjectNode" />
+              <item name="Diplomska2" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="in28Minutesfirstwebapp" type="58d84e3e:PackageViewProjectNode" />
+              <item name="Diplomska2" type="616d4139:PackageViewModuleNode" />
+              <item name="com.in28minutes.login" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="in28Minutesfirstwebapp" type="58d84e3e:PackageViewProjectNode" />
+              <item name="Diplomska2" type="616d4139:PackageViewModuleNode" />
+              <item name="com.in28minutes.todo" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="in28Minutesfirstwebapp" type="58d84e3e:PackageViewProjectNode" />
+              <item name="Diplomska2" type="616d4139:PackageViewModuleNode" />
+              <item name="Libraries" type="5c3f07af:PackageViewLibrariesNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -381,34 +407,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="in28Minutesfirstwebapp" type="58d84e3e:PackageViewProjectNode" />
-              <item name="Diplomska2" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="in28Minutesfirstwebapp" type="58d84e3e:PackageViewProjectNode" />
-              <item name="Diplomska2" type="616d4139:PackageViewModuleNode" />
-              <item name="com.in28minutes.login" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="in28Minutesfirstwebapp" type="58d84e3e:PackageViewProjectNode" />
-              <item name="Diplomska2" type="616d4139:PackageViewModuleNode" />
-              <item name="com.in28minutes.todo" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="in28Minutesfirstwebapp" type="58d84e3e:PackageViewProjectNode" />
-              <item name="Diplomska2" type="616d4139:PackageViewModuleNode" />
-              <item name="Libraries" type="5c3f07af:PackageViewLibrariesNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -606,12 +604,13 @@
       <workItem from="1528899824558" duration="519000" />
       <workItem from="1529585702623" duration="661000" />
       <workItem from="1529588798667" duration="40251000" />
-      <workItem from="1529858718939" duration="74704000" />
+      <workItem from="1529858718939" duration="76830000" />
+      <workItem from="1530394225611" duration="772000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="177512000" />
+    <option name="totallyTimeSpent" value="180410000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
@@ -621,13 +620,13 @@
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
       <window_info anchor="bottom" id="Application Servers" order="7" weight="0.3278867" />
       <window_info anchor="right" id="Maven Projects" order="11" weight="0.16684435" />
-      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="CDI" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info id="Capture Tool" order="7" />
       <window_info id="Designer" order="2" />
       <window_info anchor="right" id="Database" order="6" />
-      <window_info id="Structure" order="1" sideWeight="0.50142854" side_tool="true" weight="0.18600954" />
       <window_info anchor="right" id="JSF" order="5" />
+      <window_info id="Structure" order="1" sideWeight="0.50142854" side_tool="true" weight="0.18600954" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3998435" />
@@ -638,58 +637,21 @@
       <window_info anchor="bottom" id="Java Enterprise" order="10" weight="0.32942098" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Version Control" order="12" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.29029733" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.49921754" />
       <window_info anchor="bottom" id="Spring" order="14" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.3348983" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49857143" weight="0.1418919" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49857143" visible="true" weight="0.1418919" />
       <window_info anchor="right" id="Bean Validation" order="10" />
       <window_info id="Web" order="6" sideWeight="0.50142854" side_tool="true" weight="0.18600954" />
       <window_info anchor="right" id="Theme Preview" order="9" />
       <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32942098" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32942098" />
     </layout>
-    <layout-to-restore>
-      <window_info anchor="bottom" id="Application Servers" order="7" weight="0.3278867" />
-      <window_info id="Designer" order="2" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.20657277" />
-      <window_info anchor="bottom" id="Spring" order="14" />
-      <window_info id="Image Layers" order="3" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3348983" />
-      <window_info id="Capture Tool" order="7" />
-      <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="JSF" order="5" />
-      <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="9" weight="0.3286385" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Java Enterprise" order="10" weight="0.32942098" />
-      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="12" />
-      <window_info anchor="right" id="Maven Projects" order="11" weight="0.16684435" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32942098" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49857143" visible="true" weight="0.1418919" />
-      <window_info anchor="right" id="Database" order="6" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info id="Web" order="6" sideWeight="0.50142854" side_tool="true" weight="0.18600954" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Theme Preview" order="9" />
-      <window_info id="Structure" order="1" sideWeight="0.50142854" side_tool="true" weight="0.18600954" />
-      <window_info anchor="right" id="CDI" order="8" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3998435" />
-      <window_info anchor="right" id="Bean Validation" order="10" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -703,6 +665,17 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/getResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3256">
+          <caret line="148" lean-forward="true" selection-start-line="148" selection-end-line="148" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2958#2973#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/login/LoginServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -864,9 +837,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -881,11 +851,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="594">
           <caret line="27" selection-start-line="27" selection-end-line="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#905#3020#0" expanded="true" />
-            <element signature="e#3019#3020#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -902,9 +867,6 @@
           <caret line="12" column="45" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/crypto/keystore.ks">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/io/FileOutputStream.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -931,9 +893,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
           <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -948,11 +907,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3614">
           <caret line="453" column="25" selection-start-line="453" selection-start-column="25" selection-end-line="453" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#28609#0" expanded="true" />
-            <element signature="e#4807#4808#0" expanded="true" />
-            <element signature="e#4867#4868#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -972,7 +926,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/cryptoService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1517">
+        <state relative-caret-position="924">
           <caret line="42" column="187" selection-start-line="42" selection-start-column="187" selection-end-line="42" selection-end-column="187" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1020,7 +974,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="759">
+        <state relative-caret-position="7172">
           <caret line="326" column="19" selection-start-line="326" selection-start-column="19" selection-end-line="326" selection-end-column="19" />
         </state>
       </provider>
@@ -1034,22 +988,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/filter/LoginRequiredFilter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="7" column="36" lean-forward="true" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
+        <state relative-caret-position="88">
+          <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/krnekiLogback.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="15" column="16" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/krnekiLogback.xml" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/RequestInterceptServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
-          <caret line="83" column="43" lean-forward="true" selection-start-line="80" selection-start-column="8" selection-end-line="83" selection-end-column="43" />
+          <caret line="83" column="43" selection-start-line="80" selection-start-column="8" selection-end-line="83" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1058,8 +1006,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+        <state relative-caret-position="1296">
+          <caret line="72" column="47" selection-start-line="72" selection-start-column="47" selection-end-line="72" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1068,11 +1016,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/getResource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="91" column="30" selection-start-line="91" selection-start-column="30" selection-end-line="91" selection-end-column="30" />
+        <state relative-caret-position="81">
+          <caret line="98" column="38" selection-start-line="98" selection-start-column="38" selection-end-line="98" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2918#2933#0" expanded="true" />
+            <element signature="e#2958#2973#0" expanded="true" />
           </folding>
         </state>
       </provider>
