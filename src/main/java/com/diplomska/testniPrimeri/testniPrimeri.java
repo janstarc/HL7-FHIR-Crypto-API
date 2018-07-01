@@ -17,8 +17,8 @@ import java.net.URISyntaxException;
 public class testniPrimeri {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        //addPatient();
-        getPatient("Betka", "Perc");
+        addPatient("Testni", "Pacient");
+        //getPatient("Betka", "Perc");
     }
 
     public static void getPatient(String given, String family) throws IOException, URISyntaxException {
@@ -48,7 +48,7 @@ public class testniPrimeri {
 
         HttpClient httpClient = HttpClientBuilder.create().build();
         try {
-            HttpPost request = new HttpPost("http://localhost:8080/addResource.do");
+            HttpPost request = new HttpPost("http://localhost:8080/hapi.do");
             StringEntity params = new StringEntity(requestBody);
             request.addHeader("content-type", "application/json");
             request.setEntity(params);

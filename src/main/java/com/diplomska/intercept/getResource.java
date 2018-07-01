@@ -51,7 +51,7 @@ public class getResource extends HttpServlet {
         }
 
         FhirContext ctx = FhirContext.forDstu2();
-        IGenericClient client = ctx.newRestfulGenericClient("http://hapi.fhir.org/baseDstu2");
+        IGenericClient client = ctx.newRestfulGenericClient("http://hapi.java.fhir.org/baseDstu2");
 
         // Search for the Patient - hashed value
         Bundle search = client

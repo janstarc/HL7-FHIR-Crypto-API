@@ -6,9 +6,9 @@ import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.valueset.BundleTypeEnum;
 import ca.uhn.fhir.model.dstu2.valueset.HTTPVerbEnum;
 import ca.uhn.fhir.model.primitive.StringDt;
-import ca.uhn.fhir.rest.client.api.IGenericClient;
 import com.diplomska.encryptDecrypt.cryptoService;
 import org.hl7.fhir.instance.model.api.IBaseResource;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
@@ -28,21 +28,23 @@ import java.security.UnrecoverableEntryException;
 import java.security.cert.CertificateException;
 import java.util.ArrayList;
 
-@WebServlet(urlPatterns = "/addResource.do")
-public class RequestInterceptServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/crypto.do")
+public class crypto extends HttpServlet {
 
     private cryptoService crypto = new cryptoService();
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.getRequestDispatcher("/WEB-INF/view/addResource.jsp").forward(request, response);
+
     }
 
+    // Ko dobimo POST request - nalaganje resource na bazo
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        System.out.println("---Request intercept START---");
+        System.out.println("-------- CRYPTO START --------");
         FhirContext ctx = FhirContext.forDstu2();
 
         // Convert request to resource and cast resource to Patient
@@ -68,7 +70,7 @@ public class RequestInterceptServlet extends HttpServlet {
             familyName = crypto.encrypt(familyName);
             givenName = crypto.encrypt(givenName);
         } catch (NoSuchPaddingException | NoSuchAlgorithmException | KeyStoreException | UnrecoverableEntryException |
-                 CertificateException | BadPaddingException | IllegalBlockSizeException | InvalidKeyException e) {
+                CertificateException | BadPaddingException | IllegalBlockSizeException | InvalidKeyException e) {
             System.out.println("Encryption Error");
             e.printStackTrace();
             return;
@@ -89,11 +91,15 @@ public class RequestInterceptServlet extends HttpServlet {
         }
 
         // Encode the resource to json, prepare it to be sent
-        String changedResource = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(p);
-        System.out.println(changedResource);
-        System.out.println("---Request intercept END---");
+        String encryptedResource = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(p);
+        //System.out.println(encryptedResource);
 
-        // Send the request to HAPI endpoint
+        //PrintWriter out = response.getWriter();
+        //out.println(encryptedResource);
+
+        /**
+         *  NEW
+         */
         // Create a bundle that will be used as a transaction
         Bundle bundle = new Bundle();
         bundle.setType(BundleTypeEnum.TRANSACTION);
@@ -106,16 +112,11 @@ public class RequestInterceptServlet extends HttpServlet {
                 .setUrl("Patient")
                 .setMethod(HTTPVerbEnum.POST);
 
-        // Create a client and post the transaction to the server
-        String serverBase = "http://hapi.fhir.org/baseDstu2";
-        IGenericClient client = ctx.newRestfulGenericClient(serverBase);
-        Bundle resp = client.transaction().withBundle(bundle).execute();
-
-        // Log the response
-        System.out.println("------------RESPONSE------------");
-        String responseString = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(resp);
-        System.out.println(responseString);
+        String bundleString = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle);
+        System.out.println(bundleString);
         PrintWriter out = response.getWriter();
-        out.println(responseString);
+        out.println(bundleString);
+        //System.out.println("-------- CRYPTO END   --------");
+
     }
 }
