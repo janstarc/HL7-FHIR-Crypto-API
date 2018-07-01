@@ -7,6 +7,9 @@ import ca.uhn.fhir.model.dstu2.valueset.BundleTypeEnum;
 import ca.uhn.fhir.model.dstu2.valueset.HTTPVerbEnum;
 import ca.uhn.fhir.model.primitive.StringDt;
 import com.diplomska.encryptDecrypt.cryptoService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 
 import javax.crypto.BadPaddingException;
@@ -37,7 +40,52 @@ public class crypto extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        String encrypt = request.getParameter("encrypt");
+        if(encrypt.equals("true")){
+            System.out.println("Here 1");
+            String given = request.getParameter("given");
+            String family = request.getParameter("family");
+            ServletContext context = getServletContext();
 
+            try {
+                crypto.init(context);
+                given =  crypto.encrypt(given);
+                family = crypto.encrypt(family);
+            } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException | CertificateException | NoSuchAlgorithmException | NoSuchPaddingException | UnrecoverableEntryException | KeyStoreException e) {
+                e.printStackTrace();
+            }
+
+            JsonObject jObj = new JsonObject();
+            jObj.addProperty("given", given);
+            jObj.addProperty("family", family);
+            Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+
+            PrintWriter out = response.getWriter();
+            out.println(gson.toJson(jObj));
+
+        } else if (encrypt.equals("false")) {
+
+            System.out.println("Here 2");
+            String given = request.getParameter("given");
+            String family = request.getParameter("family");
+            ServletContext context = getServletContext();
+
+            try {
+                crypto.init(context);
+                given =  crypto.decrypt(given);
+                family = crypto.decrypt(family);
+            } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException | CertificateException | NoSuchAlgorithmException | NoSuchPaddingException | UnrecoverableEntryException | KeyStoreException e) {
+                e.printStackTrace();
+            }
+
+            JsonObject jObj = new JsonObject();
+            jObj.addProperty("given", given);
+            jObj.addProperty("family", family);
+            Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+
+            PrintWriter out = response.getWriter();
+            out.println(gson.toJson(jObj));
+        }
     }
 
     // Ko dobimo POST request - nalaganje resource na bazo

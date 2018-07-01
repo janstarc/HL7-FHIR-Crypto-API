@@ -17,14 +17,14 @@ import java.net.URISyntaxException;
 public class testniPrimeri {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        addPatient("Testni", "Pacient");
-        //getPatient("Betka", "Perc");
+        //addPatient("Testni", "Pacient");
+        getPatient("Betka", "Perc");
     }
 
     public static void getPatient(String given, String family) throws IOException, URISyntaxException {
 
         HttpClient httpClient = HttpClientBuilder.create().build();
-        URIBuilder url = new URIBuilder("http://localhost:8080/getResource.do/Patient");
+        URIBuilder url = new URIBuilder("http://localhost:8080/hapi.do");
         url.setParameter("given", given);
         url.setParameter("family", family);
         HttpGet request = new HttpGet(String.valueOf(url));

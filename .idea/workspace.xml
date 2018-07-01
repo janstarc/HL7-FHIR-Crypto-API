@@ -7,11 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09cfb8d0-a032-49fd-8d82-a8b218719caa" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/crypto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/RequestInterceptServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/postResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/getResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/getResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/crypto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/crypto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapi.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -24,7 +21,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.522655">
+    <splitter split-orientation="horizontal" split-proportion="0.5147059">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="postResource.java" pinned="false" current-in-tab="false">
@@ -39,8 +36,8 @@
           <file leaf-file-name="hapi.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapi.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="382">
-                  <caret line="49" column="80" lean-forward="true" selection-start-line="49" selection-start-column="80" selection-end-line="49" selection-end-column="80" />
+                <state relative-caret-position="280">
+                  <caret line="52" column="13" lean-forward="true" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -51,8 +48,8 @@
           <file leaf-file-name="crypto.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/crypto.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="470">
-                  <caret line="117" column="20" selection-start-line="117" selection-start-column="20" selection-end-line="117" selection-end-column="20" />
+                <state relative-caret-position="482">
+                  <caret line="64" selection-start-line="64" selection-end-line="64" />
                 </state>
               </provider>
             </entry>
@@ -115,8 +112,8 @@
           <file leaf-file-name="testniPrimeri.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="484">
-                  <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+                <state relative-caret-position="104">
+                  <caret line="20" column="8" lean-forward="true" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
                 </state>
               </provider>
             </entry>
@@ -124,7 +121,7 @@
           <file leaf-file-name="postResource.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/postResource.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="207">
+                <state relative-caret-position="472">
                   <caret line="106" column="46" lean-forward="true" selection-start-line="96" selection-start-column="8" selection-end-line="106" selection-end-column="46" />
                 </state>
               </provider>
@@ -133,8 +130,8 @@
           <file leaf-file-name="getResource.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/getResource.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1000">
-                  <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+                <state relative-caret-position="525">
+                  <caret line="97" column="28" selection-start-line="90" selection-start-column="8" selection-end-line="97" selection-end-column="28" />
                 </state>
               </provider>
             </entry>
@@ -215,8 +212,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/getResource.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/postResource.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/crypto.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapi.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/crypto.java" />
       </list>
     </option>
   </component>
@@ -618,12 +615,12 @@
       <workItem from="1529588798667" duration="40251000" />
       <workItem from="1529858718939" duration="76830000" />
       <workItem from="1530394225611" duration="6466000" />
-      <workItem from="1530452303148" duration="8974000" />
+      <workItem from="1530452303148" duration="14744000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="195078000" />
+    <option name="totallyTimeSpent" value="200848000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
@@ -650,7 +647,7 @@
       <window_info anchor="bottom" id="Java Enterprise" order="10" weight="0.32942098" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Version Control" order="12" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4460094" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.42879498" />
       <window_info anchor="bottom" id="Spring" order="14" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.2488263" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49857143" weight="0.1526232" />
@@ -1026,6 +1023,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/getResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="97" column="28" selection-start-line="90" selection-start-column="8" selection-end-line="97" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/postResource.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
@@ -1033,31 +1037,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/getResource.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1000">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        <state relative-caret-position="104">
+          <caret line="20" column="8" lean-forward="true" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/crypto.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="117" column="20" selection-start-line="117" selection-start-column="20" selection-end-line="117" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+        <state relative-caret-position="482">
+          <caret line="64" selection-start-line="64" selection-end-line="64" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapi.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="49" column="80" lean-forward="true" selection-start-line="49" selection-start-column="80" selection-end-line="49" selection-end-column="80" />
+        <state relative-caret-position="280">
+          <caret line="52" column="13" lean-forward="true" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
