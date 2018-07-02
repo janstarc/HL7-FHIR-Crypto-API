@@ -41,16 +41,19 @@ public class crypto extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String encrypt = request.getParameter("encrypt");
+        System.out.println("Encrypt value: " + encrypt);
         if(encrypt.equals("true")){
             System.out.println("Here 1");
             String given = request.getParameter("given");
             String family = request.getParameter("family");
+            //System.out.println("Given and family" + given + " " + family);
             ServletContext context = getServletContext();
 
             try {
                 crypto.init(context);
                 given =  crypto.encrypt(given);
                 family = crypto.encrypt(family);
+                System.out.println("Crypto in CryptoClass: " + given + " " + family);
             } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException | CertificateException | NoSuchAlgorithmException | NoSuchPaddingException | UnrecoverableEntryException | KeyStoreException e) {
                 e.printStackTrace();
             }
@@ -58,6 +61,7 @@ public class crypto extends HttpServlet {
             JsonObject jObj = new JsonObject();
             jObj.addProperty("given", given);
             jObj.addProperty("family", family);
+
             Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
             PrintWriter out = response.getWriter();

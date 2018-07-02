@@ -7,7 +7,6 @@ import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import com.diplomska.encryptDecrypt.cryptoService;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpHeaders;
@@ -19,10 +18,6 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +27,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URISyntaxException;
-import java.security.InvalidKeyException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,8 +56,9 @@ public class hapi extends HttpServlet {
             // Crypto returns JSON object with encrypted search parameters
             String encryptedJson = EntityUtils.toString(encryptedGet.getEntity());
             JsonObject jObj = new Gson().fromJson(encryptedJson, JsonObject.class);
-            String familyEnc = jObj.get("given").getAsString();
-            String givenEnc = jObj.get("family").getAsString();
+            String familyEnc = jObj.get("family").getAsString();
+            String givenEnc = jObj.get("given").getAsString();
+            System.out.println("Given enc: " + givenEnc + " Family enc: " + familyEnc);
 
             // Search with encoded parameters
             FhirContext ctx = FhirContext.forDstu2();
@@ -81,10 +76,12 @@ public class hapi extends HttpServlet {
 
             // Convert bundle to List<Patient> - prep to edit the values
             List<Patient> resultArray = search.getAllPopulatedChildElementsOfType(Patient.class);
+            System.out.println("Result Array size: " + resultArray.size());
 
             for (Patient p : resultArray) {
                 String fam = p.getName().get(0).getFamilyAsSingleString();
                 String giv = p.getName().get(0).getGivenAsSingleString();
+                System.out.println("Here?");
 
                 try {
                     // Decrypt the values
@@ -114,19 +111,18 @@ public class hapi extends HttpServlet {
                     String result = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(search);
                     System.out.println("RESULT: " + result);
 
-                    // Send response
-                    PrintWriter out = response.getWriter();
-                    out.println(result);
-
                 } catch (Exception e){
                     e.printStackTrace();
                 }
             }
+
+            // Send response
+            PrintWriter out = response.getWriter();
+            out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(search));
+
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-
-
     }
 
     // Ko dobimo POST request - nalaganje resourca na bazo
