@@ -17,8 +17,8 @@ import java.net.URISyntaxException;
 public class testniPrimeri {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        //addPatient("Testni", "Pacient");
-        getPatient("Betka", "Perc");
+        //addPatient("Majda", "Jelencic");
+        getPatient("Jelencic", "Majda");
     }
 
     public static void getPatient(String given, String family) throws IOException, URISyntaxException {
@@ -35,11 +35,11 @@ public class testniPrimeri {
 
     }
 
-    public static void addPatient(String family, String given){
+    public static void addPatient(String given, String family){
         Patient patient = new Patient();
         // ..populate the patient object..
         patient.addIdentifier().setSystem("urn:system").setValue("17061996");
-        patient.addName().addFamily("Starc").addGiven("Jan");
+        patient.addName().addFamily(family).addGiven(given);
 
         // Log the request
         FhirContext ctx = FhirContext.forDstu2();

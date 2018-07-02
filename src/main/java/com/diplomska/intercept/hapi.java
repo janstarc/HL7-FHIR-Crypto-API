@@ -30,11 +30,10 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/hapi.do", "/hapi.do/Patient"})
+@WebServlet(urlPatterns = {"/hapi.do"})
 public class hapi extends HttpServlet {
 
-    private cryptoService crypto = new cryptoService();
-
+    // Get requesti - iskanje pacientov
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -74,10 +73,11 @@ public class hapi extends HttpServlet {
                     .encodedJson()
                     .execute();
 
-            // Convert bundle to List<Patient> - prep to edit the values
+            // Convert bundle to List<Patient>
             List<Patient> resultArray = search.getAllPopulatedChildElementsOfType(Patient.class);
             System.out.println("Result Array size: " + resultArray.size());
 
+            // Loop through the patient list, decrypt hashed parameters
             for (Patient p : resultArray) {
                 String fam = p.getName().get(0).getFamilyAsSingleString();
                 String giv = p.getName().get(0).getGivenAsSingleString();
@@ -109,7 +109,7 @@ public class hapi extends HttpServlet {
                     // Write log
                     System.out.println("Found " + search.getEntry().size() + " results.");
                     String result = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(search);
-                    System.out.println("RESULT: " + result);
+                    //System.out.println("RESULT: " + result);
 
                 } catch (Exception e){
                     e.printStackTrace();

@@ -36,24 +36,21 @@ public class crypto extends HttpServlet {
 
     private cryptoService crypto = new cryptoService();
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String encrypt = request.getParameter("encrypt");
-        System.out.println("Encrypt value: " + encrypt);
+
         if(encrypt.equals("true")){
             System.out.println("Here 1");
             String given = request.getParameter("given");
             String family = request.getParameter("family");
-            //System.out.println("Given and family" + given + " " + family);
             ServletContext context = getServletContext();
 
             try {
                 crypto.init(context);
                 given =  crypto.encrypt(given);
                 family = crypto.encrypt(family);
-                System.out.println("Crypto in CryptoClass: " + given + " " + family);
             } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException | CertificateException | NoSuchAlgorithmException | NoSuchPaddingException | UnrecoverableEntryException | KeyStoreException e) {
                 e.printStackTrace();
             }
@@ -142,17 +139,7 @@ public class crypto extends HttpServlet {
             e.printStackTrace();
         }
 
-        // Encode the resource to json, prepare it to be sent
-        String encryptedResource = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(p);
-        //System.out.println(encryptedResource);
-
-        //PrintWriter out = response.getWriter();
-        //out.println(encryptedResource);
-
-        /**
-         *  NEW
-         */
-        // Create a bundle that will be used as a transaction
+        // Create a bundle that will be used in a transaction
         Bundle bundle = new Bundle();
         bundle.setType(BundleTypeEnum.TRANSACTION);
 
@@ -164,11 +151,10 @@ public class crypto extends HttpServlet {
                 .setUrl("Patient")
                 .setMethod(HTTPVerbEnum.POST);
 
+        // Encode bundle to json and send it to the HAPI server
         String bundleString = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle);
         System.out.println(bundleString);
         PrintWriter out = response.getWriter();
         out.println(bundleString);
-        //System.out.println("-------- CRYPTO END   --------");
-
     }
 }
