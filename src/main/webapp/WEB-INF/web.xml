@@ -9,7 +9,7 @@
 
     <welcome-file-list>
         <!-- Forward that happens, when request without parameters is sent -->
-        <welcome-file>login.do</welcome-file>
+        <welcome-file>hapi.do</welcome-file>
     </welcome-file-list>
 
 </web-app>

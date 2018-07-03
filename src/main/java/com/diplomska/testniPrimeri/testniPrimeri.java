@@ -17,8 +17,8 @@ import java.net.URISyntaxException;
 public class testniPrimeri {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        //addPatient("Majda", "Jelencic");
-        getPatient("Jelencic", "Majda");
+        addPatient("Novi", "Test");
+        //getPatient("Alenka", "Starc");
     }
 
     public static void getPatient(String given, String family) throws IOException, URISyntaxException {

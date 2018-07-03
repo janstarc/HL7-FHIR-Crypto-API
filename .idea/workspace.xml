@@ -7,9 +7,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09cfb8d0-a032-49fd-8d82-a8b218719caa" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/crypto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/crypto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Diplomska2_Web_exploded/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Diplomska2_Web_exploded/WEB-INF/classes/com/in28minutes/filter/LoginRequiredFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Diplomska2_Web_exploded/WEB-INF/classes/com/in28minutes/login/LoginService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Diplomska2_Web_exploded/WEB-INF/classes/com/in28minutes/login/LoginServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Diplomska2_Web_exploded/WEB-INF/classes/com/in28minutes/logout/LogoutServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Diplomska2_Web_exploded/WEB-INF/classes/com/in28minutes/todo/AddTodoServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Diplomska2_Web_exploded/WEB-INF/classes/com/in28minutes/todo/DeleteTodoServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Diplomska2_Web_exploded/WEB-INF/classes/com/in28minutes/todo/ListTodoServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Diplomska2_Web_exploded/WEB-INF/classes/com/in28minutes/todo/Todo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Diplomska2_Web_exploded/WEB-INF/classes/com/in28minutes/todo/TodoService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Diplomska2_Web_exploded/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/EncryptDecryptServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/getResource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/postResource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/login/LoginService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/login/LoginServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/logout/LogoutServlet.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/todo/AddTodoServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/todo/DeleteTodoServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/todo/ListTodoServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/todo/Todo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/todo/TodoService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/add-todo.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/addResource.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/encryptDecrypt.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/list-todos.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/login.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -21,23 +49,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5214626">
+    <splitter split-orientation="horizontal" split-proportion="0.42348284">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="postResource.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/postResource.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="22">
-                  <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="hapi.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapi.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="211">
-                  <caret line="42" selection-start-line="42" selection-end-line="42" />
+                <state relative-caret-position="91">
+                  <caret line="61" selection-start-line="61" selection-end-line="61" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -45,11 +64,20 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="crypto.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/pom.xml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="194">
+                  <caret line="226" column="21" selection-start-line="226" selection-start-column="21" selection-end-line="226" selection-end-column="21" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="crypto.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/crypto.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="176">
-                  <caret line="37" selection-start-line="37" selection-end-line="37" />
+                <state relative-caret-position="2816">
+                  <caret line="157" column="32" selection-start-line="157" selection-start-column="20" selection-end-line="157" selection-end-column="32" />
                 </state>
               </provider>
             </entry>
@@ -57,50 +85,17 @@
           <file leaf-file-name="LoginRequiredFilter.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/filter/LoginRequiredFilter.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="88">
+                <state relative-caret-position="22">
                   <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="EncryptDecryptServlet.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/EncryptDecryptServlet.java">
+          <file leaf-file-name="web.xml" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="220">
-                  <caret line="16" column="56" selection-start-line="16" selection-start-column="56" selection-end-line="16" selection-end-column="56" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="encryptDecrypt.jsp" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/encryptDecrypt.jsp">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="88">
-                  <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="addResource.jsp" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/addResource.jsp">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="286">
-                  <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="cryptoService.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/cryptoService.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="814">
-                  <caret line="42" column="187" selection-start-line="42" selection-start-column="187" selection-end-line="42" selection-end-column="187" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
+                <state relative-caret-position="242">
+                  <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
                 </state>
               </provider>
             </entry>
@@ -112,26 +107,8 @@
           <file leaf-file-name="testniPrimeri.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="298">
-                  <caret line="37" column="61" selection-start-line="37" selection-start-column="61" selection-end-line="37" selection-end-column="61" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="postResource.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/postResource.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1760">
-                  <caret line="106" column="46" selection-start-line="96" selection-start-column="8" selection-end-line="106" selection-end-column="46" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="getResource.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/getResource.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1628">
-                  <caret line="97" column="28" selection-start-line="90" selection-start-column="8" selection-end-line="97" selection-end-column="28" />
+                <state relative-caret-position="154">
+                  <caret line="19" column="32" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
                 </state>
               </provider>
             </entry>
@@ -163,7 +140,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/in28minutes/todo/LoginServlet.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
         <option value="$USER_HOME$/.m2/settings.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/in28minutes/todo/TodoServlet.java" />
@@ -205,7 +181,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/todo/testniPrimeri/testniPrimeri.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/todo/testniPrimeri/intercept/RequestInterceptServlet.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/intercept/RequestInterceptServlet.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/logback.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/filter/LoginRequiredFilter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/RequestInterceptServlet.java" />
@@ -213,6 +188,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/postResource.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapi.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/crypto.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java" />
       </list>
     </option>
@@ -257,10 +234,10 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1296" />
-    <option name="height" value="776" />
+    <option name="x" value="210" />
+    <option name="y" value="239" />
+    <option name="width" value="1294" />
+    <option name="height" value="767" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -325,54 +302,6 @@
               <item name="ToDoApp" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="encryptDecrypt" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ToDoApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ToDoApp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="filter" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ToDoApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ToDoApp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="intercept" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ToDoApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ToDoApp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="login" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ToDoApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ToDoApp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="logout" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ToDoApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ToDoApp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="testniPrimeri" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ToDoApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ToDoApp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -401,15 +330,6 @@
               <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
               <item name="crypto" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="ToDoApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ToDoApp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -421,7 +341,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com/in28minutes" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/todo/login/LoginServlet.java" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../hapi-fhir-jpaserver-example" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -616,15 +536,15 @@
       <workItem from="1529858718939" duration="76830000" />
       <workItem from="1530394225611" duration="6466000" />
       <workItem from="1530452303148" duration="15993000" />
-      <workItem from="1530536239164" duration="5536000" />
+      <workItem from="1530536239164" duration="12076000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="207633000" />
+    <option name="totallyTimeSpent" value="214173000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
@@ -648,10 +568,10 @@
       <window_info anchor="bottom" id="Java Enterprise" order="10" weight="0.32942098" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Version Control" order="12" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.5015649" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33115467" />
       <window_info anchor="bottom" id="Spring" order="14" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3341158" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49857143" weight="0.1526232" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.45969498" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49857143" visible="true" weight="0.19189766" />
       <window_info anchor="right" id="Bean Validation" order="10" />
       <window_info id="Web" order="6" sideWeight="0.50142854" side_tool="true" weight="0.18600954" />
       <window_info anchor="right" id="Theme Preview" order="9" />
@@ -812,13 +732,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/logout/LogoutServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/camel/enrichmentBean.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
@@ -854,13 +767,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/login/LoginServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="12" column="45" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/io/FileOutputStream.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
@@ -872,13 +778,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="632" column="22" selection-start-line="632" selection-start-column="22" selection-end-line="632" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/login/LoginService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -927,24 +826,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/addResource.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/ca/uhn/hapi/fhir/hapi-fhir-base/3.3.0/hapi-fhir-base-3.3.0-sources.jar!/ca/uhn/fhir/rest/gclient/IClientExecutable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="764">
           <caret line="60" column="7" selection-start-line="60" selection-start-column="7" selection-end-line="60" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -956,13 +841,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/krnekiLogback.xml" />
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="606">
-          <caret line="326" column="19" selection-start-line="326" selection-start-column="19" selection-end-line="326" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/Base64.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
@@ -970,20 +848,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="226" column="21" selection-start-line="226" selection-start-column="21" selection-end-line="226" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/TODELTE_EncryptDecryptServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="13" column="13" lean-forward="true" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/filter/LoginRequiredFilter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
+        <state relative-caret-position="22">
           <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/EncryptDecryptServlet.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/login/LoginService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="16" column="56" selection-start-line="16" selection-start-column="56" selection-end-line="16" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="44">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/login/LoginServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="12" column="45" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/logout/LogoutServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -994,34 +900,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/crypto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2816">
+          <caret line="157" column="32" selection-start-line="157" selection-start-column="20" selection-end-line="157" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/postResource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1760">
+        <state relative-caret-position="212">
           <caret line="106" column="46" selection-start-line="96" selection-start-column="8" selection-end-line="106" selection-end-column="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapi.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="42" selection-start-line="42" selection-end-line="42" />
+        <state relative-caret-position="91">
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/crypto.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/addResource.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
+        <state relative-caret-position="286">
+          <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="37" column="61" selection-start-line="37" selection-start-column="61" selection-end-line="37" selection-end-column="61" />
+        <state relative-caret-position="154">
+          <caret line="19" column="32" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
         </state>
       </provider>
     </entry>
