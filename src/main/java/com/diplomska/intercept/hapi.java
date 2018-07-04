@@ -5,7 +5,6 @@ import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
-import com.diplomska.encryptDecrypt.cryptoService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.apache.commons.io.IOUtils;
@@ -33,6 +32,9 @@ import java.util.List;
 @WebServlet(urlPatterns = {"/hapi.do"})
 public class hapi extends HttpServlet {
 
+    public static String HapiRESTfulServer = "http://localhost:8080/hapi/baseDstu2";
+    public static String HapiCrypto = "http://localhost:7050/crypto.do";
+
     // Get requesti - iskanje pacientov
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -45,7 +47,7 @@ public class hapi extends HttpServlet {
         URIBuilder uri;
         try {
             // Send request to crypto --> Encrypt search parameters
-            uri = new URIBuilder("http://localhost:7050/crypto.do");
+            uri = new URIBuilder(HapiCrypto);
             uri.setParameter("encrypt", "true");
             uri.setParameter("given", given);
             uri.setParameter("family", family);
@@ -61,7 +63,7 @@ public class hapi extends HttpServlet {
 
             // Search with encoded parameters
             FhirContext ctx = FhirContext.forDstu2();
-            IGenericClient client = ctx.newRestfulGenericClient("http://hapi.fhir.org/baseDstu2");
+            IGenericClient client = ctx.newRestfulGenericClient(HapiRESTfulServer);
 
             // Search for the Patient - hashed value
             Bundle search = client
@@ -85,7 +87,7 @@ public class hapi extends HttpServlet {
 
                 try {
                     // Decrypt the values
-                    uri = new URIBuilder("http://localhost:7050/crypto.do");
+                    uri = new URIBuilder(HapiCrypto);
                     uri.setParameter("encrypt", "false");
                     uri.setParameter("given", fam);
                     uri.setParameter("family", giv);
@@ -131,7 +133,7 @@ public class hapi extends HttpServlet {
 
         // Encrypt the resource
         HttpClient httpClient = HttpClientBuilder.create().build();
-        HttpPost requestToCrypto = new HttpPost("http://localhost:8080/crypto.do");
+        HttpPost requestToCrypto = new HttpPost(HapiCrypto);
         String requestBody = IOUtils.toString(new InputStreamReader(request.getInputStream()));
         requestToCrypto.setEntity(new StringEntity(requestBody));
 
@@ -139,7 +141,7 @@ public class hapi extends HttpServlet {
         HttpResponse encryptedResource = httpClient.execute(requestToCrypto);
 
         // Send the encrypted response to HAPI endpoint
-        HttpPost encryptedToHapi = new HttpPost("http://hapi.fhir.org/baseDstu2");
+        HttpPost encryptedToHapi = new HttpPost(HapiRESTfulServer);
         encryptedToHapi.setEntity(encryptedResource.getEntity());
         encryptedToHapi.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
         HttpResponse responseFromHapi = httpClient.execute(encryptedToHapi);

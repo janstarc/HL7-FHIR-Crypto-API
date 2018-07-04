@@ -7,7 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Diplomska2" />
-        <module name="todo-app" />
+        <module name="diplomskaHapiCrypto" />
         <module name="ToDoApp" />
       </profile>
     </annotationProcessing>

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.todo</groupId>
-    <artifactId>todo-app</artifactId>
+    <artifactId>diplomskaHapiCrypto</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -238,11 +238,14 @@
             <artifactId>hapi-fhir-base</artifactId>
             <version>3.2.0</version>
         </dependency>
+        <!--
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-structures-dstu3</artifactId>
             <version>3.2.0</version>
         </dependency>
+        -->
+        <!--
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-structures-dstu2</artifactId>
@@ -253,11 +256,13 @@
             <artifactId>hapi-fhir-validation-resources-dstu2</artifactId>
             <version>3.2.0</version>
         </dependency>
+
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-validation-resources-dstu3</artifactId>
             <version>3.2.0</version>
         </dependency>
+        -->
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-client</artifactId>
@@ -279,17 +284,21 @@
             <version>3.2.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/hapi-fhir-structures-dstu3 -->
+        <!--
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-structures-dstu3</artifactId>
             <version>3.4.0</version>
         </dependency>
+        -->
         <!-- https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/hapi-fhir-validation-resources-dstu3 -->
+        <!--
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-validation-resources-dstu3</artifactId>
             <version>3.4.0</version>
         </dependency>
+        -->
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-base</artifactId>
