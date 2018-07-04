@@ -24,7 +24,7 @@ public class testniPrimeri {
     public static void getPatient(String given, String family) throws IOException, URISyntaxException {
 
         HttpClient httpClient = HttpClientBuilder.create().build();
-        URIBuilder url = new URIBuilder("http://localhost:8080/hapi.do");
+        URIBuilder url = new URIBuilder("http://localhost:7050/hapi.do");
         url.setParameter("given", given);
         url.setParameter("family", family);
         HttpGet request = new HttpGet(String.valueOf(url));
@@ -48,7 +48,7 @@ public class testniPrimeri {
 
         HttpClient httpClient = HttpClientBuilder.create().build();
         try {
-            HttpPost request = new HttpPost("http://localhost:8080/hapi.do");
+            HttpPost request = new HttpPost("http://localhost:7050/hapi.do");
             StringEntity params = new StringEntity(requestBody);
             request.addHeader("content-type", "application/json");
             request.setEntity(params);

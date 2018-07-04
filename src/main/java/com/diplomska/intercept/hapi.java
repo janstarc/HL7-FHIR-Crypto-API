@@ -45,7 +45,7 @@ public class hapi extends HttpServlet {
         URIBuilder uri;
         try {
             // Send request to crypto --> Encrypt search parameters
-            uri = new URIBuilder("http://localhost:8080/crypto.do");
+            uri = new URIBuilder("http://localhost:7050/crypto.do");
             uri.setParameter("encrypt", "true");
             uri.setParameter("given", given);
             uri.setParameter("family", family);
@@ -85,7 +85,7 @@ public class hapi extends HttpServlet {
 
                 try {
                     // Decrypt the values
-                    uri = new URIBuilder("http://localhost:8080/crypto.do");
+                    uri = new URIBuilder("http://localhost:7050/crypto.do");
                     uri.setParameter("encrypt", "false");
                     uri.setParameter("given", fam);
                     uri.setParameter("family", giv);
