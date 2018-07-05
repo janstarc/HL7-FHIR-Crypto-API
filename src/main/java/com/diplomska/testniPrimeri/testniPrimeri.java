@@ -11,6 +11,8 @@ import ca.uhn.fhir.model.dstu2.valueset.HTTPVerbEnum;
 import ca.uhn.fhir.model.dstu2.valueset.ObservationStatusEnum;
 import ca.uhn.fhir.model.primitive.IdDt;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
+import com.diplomska.encryptDecrypt.cryptoService;
+import com.diplomska.intercept.crypto;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -20,14 +22,28 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.servlet.ServletContext;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
+import java.security.InvalidKeyException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableEntryException;
+import java.security.cert.CertificateException;
 import java.util.List;
+import java.util.Random;
 
 public class testniPrimeri {
 
     public static String HapiRESTfulServer = "http://localhost:8080/hapi/baseDstu2";
     public static String HapiAccessPoint = "http://localhost:7050/hapi.do";
+    public static String HapiResourceAccessPoint = "http://localhost:7050/hapi.do/Resource";
+    private static cryptoService crypto = new cryptoService();
 
     public static void main(String[] args) throws IOException, URISyntaxException {
         String given = "Jan";
@@ -35,42 +51,22 @@ public class testniPrimeri {
 
         //addPatient(given, family);
         //getPatient("Novi", "Test");
-        getPatientById("1");
-    }
-
-    public static void getPatientByGivenFamily(String given, String family) throws IOException, URISyntaxException {
-
-        HttpClient httpClient = HttpClientBuilder.create().build();
-        URIBuilder url = new URIBuilder(HapiAccessPoint);
-        url.setParameter("given", given);
-        url.setParameter("family", family);
-        HttpGet request = new HttpGet(String.valueOf(url));
-        HttpResponse response = httpClient.execute(request);
-        HttpEntity entity = response.getEntity();
-        String responseString = EntityUtils.toString(entity, "UTF-8");
-        System.out.println("----- RESPONSE -----\n" + responseString);
+        Patient p = getPatientById(14954);
+        System.out.println("Test --> _id: " + p.getId().getIdPartAsLong());
+        try{
+            addResourceToPatient(p);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
-    public static void getPatientById(String id) throws IOException, URISyntaxException {
+    public static void addResourceToPatient(Patient p) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, IOException, NoSuchPaddingException, NoSuchAlgorithmException, KeyStoreException, CertificateException, UnrecoverableEntryException {
 
-        // We're connecting to a DSTU1 compliant server in this example
         FhirContext ctx = FhirContext.forDstu2();
         String serverBase = HapiRESTfulServer;
-
         IGenericClient client = ctx.newRestfulGenericClient(serverBase);
 
-        // Perform a search
-        Bundle results = client
-                .search()
-                .forResource(Patient.class)
-                .where(Patient.FAMILY.matches().value("ZXBnTTumRMqzT5Oel36QsQ=="))
-                .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
-                .execute();
-
-        List<Patient> patientList = results.getAllPopulatedChildElementsOfType(Patient.class);
-        Patient p = patientList.get(0);
-        System.out.println("Test --> Given: " + p.getName().get(0).getGivenAsSingleString());
         String ident = p.getId().getValue();
         System.out.println("Identifier: " + ident);
 
@@ -85,16 +81,27 @@ public class testniPrimeri {
                 .setDisplay("Test 2");
         observation.setValue(
                 new QuantityDt()
-                        .setValue(4.12)
-                        .setUnit("10 trillion/L")
+                        .setValue(randomNum())
+                        .setUnit("test" + randomNum() + "testEnota")
                         .setSystem("http://unitsofmeasure.org")
                         .setCode("10*12/L"));
 
 
-
+        /**
+         *  Vse OK, problem je ker se klice iz maina, ki ni servlet in v inicializaciji ne dopusca servlet contexta!
+         *
+         */
         //observation.setSubject(new ResourceReferenceDt(p.getId().getValue()));
+        String _id = String.valueOf(p.getId().getIdPartAsLong());
+        System.out.println("ID: " + _id);
+
+        String encryptedRef = "testCeToleDela";
+        //ResourceReferenceDt resourceReferenceDt = new ResourceReferenceDt(_id);
+        observation.setSubject(new ResourceReferenceDt("Patient/" + encryptedRef));
         //IdDt idDt = new IdDt("hashValue");
-        observation.setSubject(new ResourceReferenceDt("Patient/krneki"));
+        //observation.setSubject(new ResourceReferenceDt("Patient/krneki"));
+
+
 
         Bundle bundle = new Bundle();
         bundle.setType(BundleTypeEnum.TRANSACTION);
@@ -111,7 +118,47 @@ public class testniPrimeri {
 
         // Log the response
         System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(resp));
+    }
 
+    public static void getPatientByGivenFamily(String given, String family) throws IOException, URISyntaxException {
+
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        URIBuilder url = new URIBuilder(HapiAccessPoint);
+        url.setParameter("given", given);
+        url.setParameter("family", family);
+        HttpGet request = new HttpGet(String.valueOf(url));
+        HttpResponse response = httpClient.execute(request);
+        HttpEntity entity = response.getEntity();
+        String responseString = EntityUtils.toString(entity, "UTF-8");
+        System.out.println("----- RESPONSE -----\n" + responseString);
+
+    }
+
+    public static Patient getPatientById(int id) throws IOException, URISyntaxException {
+
+        // We're connecting to a DSTU1 compliant server in this example
+        FhirContext ctx = FhirContext.forDstu2();
+        String serverBase = HapiRESTfulServer;
+
+        IGenericClient client = ctx.newRestfulGenericClient(serverBase);
+
+        // Perform a search
+        Bundle results = client
+                .search()
+                .byUrl(HapiRESTfulServer + "/Patient?_id=" + id)
+                .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
+                .execute();
+
+        List<Patient> patientList = results.getAllPopulatedChildElementsOfType(Patient.class);
+        Patient p;
+        if(patientList.size() > 0){
+            p = patientList.get(0);
+            return p;
+        } else {
+            System.out.println("No result");
+        }
+
+        return null;
     }
 
     public static void addPatient(String given, String family){
@@ -139,5 +186,13 @@ public class testniPrimeri {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static int randomNum(){
+        Random r = new Random();
+        int Low = 10;
+        int High = 100;
+        int Result = r.nextInt(High-Low) + Low;
+        return Result;
     }
 }
