@@ -1,7 +1,10 @@
 package com.diplomska.intercept;
 
 import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
+import ca.uhn.fhir.model.dstu2.resource.BaseResource;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
+import ca.uhn.fhir.model.dstu2.resource.Observation;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
@@ -36,31 +39,28 @@ import static com.diplomska.constants.address.HapiRESTfulServer;
 public class hapiObservation extends HttpServlet {
 
     // Get requesti - iskanje pacientov
-    /*
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // Get the parameter
-        String family = request.getParameter("family");
-        String given = request.getParameter("given");
+        String _id = request.getParameter("_id");
+        System.out.println("All resources for: " + _id);
 
         HttpClient httpClient = HttpClientBuilder.create().build();
         URIBuilder uri;
         try {
             // Send request to crypto --> Encrypt search parameters
-            uri = new URIBuilder(HapiCrypto);
+            uri = new URIBuilder(HapiCryptoObservation);
             uri.setParameter("encrypt", "true");
-            uri.setParameter("given", given);
-            uri.setParameter("family", family);
+            uri.setParameter("_id", _id);
             HttpGet requestToCrypto = new HttpGet(String.valueOf(uri));
             HttpResponse encryptedGet = httpClient.execute(requestToCrypto);
 
             // Crypto returns JSON object with encrypted search parameters
             String encryptedJson = EntityUtils.toString(encryptedGet.getEntity());
             JsonObject jObj = new Gson().fromJson(encryptedJson, JsonObject.class);
-            String familyEnc = jObj.get("family").getAsString();
-            String givenEnc = jObj.get("given").getAsString();
-            System.out.println("Given enc: " + givenEnc + " Family enc: " + familyEnc);
+            String _idEnc = jObj.get("_id").getAsString();
+            System.out.println("_id enc: " + _idEnc);
 
             // Search with encoded parameters
             FhirContext ctx = FhirContext.forDstu2();
@@ -69,45 +69,37 @@ public class hapiObservation extends HttpServlet {
             // Search for the Patient - hashed value
             Bundle search = client
                     .search()
-                    .forResource(Patient.class)
-                    .where(Patient.FAMILY.matches().value(familyEnc))
-                    .and(Patient.GIVEN.matches().value(givenEnc))
+                    .forResource(Observation.class)
+                    .where(Observation.PATIENT.hasId(_id))
                     .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
                     .encodedJson()
                     .execute();
 
-            // Convert bundle to List<Patient>
-            List<Patient> resultArray = search.getAllPopulatedChildElementsOfType(Patient.class);
+            // Convert bundle to List<Observation>
+            List<Observation> resultArray = search.getAllPopulatedChildElementsOfType(Observation.class);
             System.out.println("Result Array size: " + resultArray.size());
 
             // Loop through the patient list, decrypt hashed parameters
-            for (Patient p : resultArray) {
-                String fam = p.getName().get(0).getFamilyAsSingleString();
-                String giv = p.getName().get(0).getGivenAsSingleString();
+            for (Observation o : resultArray) {
+                String idEncrypted = o.getId().getValueAsString();
+                String idPartEncrypted = idEncrypted.substring(idEncrypted.lastIndexOf("/") + 1);
                 System.out.println("Here?");
 
                 try {
                     // Decrypt the values
-                    uri = new URIBuilder(HapiCrypto);
+                    uri = new URIBuilder(HapiCryptoObservation);
                     uri.setParameter("encrypt", "false");
-                    uri.setParameter("given", fam);
-                    uri.setParameter("family", giv);
+                    uri.setParameter("_id", idPartEncrypted);
                     HttpGet requestToCrypto2 = new HttpGet(String.valueOf(uri));
                     HttpResponse encryptedGet2 = httpClient.execute(requestToCrypto2);
 
                     // Crypto returns JSON object with encrypted search parameters
                     String encryptedJson2 = EntityUtils.toString(encryptedGet2.getEntity());
                     JsonObject jObj2 = new Gson().fromJson(encryptedJson2, JsonObject.class);
-                    String famDecrypt = jObj2.get("given").getAsString();
-                    String givDecrypt = jObj2.get("family").getAsString();
+                    String idDecrypt = jObj2.get("_id").getAsString();
 
                     // Handle the resource conversion and change the value of object p
-                    ArrayList<StringDt> famArray = new ArrayList<>();
-                    famArray.add(new StringDt(famDecrypt));
-                    p.getName().get(0).setFamily(famArray);
-                    ArrayList<StringDt> givArray = new ArrayList<>();
-                    givArray.add(new StringDt(givDecrypt));
-                    p.getName().get(0).setGiven(givArray);
+                    o.setSubject(new ResourceReferenceDt("Observation/" + idDecrypt));
 
                     // Write log
                     System.out.println("Found " + search.getEntry().size() + " results.");
@@ -127,7 +119,6 @@ public class hapiObservation extends HttpServlet {
             e.printStackTrace();
         }
     }
-    */
 
     // Ko dobimo POST request - nalaganje resourca na bazo
     @Override
@@ -149,6 +140,7 @@ public class hapiObservation extends HttpServlet {
         encryptedToHapi.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
         HttpResponse responseFromHapi = httpClient.execute(encryptedToHapi);
         String responseFromHapiString = EntityUtils.toString(responseFromHapi.getEntity());
+        System.out.println("Response from HAPI: " + responseFromHapiString);
         PrintWriter out = response.getWriter();
         out.println(responseFromHapiString);
     }

@@ -42,27 +42,28 @@ public class cryptoObservation extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        /*
         String encrypt = request.getParameter("encrypt");
 
         if(encrypt.equals("true")){
             System.out.println("Here 1");
-            String given = request.getParameter("given");
-            String family = request.getParameter("family");
+            String _id = request.getParameter("_id");
+
             ServletContext context = getServletContext();
 
             try {
                 crypto.init(context);
-                given =  crypto.encrypt(given);
-                family = crypto.encrypt(family);
+                // TEST
+                System.out.println("1 = " + crypto.encrypt("1") + " Dec= " + crypto.decrypt(crypto.encrypt("1")));
+                System.out.println("14954 = " + crypto.encrypt("14954") + " Dec= " + crypto.decrypt(crypto.encrypt("14954")));
+                System.out.println("14962 = " + crypto.encrypt("14962") + " Dec= " + crypto.decrypt(crypto.encrypt("14962")));
+                // TEST
+                _id =  crypto.encrypt(_id);
             } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException | CertificateException | NoSuchAlgorithmException | NoSuchPaddingException | UnrecoverableEntryException | KeyStoreException e) {
                 e.printStackTrace();
             }
 
             JsonObject jObj = new JsonObject();
-            jObj.addProperty("given", given);
-            jObj.addProperty("family", family);
-
+            jObj.addProperty("_id", _id);
             Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
             PrintWriter out = response.getWriter();
@@ -71,26 +72,23 @@ public class cryptoObservation extends HttpServlet {
         } else if (encrypt.equals("false")) {
 
             System.out.println("Here 2");
-            String given = request.getParameter("given");
-            String family = request.getParameter("family");
+            String _id = request.getParameter("_id");
             ServletContext context = getServletContext();
 
             try {
                 crypto.init(context);
-                given =  crypto.decrypt(given);
-                family = crypto.decrypt(family);
+                _id =  crypto.decrypt(_id);
             } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException | CertificateException | NoSuchAlgorithmException | NoSuchPaddingException | UnrecoverableEntryException | KeyStoreException e) {
                 e.printStackTrace();
             }
 
             JsonObject jObj = new JsonObject();
-            jObj.addProperty("given", given);
-            jObj.addProperty("family", family);
+            jObj.addProperty("_id", _id);
             Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
             PrintWriter out = response.getWriter();
             out.println(gson.toJson(jObj));
-        }*/
+        }
     }
 
     // Ko dobimo POST request - nalaganje resource na bazo
@@ -104,6 +102,8 @@ public class cryptoObservation extends HttpServlet {
         Bundle req = (Bundle) ctx.newJsonParser().parseResource(new InputStreamReader(request.getInputStream()));
         List<Observation> observationList = req.getAllPopulatedChildElementsOfType(Observation.class);
 
+        String aaaa = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(req);
+        System.out.println("\n RESOURCE BEFORE ENCRYPTION: " + aaaa + "\n ----- END -----");
         // Create ServletContext and init ED Servuce
         ServletContext context = getServletContext();
         try {
@@ -112,9 +112,15 @@ public class cryptoObservation extends HttpServlet {
             e.printStackTrace();
         }
 
+        System.out.println("observationList.len = " + observationList.size());
         // Encrypt all resources
         for(Observation o : observationList){
+            /**
+             *  TODO: FIX HERE!!!
+             *      --> Ker je referenca na drugem strezniku, vrne HAPI celo referenco. Narobe se parsa, referenca je null
+             */
             String _id = String.valueOf(o.getId().getIdPartAsLong());
+            System.out.println("Value of ID (crypto): " + _id + " As string: " + o.getId().getIdPart() + " As long: " + o.getId().getIdPartAsLong());
             try {
                 _id = crypto.encrypt(_id);
             } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {

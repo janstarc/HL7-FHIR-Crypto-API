@@ -37,9 +37,6 @@ import static com.diplomska.constants.address.*;
 
 public class testniPrimeri {
 
-    //public static String HapiRESTfulServer = "http://localhost:8080/hapi/baseDstu2";
-    //public static String HapiAccessPoint = "http://localhost:7050/hapi.do/Patient";
-
     private static cryptoService crypto = new cryptoService();
 
     public static void main(String[] args) throws IOException, URISyntaxException {
@@ -59,6 +56,19 @@ public class testniPrimeri {
             e.printStackTrace();
         }
 
+        //getAllResourcesForPatient("1");
+    }
+
+    public static void getAllResourcesForPatient(String _id) throws URISyntaxException, IOException {
+
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        URIBuilder url = new URIBuilder(HapiAccessPointObservation);
+        url.setParameter("_id", _id);
+        HttpGet request = new HttpGet(String.valueOf(url));
+        HttpResponse response = httpClient.execute(request);
+        HttpEntity entity = response.getEntity();
+        String responseString = EntityUtils.toString(entity, "UTF-8");
+        System.out.println("----- RESPONSE -----\n" + responseString);
     }
 
     public static void addObservationToPat(Patient p){
@@ -115,6 +125,7 @@ public class testniPrimeri {
         }
     }
 
+    /*
     public static void addResourceToPatient(Patient p) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, IOException, NoSuchPaddingException, NoSuchAlgorithmException, KeyStoreException, CertificateException, UnrecoverableEntryException {
 
         FhirContext ctx = FhirContext.forDstu2();
@@ -141,10 +152,6 @@ public class testniPrimeri {
                         .setCode("10*12/L"));
 
 
-        /**
-         *  Vse OK, problem je ker se klice iz maina, ki ni servlet in v inicializaciji ne dopusca servlet contexta!
-         *
-         */
         //observation.setSubject(new ResourceReferenceDt(p.getId().getValue()));
         String _id = String.valueOf(p.getId().getIdPartAsLong());
         System.out.println("ID: " + _id);
@@ -169,11 +176,12 @@ public class testniPrimeri {
         // Log the response
         System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(resp));
     }
+    */
 
     public static void getPatientByGivenFamily(String given, String family) throws IOException, URISyntaxException {
 
         HttpClient httpClient = HttpClientBuilder.create().build();
-        URIBuilder url = new URIBuilder(HapiAccessPoint);
+        URIBuilder url = new URIBuilder(HapiAccessPointPatient);
         url.setParameter("given", given);
         url.setParameter("family", family);
         HttpGet request = new HttpGet(String.valueOf(url));
