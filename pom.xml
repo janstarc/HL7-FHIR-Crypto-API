@@ -25,12 +25,14 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+        <!--
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>6.0</version>
             <scope>provided</scope>
         </dependency>
+        -->
         <!-- https://mvnrepository.com/artifact/javax.json/javax.json-api -->
         <dependency>
             <groupId>javax.json</groupId>
@@ -240,26 +242,26 @@
         </dependency>
         <!--
         <dependency>
-            <groupId>ca.uhn.hapi.fhir</groupId>
-            <artifactId>hapi-fhir-structures-dstu3</artifactId>
+            <groupId>ca.uhn.hapiPatient.fhir</groupId>
+            <artifactId>hapiPatient-fhir-structures-dstu3</artifactId>
             <version>3.2.0</version>
         </dependency>
         -->
         <!--
         <dependency>
-            <groupId>ca.uhn.hapi.fhir</groupId>
-            <artifactId>hapi-fhir-structures-dstu2</artifactId>
+            <groupId>ca.uhn.hapiPatient.fhir</groupId>
+            <artifactId>hapiPatient-fhir-structures-dstu2</artifactId>
             <version>3.2.0</version>
         </dependency>
         <dependency>
-            <groupId>ca.uhn.hapi.fhir</groupId>
-            <artifactId>hapi-fhir-validation-resources-dstu2</artifactId>
+            <groupId>ca.uhn.hapiPatient.fhir</groupId>
+            <artifactId>hapiPatient-fhir-validation-resources-dstu2</artifactId>
             <version>3.2.0</version>
         </dependency>
 
         <dependency>
-            <groupId>ca.uhn.hapi.fhir</groupId>
-            <artifactId>hapi-fhir-validation-resources-dstu3</artifactId>
+            <groupId>ca.uhn.hapiPatient.fhir</groupId>
+            <artifactId>hapiPatient-fhir-validation-resources-dstu3</artifactId>
             <version>3.2.0</version>
         </dependency>
         -->
@@ -286,16 +288,16 @@
         <!-- https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/hapi-fhir-structures-dstu3 -->
         <!--
         <dependency>
-            <groupId>ca.uhn.hapi.fhir</groupId>
-            <artifactId>hapi-fhir-structures-dstu3</artifactId>
+            <groupId>ca.uhn.hapiPatient.fhir</groupId>
+            <artifactId>hapiPatient-fhir-structures-dstu3</artifactId>
             <version>3.4.0</version>
         </dependency>
         -->
         <!-- https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/hapi-fhir-validation-resources-dstu3 -->
         <!--
         <dependency>
-            <groupId>ca.uhn.hapi.fhir</groupId>
-            <artifactId>hapi-fhir-validation-resources-dstu3</artifactId>
+            <groupId>ca.uhn.hapiPatient.fhir</groupId>
+            <artifactId>hapiPatient-fhir-validation-resources-dstu3</artifactId>
             <version>3.4.0</version>
         </dependency>
         -->

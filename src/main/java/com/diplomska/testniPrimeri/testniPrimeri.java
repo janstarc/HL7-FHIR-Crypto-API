@@ -9,10 +9,8 @@ import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.valueset.BundleTypeEnum;
 import ca.uhn.fhir.model.dstu2.valueset.HTTPVerbEnum;
 import ca.uhn.fhir.model.dstu2.valueset.ObservationStatusEnum;
-import ca.uhn.fhir.model.primitive.IdDt;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import com.diplomska.encryptDecrypt.cryptoService;
-import com.diplomska.intercept.crypto;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -22,13 +20,10 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import javax.servlet.ServletContext;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.security.KeyStoreException;
@@ -38,27 +33,86 @@ import java.security.cert.CertificateException;
 import java.util.List;
 import java.util.Random;
 
+import static com.diplomska.constants.address.*;
+
 public class testniPrimeri {
 
-    public static String HapiRESTfulServer = "http://localhost:8080/hapi/baseDstu2";
-    public static String HapiAccessPoint = "http://localhost:7050/hapi.do";
-    public static String HapiResourceAccessPoint = "http://localhost:7050/hapi.do/Resource";
+    //public static String HapiRESTfulServer = "http://localhost:8080/hapi/baseDstu2";
+    //public static String HapiAccessPoint = "http://localhost:7050/hapi.do/Patient";
+
     private static cryptoService crypto = new cryptoService();
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        String given = "Jan";
-        String family = "Starc";
+        String given = "Cvetka";
+        String family = "Cvetka";
 
         //addPatient(given, family);
-        //getPatient("Novi", "Test");
-        Patient p = getPatientById(14954);
+        //getPatientByGivenFamily(given, family);
+
+
+        Patient p = getPatientById(1);
         System.out.println("Test --> _id: " + p.getId().getIdPartAsLong());
+
         try{
-            addResourceToPatient(p);
+            addObservationToPat(p);
         } catch (Exception e){
             e.printStackTrace();
         }
 
+    }
+
+    public static void addObservationToPat(Patient p){
+
+        // Get the patient ID
+        String _id = String.valueOf(p.getId().getIdPartAsLong());
+
+        // Create an observation object
+        Observation observation = new Observation();
+        observation.setStatus(ObservationStatusEnum.FINAL);
+        observation
+                .getCode()
+                .addCoding()
+                .setSystem("http://loinc.org")
+                .setCode("789-8")
+                .setDisplay("Test 2");
+        observation.setValue(
+                new QuantityDt()
+                        .setValue(randomNum())
+                        .setUnit("test" + randomNum() + "testEnota")
+                        .setSystem("http://unitsofmeasure.org")
+                        .setCode("10*12/L"));
+
+        observation.setSubject(new ResourceReferenceDt(p.getId()));
+
+
+
+        // Create a Bundle, containing the Observation object
+        Bundle bundle = new Bundle();
+        bundle.setType(BundleTypeEnum.TRANSACTION);
+        bundle.addEntry()
+                .setResource(observation)
+                .getRequest()
+                    .setUrl("Observation")
+                    .setMethod(HTTPVerbEnum.POST);
+
+        FhirContext ctx = FhirContext.forDstu2();
+        String requestBody = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle);
+        //System.out.println("Req body: " + requestBody);
+
+        // Send a POST request to the server
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        try{
+            HttpPost request = new HttpPost(HapiAccessPointObservation);
+            StringEntity params = new StringEntity(requestBody);
+            request.addHeader("content-type", "application/json");
+            request.setEntity(params);
+            HttpResponse response = httpClient.execute(request);
+            HttpEntity entity = response.getEntity();
+            String responseString = EntityUtils.toString(entity, "UTF-8");
+            System.out.println("----- RESPONSE -----\n" + responseString);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public static void addResourceToPatient(Patient p) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, IOException, NoSuchPaddingException, NoSuchAlgorithmException, KeyStoreException, CertificateException, UnrecoverableEntryException {
@@ -98,10 +152,6 @@ public class testniPrimeri {
         String encryptedRef = "testCeToleDela";
         //ResourceReferenceDt resourceReferenceDt = new ResourceReferenceDt(_id);
         observation.setSubject(new ResourceReferenceDt("Patient/" + encryptedRef));
-        //IdDt idDt = new IdDt("hashValue");
-        //observation.setSubject(new ResourceReferenceDt("Patient/krneki"));
-
-
 
         Bundle bundle = new Bundle();
         bundle.setType(BundleTypeEnum.TRANSACTION);

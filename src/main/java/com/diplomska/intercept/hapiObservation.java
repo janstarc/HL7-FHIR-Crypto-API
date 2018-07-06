@@ -29,13 +29,14 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/hapi.do"})
-public class hapi extends HttpServlet {
+import static com.diplomska.constants.address.HapiCryptoObservation;
+import static com.diplomska.constants.address.HapiRESTfulServer;
 
-    public static String HapiRESTfulServer = "http://localhost:8080/hapi/baseDstu2";
-    public static String HapiCrypto = "http://localhost:7050/crypto.do";
+@WebServlet(urlPatterns = {"/hapi.do/Observation"})
+public class hapiObservation extends HttpServlet {
 
     // Get requesti - iskanje pacientov
+    /*
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -126,6 +127,7 @@ public class hapi extends HttpServlet {
             e.printStackTrace();
         }
     }
+    */
 
     // Ko dobimo POST request - nalaganje resourca na bazo
     @Override
@@ -133,8 +135,9 @@ public class hapi extends HttpServlet {
 
         // Encrypt the resource
         HttpClient httpClient = HttpClientBuilder.create().build();
-        HttpPost requestToCrypto = new HttpPost(HapiCrypto);
+        HttpPost requestToCrypto = new HttpPost(HapiCryptoObservation);
         String requestBody = IOUtils.toString(new InputStreamReader(request.getInputStream()));
+        System.out.println("Req - HAPI" + requestBody);
         requestToCrypto.setEntity(new StringEntity(requestBody));
 
         // Get the response, generate a usable form out of it

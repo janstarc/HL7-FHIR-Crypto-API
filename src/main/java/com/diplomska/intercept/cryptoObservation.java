@@ -1,7 +1,9 @@
 package com.diplomska.intercept;
 
 import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
+import ca.uhn.fhir.model.dstu2.resource.Observation;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.valueset.BundleTypeEnum;
 import ca.uhn.fhir.model.dstu2.valueset.HTTPVerbEnum;
@@ -30,15 +32,17 @@ import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableEntryException;
 import java.security.cert.CertificateException;
 import java.util.ArrayList;
+import java.util.List;
 
-@WebServlet(urlPatterns = "/crypto.do")
-public class crypto extends HttpServlet {
+@WebServlet(urlPatterns = "/crypto.do/Observation")
+public class cryptoObservation extends HttpServlet {
 
     private cryptoService crypto = new cryptoService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        /*
         String encrypt = request.getParameter("encrypt");
 
         if(encrypt.equals("true")){
@@ -86,7 +90,7 @@ public class crypto extends HttpServlet {
 
             PrintWriter out = response.getWriter();
             out.println(gson.toJson(jObj));
-        }
+        }*/
     }
 
     // Ko dobimo POST request - nalaganje resource na bazo
@@ -97,62 +101,41 @@ public class crypto extends HttpServlet {
         FhirContext ctx = FhirContext.forDstu2();
 
         // Convert request to resource and cast resource to Patient
-        IBaseResource resource = ctx.newJsonParser().parseResource(new InputStreamReader(request.getInputStream()));
-        Patient p = (Patient) resource;
+        Bundle req = (Bundle) ctx.newJsonParser().parseResource(new InputStreamReader(request.getInputStream()));
+        List<Observation> observationList = req.getAllPopulatedChildElementsOfType(Observation.class);
 
-        // Get first and last name from the resource
-        String familyName;
-        String givenName;
-        try {
-            familyName = p.getName().get(0).getFamilyAsSingleString();
-            givenName = p.getName().get(0).getGivenAsSingleString();
-        } catch (Exception e){
-            System.out.println("JSON Parser Error - Invalid resource");
-            e.printStackTrace();
-            return;
-        }
-
-        // Encrypt first and last name
+        // Create ServletContext and init ED Servuce
         ServletContext context = getServletContext();
         try {
             crypto.init(context);
-            familyName = crypto.encrypt(familyName);
-            givenName = crypto.encrypt(givenName);
-        } catch (NoSuchPaddingException | NoSuchAlgorithmException | KeyStoreException | UnrecoverableEntryException |
-                CertificateException | BadPaddingException | IllegalBlockSizeException | InvalidKeyException e) {
-            System.out.println("Encryption Error");
+        } catch (NoSuchAlgorithmException | KeyStoreException | CertificateException | UnrecoverableEntryException | NoSuchPaddingException e) {
             e.printStackTrace();
-            return;
         }
 
-        // Handle data types
-        ArrayList<StringDt> family = new ArrayList<>();
-        family.add(new StringDt(familyName));
-        ArrayList<StringDt> given = new ArrayList<>();
-        given.add(new StringDt(givenName));
-
-        // Set encrypted values to resource
-        try{
-            p.getName().get(0).setFamily(family);
-            p.getName().get(0).setGiven(given);
-        } catch (Exception e){
-            e.printStackTrace();
+        // Encrypt all resources
+        for(Observation o : observationList){
+            String _id = String.valueOf(o.getId().getIdPartAsLong());
+            try {
+                _id = crypto.encrypt(_id);
+            } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
+                e.printStackTrace();
+            }
+            o.setSubject(new ResourceReferenceDt("Patient/" + _id));
         }
 
         // Create a bundle that will be used in a transaction
-        Bundle bundle = new Bundle();
-        bundle.setType(BundleTypeEnum.TRANSACTION);
+        //Bundle bundle = new Bundle();
+        //req.setType(BundleTypeEnum.TRANSACTION);
 
         // Add the patient as an entry
-        bundle.addEntry()
-                .setFullUrl(p.getId().getValue())
-                .setResource(p)
+        /*bundle.addEntry()
+                .setResource(req)
                 .getRequest()
-                .setUrl("Patient")
-                .setMethod(HTTPVerbEnum.POST);
+                .setUrl("Observation")
+                .setMethod(HTTPVerbEnum.POST);*/
 
         // Encode bundle to json and send it to the HAPI server
-        String bundleString = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle);
+        String bundleString = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(req);
         System.out.println(bundleString);
         PrintWriter out = response.getWriter();
         out.println(bundleString);
