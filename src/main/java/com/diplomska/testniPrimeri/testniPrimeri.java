@@ -48,8 +48,8 @@ public class testniPrimeri {
         //addPatient(given, family);
         //getPatientByGivenFamily(given, family);
 
-        /*
-        Patient p = getPatientById(1);
+
+        Patient p = getPatientById(14962);
         System.out.println("Test --> _id: " + p.getId().getIdPartAsLong());
 
         try{
@@ -57,11 +57,11 @@ public class testniPrimeri {
         } catch (Exception e){
             e.printStackTrace();
         }
-        */
+
         //Patient p = getPatientById(1);
         //addResourceToPatient(p);
 
-        getAllResourcesForPatient("14954");
+        getAllResourcesForPatient("14962");
     }
 
     public static void getAllResourcesForPatient(String _id) throws URISyntaxException, IOException {
@@ -97,8 +97,11 @@ public class testniPrimeri {
                         .setSystem("http://unitsofmeasure.org")
                         .setCode("10*12/L"));
 
-        observation.setSubject(new ResourceReferenceDt(p.getId()));
-
+        //observation.setSubject(new ResourceReferenceDt(p.getId()));
+        ExtensionDt ext = new ExtensionDt();
+        ext.setElementSpecificId("encryptedReference");
+        ext.setValue(new StringDt("Patient/" + _id));
+        observation.addUndeclaredExtension(ext);
 
 
         // Create a Bundle, containing the Observation object
@@ -135,6 +138,7 @@ public class testniPrimeri {
 
         FhirContext ctx = FhirContext.forDstu2();
         String serverBase = HapiRESTfulServer;
+        //String serverBase = "http://hapi.fhir.org/baseDstu2";
         IGenericClient client = ctx.newRestfulGenericClient(serverBase);
 
         String ident = p.getId().getValue();
@@ -157,15 +161,15 @@ public class testniPrimeri {
                         .setCode("10*12/L"));
 
 
-        //observation.setSubject(new ResourceReferenceDt(p.getId().getValue()));
+        //observation.setSubject(new ResourceReferenceDt("Patient/1124")); // TO DELETE!
         String _id = String.valueOf(p.getId().getIdPartAsLong());
         System.out.println("ID: " + _id);
 
         String encryptedRef = "testCeToleDela";
         //ResourceReferenceDt resourceReferenceDt = new ResourceReferenceDt(_id);
         //observation.setSubject(new ResourceReferenceDt("Patient/" + encryptedRef));
+
         ExtensionDt ext = new ExtensionDt();
-        //ext.setModifier(false);
         ext.setElementSpecificId("encryptedReference");
         ext.setValue(new StringDt("Patient/GVJiNefvk3wDfaDqS5xh0Q=="));
         observation.addUndeclaredExtension(ext);

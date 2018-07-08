@@ -1,6 +1,7 @@
 package com.diplomska.intercept;
 
 import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.model.api.ExtensionDt;
 import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.Observation;
@@ -12,6 +13,7 @@ import com.diplomska.encryptDecrypt.cryptoService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import org.hl7.fhir.instance.model.api.IBaseDatatype;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 
 import javax.crypto.BadPaddingException;
@@ -121,8 +123,27 @@ public class cryptoObservation extends HttpServlet {
              *  TODO: FIX HERE!!!
              *      --> Ker je referenca na drugem strezniku, vrne HAPI celo referenco. Narobe se parsa, referenca je null
              */
+            List<ExtensionDt> extList = o.getUndeclaredExtensions();
+            if(extList.size() > 0){
+                for(ExtensionDt ext : extList){
+                    if(ext.getElementSpecificId().equals("encryptedReference")){
+                        //ext.setValue(new StringDt("Patient/" + _id));
+                        String id = ext.getValue().toString();
+                        String idPart = id.substring(id.lastIndexOf("/") + 1);
+                        try{
+                            idPart = crypto.encrypt(idPart);
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+                        ext.setValue(new StringDt("Patient/" + idPart));
+                        //System.out.println("Class type = " + id + " ID Part: " + idPart);
+                    }
+                }
+            }
+
             //System.out.println("Se nek test: " + o.getSubject().getReference().getIdPartAsLong());
-            String _id = String.valueOf(o.getSubject().getReference().getIdPartAsLong());
+
+            /*String _id = String.valueOf(o.getSubject().getReference().getIdPartAsLong());
             System.out.println("Value of ID (crypto): " + _id);
             try {
                 _id = crypto.encrypt(_id);
@@ -130,6 +151,7 @@ public class cryptoObservation extends HttpServlet {
                 e.printStackTrace();
             }
             o.setSubject(new ResourceReferenceDt(HapiRESTfulServer + "/Patient/" + _id));
+            */
         }
 
         // Create a bundle that will be used in a transaction
