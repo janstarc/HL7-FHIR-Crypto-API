@@ -1,6 +1,7 @@
 package com.diplomska.testniPrimeri;
 
 import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.model.api.ExtensionDt;
 import ca.uhn.fhir.model.dstu2.composite.QuantityDt;
 import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
@@ -9,6 +10,7 @@ import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.valueset.BundleTypeEnum;
 import ca.uhn.fhir.model.dstu2.valueset.HTTPVerbEnum;
 import ca.uhn.fhir.model.dstu2.valueset.ObservationStatusEnum;
+import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import com.diplomska.encryptDecrypt.cryptoService;
 import org.apache.http.HttpEntity;
@@ -56,6 +58,8 @@ public class testniPrimeri {
             e.printStackTrace();
         }
         */
+        //Patient p = getPatientById(1);
+        //addResourceToPatient(p);
 
         getAllResourcesForPatient("14954");
     }
@@ -126,8 +130,8 @@ public class testniPrimeri {
         }
     }
 
-    /*
-    public static void addResourceToPatient(Patient p) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, IOException, NoSuchPaddingException, NoSuchAlgorithmException, KeyStoreException, CertificateException, UnrecoverableEntryException {
+    // TODO Direct access to HAPI server! DELETE!
+    public static void addResourceToPatient(Patient p) {
 
         FhirContext ctx = FhirContext.forDstu2();
         String serverBase = HapiRESTfulServer;
@@ -159,7 +163,12 @@ public class testniPrimeri {
 
         String encryptedRef = "testCeToleDela";
         //ResourceReferenceDt resourceReferenceDt = new ResourceReferenceDt(_id);
-        observation.setSubject(new ResourceReferenceDt("Patient/" + encryptedRef));
+        //observation.setSubject(new ResourceReferenceDt("Patient/" + encryptedRef));
+        ExtensionDt ext = new ExtensionDt();
+        //ext.setModifier(false);
+        ext.setElementSpecificId("encryptedReference");
+        ext.setValue(new StringDt("Patient/GVJiNefvk3wDfaDqS5xh0Q=="));
+        observation.addUndeclaredExtension(ext);
 
         Bundle bundle = new Bundle();
         bundle.setType(BundleTypeEnum.TRANSACTION);
@@ -177,7 +186,7 @@ public class testniPrimeri {
         // Log the response
         System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(resp));
     }
-    */
+
 
     public static void getPatientByGivenFamily(String given, String family) throws IOException, URISyntaxException {
 

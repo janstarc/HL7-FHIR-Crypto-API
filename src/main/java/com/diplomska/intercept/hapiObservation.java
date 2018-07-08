@@ -1,6 +1,7 @@
 package com.diplomska.intercept;
 
 import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.model.api.ExtensionDt;
 import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
 import ca.uhn.fhir.model.dstu2.resource.BaseResource;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
@@ -8,6 +9,7 @@ import ca.uhn.fhir.model.dstu2.resource.Observation;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
+import ca.uhn.fhir.rest.gclient.StringClientParam;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.apache.commons.io.IOUtils;
@@ -67,11 +69,12 @@ public class hapiObservation extends HttpServlet {
             IGenericClient client = ctx.newRestfulGenericClient(HapiRESTfulServer);
 
 
-            // Search for the Patient - hashed value
+            // Get ALL Observations
             Bundle search = client
                     .search()
                     .forResource(Observation.class)
-                    .where(Observation.PATIENT.hasId("14954"))
+                    //.where(Observation.PATIENT.hasId("14954"))
+                    .where(new StringClientParam("_content").matches().value("Patient/" + _idEnc))
                     .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
                     .encodedJson()
                     .execute();
@@ -80,34 +83,46 @@ public class hapiObservation extends HttpServlet {
             List<Observation> resultArray = search.getAllPopulatedChildElementsOfType(Observation.class);
             System.out.println("Result Array size: " + resultArray.size());
 
+
             // Loop through the patient list, decrypt hashed parameters
             for (Observation o : resultArray) {
-                String idPartEncrypted = String.valueOf(o.getSubject().getReference().getIdPartAsLong());
+                //String idPartEncrypted = String.valueOf(o.getSubject().getReference().getIdPartAsLong());
                 //String idPartEncrypted = idEncrypted.substring(idEncrypted.lastIndexOf("/") + 1);
-                System.out.println("Line 87 - Sent to decrypt: " + idPartEncrypted);
+                //System.out.println("Line 87 - Sent to decrypt: " + idPartEncrypted);
 
                 try {
                     // Decrypt the values
+                    /*
                     uri = new URIBuilder(HapiCryptoObservation);
                     uri.setParameter("encrypt", "false");
                     uri.setParameter("_id", idPartEncrypted);
                     HttpGet requestToCrypto2 = new HttpGet(String.valueOf(uri));
                     HttpResponse encryptedGet2 = httpClient.execute(requestToCrypto2);
+                    */
 
                     // Crypto returns JSON object with encrypted search parameters
-                    String encryptedJson2 = EntityUtils.toString(encryptedGet2.getEntity());
+                    //String encryptedJson2 = EntityUtils.toString(encryptedGet2.getEntity());
                     //System.out.println("Line before error:\n" + encryptedJson2);
-                    JsonObject jObj2 = new Gson().fromJson(encryptedJson2, JsonObject.class);
-                    String idDecrypt = jObj2.get("_id").getAsString();
-                    System.out.println("ID_Decrypt (is ok?): " + idDecrypt);
+                    //JsonObject jObj2 = new Gson().fromJson(encryptedJson2, JsonObject.class);
+                    //String idDecrypt = jObj2.get("_id").getAsString();
+                    //System.out.println("ID_Decrypt (is ok?): " + idDecrypt);
 
                     // Handle the resource conversion and change the value of object p
-                    o.setSubject(new ResourceReferenceDt("Observation/" + idDecrypt));
+                    List<ExtensionDt> extList = o.getUndeclaredExtensions();
+                    if(extList.size() > 0){
+                        for(ExtensionDt ext : extList){
+                            if(ext.getElementSpecificId().equals("encryptedReference")){
+                                ext.setValue(new StringDt("Patient/" + _id));
+                            }
+                        }
+                    }
+
+
+                    //o.setSubject(new ResourceReferenceDt("Observation/" + idDecrypt));
 
                     // Write log
                     System.out.println("Found " + search.getEntry().size() + " results.");
                     String result = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(search);
-                    //System.out.println("RESULT: " + result);
 
                 } catch (Exception e){
                     e.printStackTrace();
@@ -117,6 +132,8 @@ public class hapiObservation extends HttpServlet {
             // Send response
             PrintWriter out = response.getWriter();
             out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(search));
+
+            System.out.println("HERE - END!");
 
         } catch (URISyntaxException e) {
             e.printStackTrace();
