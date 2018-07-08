@@ -3,7 +3,6 @@ package com.diplomska.testniPrimeri;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.api.ExtensionDt;
 import ca.uhn.fhir.model.dstu2.composite.QuantityDt;
-import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.Observation;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
@@ -22,16 +21,8 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.security.InvalidKeyException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.UnrecoverableEntryException;
-import java.security.cert.CertificateException;
 import java.util.List;
 import java.util.Random;
 
@@ -50,7 +41,7 @@ public class testniPrimeri {
 
 
         Patient p = getPatientById(14962);
-        System.out.println("Test --> _id: " + p.getId().getIdPartAsLong());
+        //System.out.println("Test --> _id: " + p.getId().getIdPartAsLong());
 
         try{
             addObservationToPat(p);
@@ -134,6 +125,7 @@ public class testniPrimeri {
     }
 
     // TODO Direct access to HAPI server! DELETE!
+    /*
     public static void addResourceToPatient(Patient p) {
 
         FhirContext ctx = FhirContext.forDstu2();
@@ -190,6 +182,7 @@ public class testniPrimeri {
         // Log the response
         System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(resp));
     }
+    */
 
 
     public static void getPatientByGivenFamily(String given, String family) throws IOException, URISyntaxException {

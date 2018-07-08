@@ -2,20 +2,13 @@ package com.diplomska.intercept;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.api.ExtensionDt;
-import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.Observation;
-import ca.uhn.fhir.model.dstu2.resource.Patient;
-import ca.uhn.fhir.model.dstu2.valueset.BundleTypeEnum;
-import ca.uhn.fhir.model.dstu2.valueset.HTTPVerbEnum;
 import ca.uhn.fhir.model.primitive.StringDt;
 import com.diplomska.encryptDecrypt.cryptoService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import org.hl7.fhir.instance.model.api.IBaseDatatype;
-import org.hl7.fhir.instance.model.api.IBaseResource;
-
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
@@ -33,10 +26,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableEntryException;
 import java.security.cert.CertificateException;
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.diplomska.constants.address.HapiRESTfulServer;
 
 @WebServlet(urlPatterns = "/crypto.do/Observation")
 public class cryptoObservation extends HttpServlet {
@@ -48,37 +38,37 @@ public class cryptoObservation extends HttpServlet {
 
         String encrypt = request.getParameter("encrypt");
 
+        // Encryption of IDs
         if(encrypt.equals("true")){
-            System.out.println("Here 1");
-            String _id = request.getParameter("_id");
 
+            // Get the plaintext ID from GET request
+            String _id = request.getParameter("_id");
             ServletContext context = getServletContext();
 
+            // Encrypt the ID
             try {
                 crypto.init(context);
-                // TEST
-                System.out.println("1 = " + crypto.encrypt("1") + " Dec= " + crypto.decrypt(crypto.encrypt("1")));
-                System.out.println("14954 = " + crypto.encrypt("14954") + " Dec= " + crypto.decrypt(crypto.encrypt("14954")));
-                System.out.println("14962 = " + crypto.encrypt("14962") + " Dec= " + crypto.decrypt(crypto.encrypt("14962")));
-                // TEST
                 _id =  crypto.encrypt(_id);
             } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException | CertificateException | NoSuchAlgorithmException | NoSuchPaddingException | UnrecoverableEntryException | KeyStoreException e) {
                 e.printStackTrace();
             }
 
+            // Put encrypted value to JSON object
             JsonObject jObj = new JsonObject();
             jObj.addProperty("_id", _id);
             Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
+            // Send it back to hapi.do
             PrintWriter out = response.getWriter();
             out.println(gson.toJson(jObj));
 
         } else if (encrypt.equals("false")) {
 
-            System.out.println("Here 2");
+            // Get the encrypted ID from GET request
             String _id = request.getParameter("_id");
             ServletContext context = getServletContext();
 
+            // Decrypt the ID
             try {
                 crypto.init(context);
                 _id =  crypto.decrypt(_id);
@@ -86,29 +76,27 @@ public class cryptoObservation extends HttpServlet {
                 e.printStackTrace();
             }
 
+            // Put decrypted value to JSON object
             JsonObject jObj = new JsonObject();
             jObj.addProperty("_id", _id);
             Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
+            // Send it back to hapi.do
             PrintWriter out = response.getWriter();
             out.println(gson.toJson(jObj));
         }
     }
 
-    // Ko dobimo POST request - nalaganje resource na bazo
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        System.out.println("-------- CRYPTO START --------");
         FhirContext ctx = FhirContext.forDstu2();
 
-        // Convert request to resource and cast resource to Patient
+        // Create observationList out of request
         Bundle req = (Bundle) ctx.newJsonParser().parseResource(new InputStreamReader(request.getInputStream()));
         List<Observation> observationList = req.getAllPopulatedChildElementsOfType(Observation.class);
 
-        String aaaa = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(req);
-        System.out.println("\n----- RESOURCE BEFORE ENCRYPTION: -----\n" + aaaa + "\n ----- RESOURCE BEFORE ENCRYPTION END -----");
-        // Create ServletContext and init ED Servuce
+        // Create ServletContext and init ED Service
         ServletContext context = getServletContext();
         try {
             crypto.init(context);
@@ -116,58 +104,33 @@ public class cryptoObservation extends HttpServlet {
             e.printStackTrace();
         }
 
-        System.out.println("observationList.len = " + observationList.size());
-        // Encrypt all resources
         for(Observation o : observationList){
-            /**
-             *  TODO: FIX HERE!!!
-             *      --> Ker je referenca na drugem strezniku, vrne HAPI celo referenco. Narobe se parsa, referenca je null
-             */
+
+            // Get list of extensions for every Observation object, find the encryptedReference extension
             List<ExtensionDt> extList = o.getUndeclaredExtensions();
             if(extList.size() > 0){
                 for(ExtensionDt ext : extList){
-                    if(ext.getElementSpecificId().equals("encryptedReference")){
-                        //ext.setValue(new StringDt("Patient/" + _id));
+                    if(ext.getElementSpecificId().equals("encryptedReference")){        // Find encrypted reference extension
+
                         String id = ext.getValue().toString();
-                        String idPart = id.substring(id.lastIndexOf("/") + 1);
+                        String idPart = id.substring(id.lastIndexOf("/") + 1);      // Get idPart (5 instead of Patient/5)
+
+                        // Encrypt the reference
                         try{
                             idPart = crypto.encrypt(idPart);
                         } catch (Exception e){
                             e.printStackTrace();
                         }
+
+                        // Set encrypted ID
                         ext.setValue(new StringDt("Patient/" + idPart));
-                        //System.out.println("Class type = " + id + " ID Part: " + idPart);
                     }
                 }
             }
-
-            //System.out.println("Se nek test: " + o.getSubject().getReference().getIdPartAsLong());
-
-            /*String _id = String.valueOf(o.getSubject().getReference().getIdPartAsLong());
-            System.out.println("Value of ID (crypto): " + _id);
-            try {
-                _id = crypto.encrypt(_id);
-            } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
-                e.printStackTrace();
-            }
-            o.setSubject(new ResourceReferenceDt(HapiRESTfulServer + "/Patient/" + _id));
-            */
         }
-
-        // Create a bundle that will be used in a transaction
-        //Bundle bundle = new Bundle();
-        //req.setType(BundleTypeEnum.TRANSACTION);
-
-        // Add the patient as an entry
-        /*bundle.addEntry()
-                .setResource(req)
-                .getRequest()
-                .setUrl("Observation")
-                .setMethod(HTTPVerbEnum.POST);*/
 
         // Encode bundle to json and send it to the HAPI server
         String bundleString = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(req);
-        System.out.println(bundleString);
         PrintWriter out = response.getWriter();
         out.println(bundleString);
     }

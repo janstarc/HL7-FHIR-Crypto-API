@@ -2,11 +2,8 @@ package com.diplomska.intercept;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.api.ExtensionDt;
-import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
-import ca.uhn.fhir.model.dstu2.resource.BaseResource;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.Observation;
-import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import ca.uhn.fhir.rest.gclient.StringClientParam;
@@ -31,7 +28,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.diplomska.constants.address.HapiCryptoObservation;
@@ -44,14 +40,13 @@ public class hapiObservation extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // Get the parameter
+        // Find all Observation for Patient with _id
         String _id = request.getParameter("_id");
-        System.out.println("All resources for: " + _id);
 
         HttpClient httpClient = HttpClientBuilder.create().build();
         URIBuilder uri;
         try {
-            // Send request to crypto --> Encrypt search parameters
+            // Send request to crypto --> Encrypt _id
             uri = new URIBuilder(HapiCryptoObservation);
             uri.setParameter("encrypt", "true");
             uri.setParameter("_id", _id);
@@ -62,18 +57,15 @@ public class hapiObservation extends HttpServlet {
             String encryptedJson = EntityUtils.toString(encryptedGet.getEntity());
             JsonObject jObj = new Gson().fromJson(encryptedJson, JsonObject.class);
             String _idEnc = jObj.get("_id").getAsString();
-            System.out.println("_id enc: " + _idEnc);
 
-            // Search with encoded parameters
+            // Create FHIR context
             FhirContext ctx = FhirContext.forDstu2();
             IGenericClient client = ctx.newRestfulGenericClient(HapiRESTfulServer);
 
-
-            // Get ALL Observations
+            // Search with encoded parameters
             Bundle search = client
                     .search()
                     .forResource(Observation.class)
-                    //.where(Observation.PATIENT.hasId("14954"))
                     .where(new StringClientParam("_content").matches().value("Patient/" + _idEnc))
                     .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
                     .encodedJson()
@@ -84,30 +76,12 @@ public class hapiObservation extends HttpServlet {
             System.out.println("Result Array size: " + resultArray.size());
 
 
-            // Loop through the patient list, decrypt hashed parameters
+            // Loop through the Observation list, decrypt hashed parameters
             for (Observation o : resultArray) {
-                //String idPartEncrypted = String.valueOf(o.getSubject().getReference().getIdPartAsLong());
-                //String idPartEncrypted = idEncrypted.substring(idEncrypted.lastIndexOf("/") + 1);
-                //System.out.println("Line 87 - Sent to decrypt: " + idPartEncrypted);
 
+                // Decrypt the values
                 try {
-                    // Decrypt the values
-                    /*
-                    uri = new URIBuilder(HapiCryptoObservation);
-                    uri.setParameter("encrypt", "false");
-                    uri.setParameter("_id", idPartEncrypted);
-                    HttpGet requestToCrypto2 = new HttpGet(String.valueOf(uri));
-                    HttpResponse encryptedGet2 = httpClient.execute(requestToCrypto2);
-                    */
-
-                    // Crypto returns JSON object with encrypted search parameters
-                    //String encryptedJson2 = EntityUtils.toString(encryptedGet2.getEntity());
-                    //System.out.println("Line before error:\n" + encryptedJson2);
-                    //JsonObject jObj2 = new Gson().fromJson(encryptedJson2, JsonObject.class);
-                    //String idDecrypt = jObj2.get("_id").getAsString();
-                    //System.out.println("ID_Decrypt (is ok?): " + idDecrypt);
-
-                    // Handle the resource conversion and change the value of object p
+                    // Find the right extension, decrypt the value
                     List<ExtensionDt> extList = o.getUndeclaredExtensions();
                     if(extList.size() > 0){
                         for(ExtensionDt ext : extList){
@@ -117,12 +91,9 @@ public class hapiObservation extends HttpServlet {
                         }
                     }
 
-
-                    //o.setSubject(new ResourceReferenceDt("Observation/" + idDecrypt));
-
                     // Write log
                     System.out.println("Found " + search.getEntry().size() + " results.");
-                    String result = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(search);
+                    System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(search));
 
                 } catch (Exception e){
                     e.printStackTrace();
@@ -132,8 +103,6 @@ public class hapiObservation extends HttpServlet {
             // Send response
             PrintWriter out = response.getWriter();
             out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(search));
-
-            System.out.println("HERE - END!");
 
         } catch (URISyntaxException e) {
             e.printStackTrace();
