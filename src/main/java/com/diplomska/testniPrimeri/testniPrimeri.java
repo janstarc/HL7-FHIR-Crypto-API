@@ -46,7 +46,7 @@ public class testniPrimeri {
         //addPatient(given, family);
         //getPatientByGivenFamily(given, family);
 
-
+        /*
         Patient p = getPatientById(1);
         System.out.println("Test --> _id: " + p.getId().getIdPartAsLong());
 
@@ -55,8 +55,9 @@ public class testniPrimeri {
         } catch (Exception e){
             e.printStackTrace();
         }
+        */
 
-        //getAllResourcesForPatient("1");
+        getAllResourcesForPatient("14954");
     }
 
     public static void getAllResourcesForPatient(String _id) throws URISyntaxException, IOException {

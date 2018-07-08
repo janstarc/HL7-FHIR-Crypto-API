@@ -66,11 +66,12 @@ public class hapiObservation extends HttpServlet {
             FhirContext ctx = FhirContext.forDstu2();
             IGenericClient client = ctx.newRestfulGenericClient(HapiRESTfulServer);
 
+
             // Search for the Patient - hashed value
             Bundle search = client
                     .search()
                     .forResource(Observation.class)
-                    .where(Observation.PATIENT.hasId(_id))
+                    .where(Observation.PATIENT.hasId("14954"))
                     .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
                     .encodedJson()
                     .execute();
@@ -81,9 +82,9 @@ public class hapiObservation extends HttpServlet {
 
             // Loop through the patient list, decrypt hashed parameters
             for (Observation o : resultArray) {
-                String idEncrypted = o.getId().getValueAsString();
-                String idPartEncrypted = idEncrypted.substring(idEncrypted.lastIndexOf("/") + 1);
-                System.out.println("Here?");
+                String idPartEncrypted = String.valueOf(o.getSubject().getReference().getIdPartAsLong());
+                //String idPartEncrypted = idEncrypted.substring(idEncrypted.lastIndexOf("/") + 1);
+                System.out.println("Line 87 - Sent to decrypt: " + idPartEncrypted);
 
                 try {
                     // Decrypt the values
@@ -95,8 +96,10 @@ public class hapiObservation extends HttpServlet {
 
                     // Crypto returns JSON object with encrypted search parameters
                     String encryptedJson2 = EntityUtils.toString(encryptedGet2.getEntity());
+                    //System.out.println("Line before error:\n" + encryptedJson2);
                     JsonObject jObj2 = new Gson().fromJson(encryptedJson2, JsonObject.class);
                     String idDecrypt = jObj2.get("_id").getAsString();
+                    System.out.println("ID_Decrypt (is ok?): " + idDecrypt);
 
                     // Handle the resource conversion and change the value of object p
                     o.setSubject(new ResourceReferenceDt("Observation/" + idDecrypt));

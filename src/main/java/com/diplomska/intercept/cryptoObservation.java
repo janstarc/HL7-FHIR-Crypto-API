@@ -34,6 +34,8 @@ import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.diplomska.constants.address.HapiRESTfulServer;
+
 @WebServlet(urlPatterns = "/crypto.do/Observation")
 public class cryptoObservation extends HttpServlet {
 
@@ -103,7 +105,7 @@ public class cryptoObservation extends HttpServlet {
         List<Observation> observationList = req.getAllPopulatedChildElementsOfType(Observation.class);
 
         String aaaa = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(req);
-        System.out.println("\n RESOURCE BEFORE ENCRYPTION: " + aaaa + "\n ----- END -----");
+        System.out.println("\n----- RESOURCE BEFORE ENCRYPTION: -----\n" + aaaa + "\n ----- RESOURCE BEFORE ENCRYPTION END -----");
         // Create ServletContext and init ED Servuce
         ServletContext context = getServletContext();
         try {
@@ -119,14 +121,15 @@ public class cryptoObservation extends HttpServlet {
              *  TODO: FIX HERE!!!
              *      --> Ker je referenca na drugem strezniku, vrne HAPI celo referenco. Narobe se parsa, referenca je null
              */
-            String _id = String.valueOf(o.getId().getIdPartAsLong());
-            System.out.println("Value of ID (crypto): " + _id + " As string: " + o.getId().getIdPart() + " As long: " + o.getId().getIdPartAsLong());
+            //System.out.println("Se nek test: " + o.getSubject().getReference().getIdPartAsLong());
+            String _id = String.valueOf(o.getSubject().getReference().getIdPartAsLong());
+            System.out.println("Value of ID (crypto): " + _id);
             try {
                 _id = crypto.encrypt(_id);
             } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
                 e.printStackTrace();
             }
-            o.setSubject(new ResourceReferenceDt("Patient/" + _id));
+            o.setSubject(new ResourceReferenceDt(HapiRESTfulServer + "/Patient/" + _id));
         }
 
         // Create a bundle that will be used in a transaction
