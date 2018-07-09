@@ -98,7 +98,7 @@ public class cryptoService {
             e.printStackTrace();
         }
 
-        return null;
+        return keyAlias;
     }
 
     private static void calculateMAC(byte[] plainText, SecretKey secretKey) throws InvalidKeyException, NoSuchAlgorithmException {
@@ -168,7 +168,7 @@ public class cryptoService {
     }
 
     private static String getTimestamp(){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd|HH:mm:ss.SSS");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss-SSS");
         return sdf.format(new Date());
     }
 }

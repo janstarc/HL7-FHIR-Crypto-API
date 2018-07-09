@@ -7,13 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09cfb8d0-a032-49fd-8d82-a8b218719caa" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapiChangeKey.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/directAccessTODELETE.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/cryptoGenerateNewKey.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/constants/address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/constants/address.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/cryptoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/cryptoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapiObservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapiObservation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -25,7 +21,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5944494">
+    <splitter split-orientation="horizontal" split-proportion="0.46508506">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="hapiObservation.java" pinned="false" current-in-tab="false">
@@ -37,11 +33,23 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="cryptoService.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="cryptoService.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/cryptoService.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="821">
-                  <caret line="171" column="5" lean-forward="true" selection-start-line="171" selection-start-column="5" selection-end-line="171" selection-end-column="5" />
+                <state relative-caret-position="858">
+                  <caret line="100" column="23" selection-start-line="100" selection-start-column="23" selection-end-line="100" selection-end-column="23" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="cryptoGenerateNewKey.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/cryptoGenerateNewKey.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="714">
+                  <caret line="43" column="41" lean-forward="true" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -77,11 +85,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="cryptoPatient.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="cryptoPatient.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/cryptoPatient.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="132">
-                  <caret line="35" selection-start-line="35" selection-end-line="35" />
+                <state relative-caret-position="59">
+                  <caret line="36" column="12" selection-start-line="36" selection-start-column="12" selection-end-line="36" selection-end-column="12" />
                 </state>
               </provider>
             </entry>
@@ -89,8 +97,8 @@
           <file leaf-file-name="hapiChangeKey.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapiChangeKey.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-66">
-                  <caret line="114" column="33" selection-start-line="114" selection-start-column="33" selection-end-line="114" selection-end-column="33" />
+                <state relative-caret-position="272">
+                  <caret line="41" column="19" lean-forward="true" selection-start-line="40" selection-start-column="4" selection-end-line="41" selection-end-column="19" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -98,7 +106,7 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="keystore.ks" pinned="false" current-in-tab="true">
+          <file leaf-file-name="keystore.ks" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/crypto/keystore.ks">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="242">
@@ -168,6 +176,7 @@
       <find>class type</find>
       <find>resourceRe</find>
       <find>addPatient</find>
+      <find>context</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -176,8 +185,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/new-todos.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/in28minutes/todo/Todo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/in28minutes/todo/AddTodoServlet.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/in28minutes/todo/DeleteTodoServlet.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/in28minutes/todo/TodoService.java" />
@@ -214,7 +221,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/postResource.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapi.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/cryptoPatient.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/crypto.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapiPatient.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/address/address.java" />
@@ -226,6 +232,9 @@
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/directAccessTODELETE.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapiObservation.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapiChangeKey.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapiGenerateNewKey.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/cryptoPatient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/intercept/cryptoGenerateNewKey.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/cryptoService.java" />
       </list>
     </option>
@@ -701,12 +710,12 @@
       <workItem from="1530452303148" duration="15993000" />
       <workItem from="1530536239164" duration="14540000" />
       <workItem from="1530653599431" duration="104000" />
-      <workItem from="1530654052442" duration="77626000" />
+      <workItem from="1530654052442" duration="79344000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="294367000" />
+    <option name="totallyTimeSpent" value="296085000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
@@ -731,10 +740,10 @@
       <window_info anchor="bottom" id="Java Enterprise" order="10" weight="0.32942098" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Version Control" order="12" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2230047" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.4796557" />
       <window_info anchor="bottom" id="Spring" order="14" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.24647887" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49857143" visible="true" weight="0.11208267" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.23317684" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49857143" visible="true" weight="0.11208267" />
       <window_info anchor="right" id="Bean Validation" order="10" />
       <window_info id="Web" order="6" sideWeight="0.50142854" side_tool="true" weight="0.18600954" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32942098" />
@@ -798,13 +807,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/lang/Object.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="147" column="19" selection-start-line="147" selection-start-column="19" selection-end-line="147" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.m2/settings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -1010,20 +1012,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/cryptoPatient.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapiObservation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapiChangeKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-66">
-          <caret line="114" column="33" selection-start-line="114" selection-start-column="33" selection-end-line="114" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="572">
+          <caret line="57" column="83" lean-forward="true" selection-start-line="57" selection-start-column="83" selection-end-line="57" selection-end-column="83" />
         </state>
       </provider>
     </entry>
@@ -1034,17 +1026,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapiObservation.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/hapiChangeKey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="57" column="83" lean-forward="true" selection-start-line="57" selection-start-column="83" selection-end-line="57" selection-end-column="83" />
+        <state relative-caret-position="272">
+          <caret line="41" column="19" lean-forward="true" selection-start-line="40" selection-start-column="4" selection-end-line="41" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/cryptoPatient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="59">
+          <caret line="36" column="12" selection-start-line="36" selection-start-column="12" selection-end-line="36" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/cryptoService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="821">
-          <caret line="171" column="5" lean-forward="true" selection-start-line="171" selection-start-column="5" selection-end-line="171" selection-end-column="5" />
+        <state relative-caret-position="858">
+          <caret line="100" column="23" selection-start-line="100" selection-start-column="23" selection-end-line="100" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/intercept/cryptoGenerateNewKey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="43" column="41" lean-forward="true" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
