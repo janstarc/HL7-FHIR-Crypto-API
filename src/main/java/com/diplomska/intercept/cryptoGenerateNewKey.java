@@ -39,9 +39,11 @@ public class cryptoGenerateNewKey extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletContext context = getServletContext();
+        String keyAlias = request.getParameter("keyAlias");
         try{
             crypto.init(context);
-            crypto.addNewKeyToKeyStore();
+            String out = crypto.addNewKeyToKeyStore(keyAlias);
+            System.out.println("KeyAlias: " + out);
         } catch (Exception e){
             e.printStackTrace();
         }

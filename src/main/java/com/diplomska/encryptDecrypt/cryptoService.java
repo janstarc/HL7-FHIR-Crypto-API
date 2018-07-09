@@ -37,25 +37,6 @@ public class cryptoService {
             // Assign the key from the keyStore to the secret key
             secretKey = (SecretKey) keyEntry;
             System.out.println("Secret key HASH: " + secretKey.hashCode());
-        } else {
-            /*
-            // TODO Probably not OK approach
-            // Generate key - safely
-            secretKey = generateSecretKey("AES", 256);
-            // Get the entry pass object. keyPassword & entryPassword - password of the entry, not the entire keyStore
-            saveKeyToKeystore(secretKey, "keyPassword", "keyAlias", keyStore);
-
-            // Save the keystore to file
-            String keyStorePath = ctx.getRealPath("/WEB-INF/crypto/keystore.ks");       // https://stackoverflow.com/questions/4340653/file-path-to-resource-in-our-war-web-inf-folder; https://stackoverflow.com/questions/35837285/different-ways-to-get-servlet-context
-            System.out.println("KeyStorePath - SAVE: " + keyStorePath);
-
-            try (FileOutputStream keyStoreOutputStream = new FileOutputStream(keyStorePath)){
-                keyStore.store(keyStoreOutputStream, "123abc".toCharArray());
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-            */
-            // TODO Error - KS is empty
         }
     }
 
@@ -81,11 +62,17 @@ public class cryptoService {
         return decryptedString;
     }
 
-    public static String addNewKeyToKeyStore() throws NoSuchAlgorithmException, KeyStoreException {
+    public static String reencrypt(String keyAlias){
+
+        //cipher.init(Cipher.DECRYPT_MODE, )
+        return null;
+    }
+
+    public static String addNewKeyToKeyStore(String keyAlias) throws NoSuchAlgorithmException, KeyStoreException {
         secretKey = generateSecretKey("AES", 256);
 
         // Get the entry pass object. keyPassword & entryPassword - password of the entry, not the entire keyStore
-        String keyAlias = getTimestamp();
+        //String keyAlias = getTimestamp();
         saveKeyToKeystore(secretKey, "keyPassword", keyAlias, keyStore);
 
         // Save the keystore to file

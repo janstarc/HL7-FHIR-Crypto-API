@@ -47,6 +47,7 @@ public class hapiChangeKey extends HttpServlet {
 
         // Find all Observation for Patient with _id
         String _id = request.getParameter("_id");
+        String newKeyAlias = request.getParameter("keyAlias");
 
         try {
             // Send request to crypto --> Encrypt _id
