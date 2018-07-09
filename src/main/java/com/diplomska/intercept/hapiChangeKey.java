@@ -3,6 +3,7 @@ package com.diplomska.intercept;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.api.ExtensionDt;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
+import ca.uhn.fhir.model.dstu2.resource.Condition;
 import ca.uhn.fhir.model.dstu2.resource.Observation;
 import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
@@ -19,6 +20,7 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,19 +35,20 @@ import java.util.List;
 import static com.diplomska.constants.address.HapiCryptoObservation;
 import static com.diplomska.constants.address.HapiRESTfulServer;
 
-@WebServlet(urlPatterns = {"/hapi.do/Observation"})
-public class hapiObservation extends HttpServlet {
+@WebServlet(urlPatterns = {"/hapi.do/ChangeKey"})
+public class hapiChangeKey extends HttpServlet {
 
+    HttpClient httpClient = HttpClientBuilder.create().build();
+    URIBuilder uri;
 
-        HttpClient httpClient = HttpClientBuilder.create().build();
-        URIBuilder uri;// Get requesti - iskanje pacientov
-        @Override
-        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // Get requesti - iskanje pacientov
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-            // Find all Observation for Patient with _id
-            String _id = request.getParameter("_id");
+        // Find all Observation for Patient with _id
+        String _id = request.getParameter("_id");
 
-            try {
+        try {
             // Send request to crypto --> Encrypt _id
             uri = new URIBuilder(HapiCryptoObservation);
             uri.setParameter("encrypt", "true");
@@ -63,7 +66,7 @@ public class hapiObservation extends HttpServlet {
             IGenericClient client = ctx.newRestfulGenericClient(HapiRESTfulServer);
 
             // Search with encoded parameters
-            Bundle search = client
+            Bundle searchObservation = client
                     .search()
                     .forResource(Observation.class)
                     .where(new StringClientParam("_content").matches().value("Patient/" + _idEnc))
@@ -71,11 +74,46 @@ public class hapiObservation extends HttpServlet {
                     .encodedJson()
                     .execute();
 
+            Bundle searchCondition = client
+                    .search()
+                    .forResource(Condition.class)
+                    .where(new StringClientParam("_content").matches().value("Patient/" + _idEnc))
+                    .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
+                    .encodedJson()
+                    .execute();
+
             // Convert bundle to List<Observation>
-            List<Observation> resultArray = search.getAllPopulatedChildElementsOfType(Observation.class);
-            System.out.println("Result Array size: " + resultArray.size());
+            List<Observation> observationsList = searchObservation.getAllPopulatedChildElementsOfType(Observation.class);
+            List<Condition> conditionsList = searchCondition.getAllPopulatedChildElementsOfType(Condition.class);
+            System.out.println("ObservationSize: " + observationsList.size() + " | ConditionsSize: " + conditionsList.size());
 
+            for (Observation o : observationsList){
+                List<ExtensionDt> extList = o.getUndeclaredExtensions();
+                if(extList.size() > 0){
+                    for(ExtensionDt ext : extList){
+                        if(ext.getElementSpecificId().equals("encryptedReference")){
+                            System.out.println(ext.getValue());
+                            // TODO Reencrypt here
+                        }
+                    }
+                }
+            }
 
+            for (Condition c : conditionsList){
+                List<ExtensionDt> extList = c.getUndeclaredExtensions();
+                if(extList.size() > 0){
+                    for(ExtensionDt ext : extList){
+                        if(ext.getElementSpecificId().equals("encryptedReference")){
+                            System.out.println(ext.getValue());
+                            // TODO Reencrypt here
+                        }
+                    }
+                }
+            }
+
+            // TODO Build bundle
+            // TODO Commit bundle
+            /*
             // Loop through the Observation list, decrypt hashed parameters
             for (Observation o : resultArray) {
 
@@ -103,12 +141,13 @@ public class hapiObservation extends HttpServlet {
             // Send response
             PrintWriter out = response.getWriter();
             out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(search));
+            */
 
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
     }
-
+    /*
     // Ko dobimo POST request - nalaganje resourca na bazo
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -133,4 +172,6 @@ public class hapiObservation extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println(responseFromHapiString);
     }
+    */
+
 }

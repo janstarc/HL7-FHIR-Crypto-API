@@ -33,29 +33,30 @@ public class testniPrimeri {
     private static cryptoService crypto = new cryptoService();
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        String given = "Cvetka";
-        String family = "Cvetka";
+        String given = "Testni";
+        String family = "Pacient2";
 
         //addPatient(given, family);
         //getPatientByGivenFamily(given, family);
 
-
-        Patient p = getPatientById(14962);
-        //System.out.println("Test --> _id: " + p.getId().getIdPartAsLong());
-
+        /*
         try{
+            Patient p = getPatientById(20004);
+            System.out.println("Test --> _id: " + p.getId().getIdPartAsLong());
             addObservationToPat(p);
         } catch (Exception e){
             e.printStackTrace();
         }
+        */
 
         //Patient p = getPatientById(1);
         //addResourceToPatient(p);
 
-        getAllResourcesForPatient("14962");
+        getAllObservationsForPatient("20004");
     }
 
-    public static void getAllResourcesForPatient(String _id) throws URISyntaxException, IOException {
+    // GET all observations for Patient ID
+    public static void getAllObservationsForPatient(String _id) throws URISyntaxException, IOException {
 
         HttpClient httpClient = HttpClientBuilder.create().build();
         URIBuilder url = new URIBuilder(HapiAccessPointObservation);
@@ -67,6 +68,7 @@ public class testniPrimeri {
         System.out.println("----- RESPONSE -----\n" + responseString);
     }
 
+    // POST observation
     public static void addObservationToPat(Patient p){
 
         // Get the patient ID
@@ -80,7 +82,7 @@ public class testniPrimeri {
                 .addCoding()
                 .setSystem("http://loinc.org")
                 .setCode("789-8")
-                .setDisplay("Test 2");
+                .setDisplay("Observation1, TP3");
         observation.setValue(
                 new QuantityDt()
                         .setValue(randomNum())
@@ -124,67 +126,7 @@ public class testniPrimeri {
         }
     }
 
-    // TODO Direct access to HAPI server! DELETE!
-    /*
-    public static void addResourceToPatient(Patient p) {
-
-        FhirContext ctx = FhirContext.forDstu2();
-        String serverBase = HapiRESTfulServer;
-        //String serverBase = "http://hapi.fhir.org/baseDstu2";
-        IGenericClient client = ctx.newRestfulGenericClient(serverBase);
-
-        String ident = p.getId().getValue();
-        System.out.println("Identifier: " + ident);
-
-        // Create an observation object
-        Observation observation = new Observation();
-        observation.setStatus(ObservationStatusEnum.FINAL);
-        observation
-                .getCode()
-                .addCoding()
-                .setSystem("http://loinc.org")
-                .setCode("789-8")
-                .setDisplay("Test 2");
-        observation.setValue(
-                new QuantityDt()
-                        .setValue(randomNum())
-                        .setUnit("test" + randomNum() + "testEnota")
-                        .setSystem("http://unitsofmeasure.org")
-                        .setCode("10*12/L"));
-
-
-        //observation.setSubject(new ResourceReferenceDt("Patient/1124")); // TO DELETE!
-        String _id = String.valueOf(p.getId().getIdPartAsLong());
-        System.out.println("ID: " + _id);
-
-        String encryptedRef = "testCeToleDela";
-        //ResourceReferenceDt resourceReferenceDt = new ResourceReferenceDt(_id);
-        //observation.setSubject(new ResourceReferenceDt("Patient/" + encryptedRef));
-
-        ExtensionDt ext = new ExtensionDt();
-        ext.setElementSpecificId("encryptedReference");
-        ext.setValue(new StringDt("Patient/GVJiNefvk3wDfaDqS5xh0Q=="));
-        observation.addUndeclaredExtension(ext);
-
-        Bundle bundle = new Bundle();
-        bundle.setType(BundleTypeEnum.TRANSACTION);
-        bundle.addEntry()
-                .setResource(observation)
-                .getRequest()
-                .setUrl("Observation")
-                .setMethod(HTTPVerbEnum.POST);
-
-        System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle));
-
-        // Create a client and post the transaction to the server
-        Bundle resp = client.transaction().withBundle(bundle).execute();
-
-        // Log the response
-        System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(resp));
-    }
-    */
-
-
+    // GET Patient by Given and Family name
     public static void getPatientByGivenFamily(String given, String family) throws IOException, URISyntaxException {
 
         HttpClient httpClient = HttpClientBuilder.create().build();
@@ -199,6 +141,7 @@ public class testniPrimeri {
 
     }
 
+    // GET Patient by ID
     public static Patient getPatientById(int id) throws IOException, URISyntaxException {
 
         // We're connecting to a DSTU1 compliant server in this example
@@ -226,10 +169,12 @@ public class testniPrimeri {
         return null;
     }
 
+    // POST new Patient, encrypt First and Last
     public static void addPatient(String given, String family){
         Patient patient = new Patient();
+
         // ..populate the patient object..
-        patient.addIdentifier().setSystem("urn:system").setValue("17061996");
+        patient.addIdentifier().setSystem("urn:system").setValue(String.valueOf(randomNum()));
         patient.addName().addFamily(family).addGiven(given);
 
         // Log the request
@@ -239,7 +184,7 @@ public class testniPrimeri {
 
         HttpClient httpClient = HttpClientBuilder.create().build();
         try {
-            HttpPost request = new HttpPost(HapiAccessPoint);
+            HttpPost request = new HttpPost(HapiAccessPointPatient);
             StringEntity params = new StringEntity(requestBody);
             request.addHeader("content-type", "application/json");
             request.setEntity(params);

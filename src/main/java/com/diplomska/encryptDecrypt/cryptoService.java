@@ -6,22 +6,27 @@ import javax.servlet.ServletContext;
 import java.io.*;
 import java.security.*;
 import java.security.cert.CertificateException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class cryptoService {
 
     private static Cipher cipher;
     private static SecretKey secretKey;
-
+    private static KeyStore keyStore;
+    private static ServletContext ctx;
 
     public void init(ServletContext context) throws NoSuchPaddingException, NoSuchAlgorithmException, KeyStoreException, UnrecoverableEntryException, CertificateException, IOException {
+
         Security.addProvider(new BouncyCastleProvider());
+        ctx = context;
 
         // Cipher - represents a cryptographic algorithm --> Algorithm is set here
         cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
 
         // Create/Load a KeyStore
             // TODO Figure out what to do if the keystore is not avaliable!
-        KeyStore keyStore = getKeyStore("123abc", "/WEB-INF/crypto/keystore.ks", context);
+        keyStore = getKeyStore("123abc", "/WEB-INF/crypto/keystore.ks", context);
         System.out.println("KeyStore: " + keyStore);
 
         // Get the key from the keystore
@@ -33,6 +38,7 @@ public class cryptoService {
             secretKey = (SecretKey) keyEntry;
             System.out.println("Secret key HASH: " + secretKey.hashCode());
         } else {
+            /*
             // TODO Probably not OK approach
             // Generate key - safely
             secretKey = generateSecretKey("AES", 256);
@@ -40,7 +46,7 @@ public class cryptoService {
             saveKeyToKeystore(secretKey, "keyPassword", "keyAlias", keyStore);
 
             // Save the keystore to file
-            String keyStorePath = context.getRealPath("/WEB-INF/crypto/keystore.ks");       // https://stackoverflow.com/questions/4340653/file-path-to-resource-in-our-war-web-inf-folder; https://stackoverflow.com/questions/35837285/different-ways-to-get-servlet-context
+            String keyStorePath = ctx.getRealPath("/WEB-INF/crypto/keystore.ks");       // https://stackoverflow.com/questions/4340653/file-path-to-resource-in-our-war-web-inf-folder; https://stackoverflow.com/questions/35837285/different-ways-to-get-servlet-context
             System.out.println("KeyStorePath - SAVE: " + keyStorePath);
 
             try (FileOutputStream keyStoreOutputStream = new FileOutputStream(keyStorePath)){
@@ -48,6 +54,8 @@ public class cryptoService {
             } catch (Exception e){
                 e.printStackTrace();
             }
+            */
+            // TODO Error - KS is empty
         }
     }
 
@@ -71,6 +79,26 @@ public class cryptoService {
         String decryptedString = new String(decryptedArray);                    // Convert from byte[] to plainText
 
         return decryptedString;
+    }
+
+    public static String addNewKeyToKeyStore() throws NoSuchAlgorithmException, KeyStoreException {
+        secretKey = generateSecretKey("AES", 256);
+
+        // Get the entry pass object. keyPassword & entryPassword - password of the entry, not the entire keyStore
+        String keyAlias = getTimestamp();
+        saveKeyToKeystore(secretKey, "keyPassword", keyAlias, keyStore);
+
+        // Save the keystore to file
+        String keyStorePath = ctx.getRealPath("/WEB-INF/crypto/keystore.ks");       // https://stackoverflow.com/questions/4340653/file-path-to-resource-in-our-war-web-inf-folder; https://stackoverflow.com/questions/35837285/different-ways-to-get-servlet-context
+        System.out.println("KeyStorePath - SAVE: " + keyStorePath);
+
+        try (FileOutputStream keyStoreOutputStream = new FileOutputStream(keyStorePath)){
+            keyStore.store(keyStoreOutputStream, "123abc".toCharArray());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     private static void calculateMAC(byte[] plainText, SecretKey secretKey) throws InvalidKeyException, NoSuchAlgorithmException {
@@ -137,5 +165,10 @@ public class cryptoService {
         SecretKey secretKey = keyGenerator.generateKey();
 
         return secretKey;
+    }
+
+    private static String getTimestamp(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd|HH:mm:ss.SSS");
+        return sdf.format(new Date());
     }
 }

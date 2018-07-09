@@ -2,6 +2,7 @@ package com.diplomska.constants;
 
 public class address {
 
+    public static String HapiPublicTestServer = "http://hapi.fhir.org/baseDstu2";
     public static String HapiAccessPoint = "http://localhost:7050/hapi.do";
     public static String HapiCrypto = "http://localhost:7050/crypto.do";
 
