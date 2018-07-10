@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.diplomska.encryptDecrypt;
+package com.diplomska.crypto;
 
 import java.io.UnsupportedEncodingException;
 

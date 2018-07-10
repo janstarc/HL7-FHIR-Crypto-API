@@ -1,4 +1,4 @@
-package com.diplomska.intercept;
+package com.diplomska.crypto;
 
 //STEP 1. Import required packages
 import java.sql.*;

@@ -1,4 +1,4 @@
-package com.diplomska.encryptDecrypt;
+package com.diplomska.crypto;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import javax.crypto.*;
@@ -40,6 +40,14 @@ public class cryptoService {
         }
     }
 
+    /**
+     *
+     *  Premisliti situacijo glede kljucev
+     *      -Pri encrypt imamo dovolj informacij - le pogledamo, pod katerim kljucem moramo sifrirati
+     *
+     *      -Pre decrypt nimamo dovolj informacij, ker ne vemo, pod katerim kljucem je user sifriran
+     */
+
     // Convert Array->String
     // https://stackoverflow.com/questions/9098022/problems-converting-byte-array-to-string-and-back-to-byte-array
     public static String encrypt(String plainText) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
@@ -62,9 +70,19 @@ public class cryptoService {
         return decryptedString;
     }
 
-    public static String reencrypt(String keyAlias){
+    public static String reencryptWithNewKey(String newKeyAlias, String userId) throws UnrecoverableEntryException, NoSuchAlgorithmException, KeyStoreException, InvalidKeyException {
 
-        //cipher.init(Cipher.DECRYPT_MODE, )
+        // Get old key
+        /*
+        String oldKeyAlias = getKeyAlias(userId);
+        Key keyEntry = getEntryFromKeyStore(oldKeyAlias, "keyPassword", keyStore);
+        SecretKey oldKey = (SecretKey) keyEntry;
+        cipher.init(Cipher.DECRYPT_MODE, oldKey);
+        */
+        SecretKey newKey = (SecretKey) getEntryFromKeyStore(newKeyAlias, "keyPasword", keyStore);
+        //cipher.init(Cipher.ENCRYPT_MODE, newKey);
+        //String newHash = encrypt(userId, // TODO KEY ALIAS);
+
         return null;
     }
 

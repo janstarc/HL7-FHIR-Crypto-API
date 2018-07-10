@@ -1,4 +1,4 @@
-package com.diplomska.intercept;
+package com.diplomska.crypto;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
@@ -6,7 +6,7 @@ import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.valueset.BundleTypeEnum;
 import ca.uhn.fhir.model.dstu2.valueset.HTTPVerbEnum;
 import ca.uhn.fhir.model.primitive.StringDt;
-import com.diplomska.encryptDecrypt.cryptoService;
+import com.diplomska.crypto.cryptoService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -64,7 +64,7 @@ public class cryptoPatient extends HttpServlet {
             PrintWriter out = response.getWriter();
             out.println(gson.toJson(jObj));
 
-        } else if (encrypt.equals("false")) {
+        } /*else if (encrypt.equals("false")) {
 
             System.out.println("Here 2");
             String given = request.getParameter("given");
@@ -86,7 +86,7 @@ public class cryptoPatient extends HttpServlet {
 
             PrintWriter out = response.getWriter();
             out.println(gson.toJson(jObj));
-        }
+        }*/
     }
 
     // Ko dobimo POST request - nalaganje resource na bazo

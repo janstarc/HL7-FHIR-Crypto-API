@@ -1,11 +1,11 @@
-package com.diplomska.intercept;
+package com.diplomska.crypto;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.api.ExtensionDt;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.Observation;
 import ca.uhn.fhir.model.primitive.StringDt;
-import com.diplomska.encryptDecrypt.cryptoService;
+import com.diplomska.crypto.cryptoService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -62,7 +62,7 @@ public class cryptoObservation extends HttpServlet {
             PrintWriter out = response.getWriter();
             out.println(gson.toJson(jObj));
 
-        } else if (encrypt.equals("false")) {
+        } /* else if (encrypt.equals("false")) {
 
             // Get the encrypted ID from GET request
             String _id = request.getParameter("_id");
@@ -84,7 +84,7 @@ public class cryptoObservation extends HttpServlet {
             // Send it back to hapi.do
             PrintWriter out = response.getWriter();
             out.println(gson.toJson(jObj));
-        }
+        } */
     }
 
     @Override

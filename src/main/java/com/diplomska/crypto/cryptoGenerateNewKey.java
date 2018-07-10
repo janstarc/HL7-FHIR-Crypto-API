@@ -1,21 +1,6 @@
-package com.diplomska.intercept;
+package com.diplomska.crypto;
 
-import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.model.api.ExtensionDt;
-import ca.uhn.fhir.model.dstu2.resource.Bundle;
-import ca.uhn.fhir.model.dstu2.resource.Condition;
-import ca.uhn.fhir.model.dstu2.resource.Observation;
-import ca.uhn.fhir.rest.client.api.IGenericClient;
-import ca.uhn.fhir.rest.gclient.StringClientParam;
-import com.diplomska.encryptDecrypt.cryptoService;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
+import com.diplomska.crypto.cryptoService;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -24,11 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.List;
-
-import static com.diplomska.constants.address.HapiCryptoObservation;
-import static com.diplomska.constants.address.HapiRESTfulServer;
 
 @WebServlet(urlPatterns = {"/crypto.do/GenerateNewKey"})
 public class cryptoGenerateNewKey extends HttpServlet {

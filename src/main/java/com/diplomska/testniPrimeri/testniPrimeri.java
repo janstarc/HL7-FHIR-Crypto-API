@@ -11,7 +11,7 @@ import ca.uhn.fhir.model.dstu2.valueset.HTTPVerbEnum;
 import ca.uhn.fhir.model.dstu2.valueset.ObservationStatusEnum;
 import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
-import com.diplomska.encryptDecrypt.cryptoService;
+import com.diplomska.crypto.cryptoService;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -52,7 +52,7 @@ public class testniPrimeri {
         //Patient p = getPatientById(1);
         //addResourceToPatient(p);
 
-        getAllObservationsForPatient("20004");
+        //getAllObservationsForPatient("20002");
     }
 
     // GET all observations for Patient ID
