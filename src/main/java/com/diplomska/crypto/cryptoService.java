@@ -9,6 +9,8 @@ import java.security.cert.CertificateException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.diplomska.crypto.cryptoDB.getKeyAlias;
+
 public class cryptoService {
 
     private static Cipher cipher;
@@ -50,10 +52,27 @@ public class cryptoService {
 
     // Convert Array->String
     // https://stackoverflow.com/questions/9098022/problems-converting-byte-array-to-string-and-back-to-byte-array
-    public static String encrypt(String plainText) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
+        // Plain text --> V resnici gre za user_id
+    public static String encrypt(String patientId) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, UnrecoverableEntryException, NoSuchAlgorithmException, KeyStoreException {
 
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-        byte[] textToArray = plainText.getBytes();                          // Convert from plainText to byte[]
+        String keyAlias = getKeyAlias(patientId);
+        SecretKey secKey = (SecretKey) getEntryFromKeyStore(keyAlias, "keyPassword", keyStore);
+
+        cipher.init(Cipher.ENCRYPT_MODE, secKey);
+        byte[] textToArray = patientId.getBytes();                          // Convert from plainText to byte[]
+        byte[] cipherText = cipher.doFinal(textToArray);                    // Encrypt to byte[]
+        String cipherString = Base64.encodeToString(cipherText, Base64.NO_WRAP);        // Convert byte[] to hash String without loss
+
+        return cipherString;
+    }
+
+    // TODO Change or delete this!
+    public static String encryptName(String patientId) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, UnrecoverableEntryException, NoSuchAlgorithmException, KeyStoreException {
+
+        SecretKey secKey = (SecretKey) getEntryFromKeyStore("keyAlias", "keyPassword", keyStore);
+
+        cipher.init(Cipher.ENCRYPT_MODE, secKey);
+        byte[] textToArray = patientId.getBytes();                          // Convert from plainText to byte[]
         byte[] cipherText = cipher.doFinal(textToArray);                    // Encrypt to byte[]
         String cipherString = Base64.encodeToString(cipherText, Base64.NO_WRAP);        // Convert byte[] to hash String without loss
 

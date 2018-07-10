@@ -12,7 +12,7 @@ public class cryptoDB {
     static final String USER = "root";
     static final String PASS = "";
 
-    public static String getKeyAlias(String userId){
+    public static String getKeyAlias(String patientId){
 
         Connection conn = null;
         Statement stmt = null;
@@ -28,7 +28,7 @@ public class cryptoDB {
             // Execute a query
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
-            String sql = "SELECT key_alias FROM user_key WHERE user_id = " + userId;
+            String sql = "SELECT key_alias FROM user_key WHERE user_id = " + patientId;
             System.out.println("SQL: " + sql);
             ResultSet rs = stmt.executeQuery(sql);
 
@@ -39,11 +39,12 @@ public class cryptoDB {
                 rs.next();
                 keyAlias = rs.getString("key_alias");
                 System.out.println("KeyAlias: " + keyAlias);
+
             } else {
                 System.out.println("Oops - sth weird is happening");
             }
 
-            //STEP 6: Clean-up environment
+            // Clean-up environment
             rs.close();
             stmt.close();
             conn.close();

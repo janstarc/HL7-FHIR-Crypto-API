@@ -121,6 +121,7 @@ public class hapiPatient extends HttpServlet {
                 }
             }
 
+
             // Send response
             PrintWriter out = response.getWriter();
             out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(search));
