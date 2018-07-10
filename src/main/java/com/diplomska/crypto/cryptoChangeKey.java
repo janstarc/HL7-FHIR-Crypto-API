@@ -5,6 +5,10 @@ import ca.uhn.fhir.model.api.ExtensionDt;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.Condition;
 import ca.uhn.fhir.model.dstu2.resource.Observation;
+import ca.uhn.fhir.model.dstu2.resource.Patient;
+import ca.uhn.fhir.model.dstu2.valueset.BundleTypeEnum;
+import ca.uhn.fhir.model.dstu2.valueset.HTTPVerbEnum;
+import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import ca.uhn.fhir.rest.gclient.StringClientParam;
 
@@ -82,8 +86,10 @@ public class cryptoChangeKey extends HttpServlet {
                         try {
                             String newHash = crypto.encryptWithNewKey(_id, keyAlias);
                             System.out.println("New hash: " + newHash);
+                            ext.setValue(new StringDt("Patient/" + newHash));
                         } catch (Exception e) {
                             e.printStackTrace();
+                            response.sendError(500, "Encryption Error");
                         }
                     }
                 }
@@ -95,14 +101,39 @@ public class cryptoChangeKey extends HttpServlet {
             if(extList.size() > 0){
                 for(ExtensionDt ext : extList){
                     if(ext.getElementSpecificId().equals("encryptedReference")){
-                        System.out.println(ext.getValue());
-                        // TODO Reencrypt here
+                        System.out.println("Plain: " + _id + "Prev Hash: " + ext.getValue() + " Test: " + _idEnc);
+                        try {
+                            String newHash = crypto.encryptWithNewKey(_id, keyAlias);
+                            System.out.println("New hash: " + newHash);
+                            ext.setValue(new StringDt("Patient/" + newHash));
+                            String krneki;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            response.sendError(500, "Encryption Error");
+                        }
                     }
                 }
             }
         }
 
-        //PrintWriter out = response.getWriter();
-        //out.println(ct)
+        Bundle bundle = new Bundle();
+        bundle.setType(BundleTypeEnum.TRANSACTION);
+        bundle.addEntry()
+                .setResource(searchObservation)
+                .getRequest()
+                .setUrl("Observation")
+                .setMethod(HTTPVerbEnum.POST);
+        bundle.addEntry()
+                .setResource(searchCondition)
+                .getRequest()
+                .setUrl("Condition")
+                .setMethod(HTTPVerbEnum.POST);
+
+        String bundleOut = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle);
+        //System.out.println(bundleOut);
+
+
+        PrintWriter out = response.getWriter();
+        out.println(bundleOut);
     }
 }

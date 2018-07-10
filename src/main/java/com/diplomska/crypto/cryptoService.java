@@ -50,7 +50,6 @@ public class cryptoService {
     public static String encrypt(String patientId) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, UnrecoverableEntryException, NoSuchAlgorithmException, KeyStoreException {
 
         String keyAlias = getKeyAlias(patientId);
-        //System.out.println("#encrypt Key Alias = " + keyAlias);
         SecretKey secKey = (SecretKey) getEntryFromKeyStore(keyAlias, "keyPassword", keyStore);
 
         cipher.init(Cipher.ENCRYPT_MODE, secKey);
@@ -64,8 +63,6 @@ public class cryptoService {
     public static String encryptWithNewKey (String patientId, String newKeyAlias) throws UnrecoverableEntryException, NoSuchAlgorithmException, KeyStoreException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
 
         // Get old key
-        //System.out.println("---Parameters: " + newKeyAlias + " -- PatientId = " + patientId);
-
         SecretKey secKey = (SecretKey) getEntryFromKeyStore(newKeyAlias, "keyPassword", keyStore);
         cipher.init(Cipher.ENCRYPT_MODE, secKey);
 

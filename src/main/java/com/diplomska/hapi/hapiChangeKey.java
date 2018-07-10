@@ -49,10 +49,25 @@ public class hapiChangeKey extends HttpServlet {
             uri.setParameter("_id", _id);
             uri.setParameter("keyAlias", keyAlias);
             HttpGet requestToCrypto = new HttpGet(String.valueOf(uri));
-            HttpResponse encryptedId = httpClient.execute(requestToCrypto);
+            HttpResponse changedKeyResources = httpClient.execute(requestToCrypto);
+            //System.out.println("Response code: " + changedKeyResources.co);
+            /**
+             *  TODO
+             *  -Nastavi error code, ce enkripcija ni uspesna/kljuc ne obstaja
+             *  -Nalozi resource na HAPI Server
+             *  -Ce je response od HAPIja OK, popravi keyAlias vnos v bazi za userja
+             *
+             *  TODO 2
+             *  -Shandlaj dodajanje novega userja - s katerim kljucem se kriptira
+             *  -
+             *
+             *
+             */
 
-            // Crypto returns JSON object with encrypted search parameters
-            String changeKeyResponse = EntityUtils.toString(encryptedId.getEntity());
+
+            String changeKeyResponse = EntityUtils.toString(changedKeyResources.getEntity());
+
+            System.out.println("HAPI Response: \n" + changeKeyResponse);
 
 
             //JsonObject jObj = new Gson().fromJson(encryptedJson, JsonObject.class);
