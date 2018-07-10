@@ -31,6 +31,7 @@ public class cryptoService {
         keyStore = getKeyStore("123abc", "/WEB-INF/crypto/keystore.ks", context);
         System.out.println("KeyStore: " + keyStore);
 
+        /*
         // Get the key from the keystore
         Key keyEntry = getEntryFromKeyStore("keyAlias", "keyPassword", keyStore);
         System.out.println("KeyEntry: " + keyEntry);
@@ -40,15 +41,8 @@ public class cryptoService {
             secretKey = (SecretKey) keyEntry;
             System.out.println("Secret key HASH: " + secretKey.hashCode());
         }
+        */
     }
-
-    /**
-     *
-     *  Premisliti situacijo glede kljucev
-     *      -Pri encrypt imamo dovolj informacij - le pogledamo, pod katerim kljucem moramo sifrirati
-     *
-     *      -Pre decrypt nimamo dovolj informacij, ker ne vemo, pod katerim kljucem je user sifriran
-     */
 
     // Convert Array->String
     // https://stackoverflow.com/questions/9098022/problems-converting-byte-array-to-string-and-back-to-byte-array
@@ -56,9 +50,25 @@ public class cryptoService {
     public static String encrypt(String patientId) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, UnrecoverableEntryException, NoSuchAlgorithmException, KeyStoreException {
 
         String keyAlias = getKeyAlias(patientId);
+        //System.out.println("#encrypt Key Alias = " + keyAlias);
         SecretKey secKey = (SecretKey) getEntryFromKeyStore(keyAlias, "keyPassword", keyStore);
 
         cipher.init(Cipher.ENCRYPT_MODE, secKey);
+        byte[] textToArray = patientId.getBytes();                          // Convert from plainText to byte[]
+        byte[] cipherText = cipher.doFinal(textToArray);                    // Encrypt to byte[]
+        String cipherString = Base64.encodeToString(cipherText, Base64.NO_WRAP);        // Convert byte[] to hash String without loss
+
+        return cipherString;
+    }
+
+    public static String encryptWithNewKey (String patientId, String newKeyAlias) throws UnrecoverableEntryException, NoSuchAlgorithmException, KeyStoreException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
+
+        // Get old key
+        //System.out.println("---Parameters: " + newKeyAlias + " -- PatientId = " + patientId);
+
+        SecretKey secKey = (SecretKey) getEntryFromKeyStore(newKeyAlias, "keyPassword", keyStore);
+        cipher.init(Cipher.ENCRYPT_MODE, secKey);
+
         byte[] textToArray = patientId.getBytes();                          // Convert from plainText to byte[]
         byte[] cipherText = cipher.doFinal(textToArray);                    // Encrypt to byte[]
         String cipherString = Base64.encodeToString(cipherText, Base64.NO_WRAP);        // Convert byte[] to hash String without loss
@@ -79,6 +89,7 @@ public class cryptoService {
         return cipherString;
     }
 
+    /*
     public static String decrypt(String cipherText) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
 
         cipher.init(Cipher.DECRYPT_MODE, secretKey);                            // Set DECRYPT mode
@@ -88,25 +99,10 @@ public class cryptoService {
 
         return decryptedString;
     }
-
-    public static String reencryptWithNewKey(String newKeyAlias, String userId) throws UnrecoverableEntryException, NoSuchAlgorithmException, KeyStoreException, InvalidKeyException {
-
-        // Get old key
-        /*
-        String oldKeyAlias = getKeyAlias(userId);
-        Key keyEntry = getEntryFromKeyStore(oldKeyAlias, "keyPassword", keyStore);
-        SecretKey oldKey = (SecretKey) keyEntry;
-        cipher.init(Cipher.DECRYPT_MODE, oldKey);
-        */
-        SecretKey newKey = (SecretKey) getEntryFromKeyStore(newKeyAlias, "keyPasword", keyStore);
-        //cipher.init(Cipher.ENCRYPT_MODE, newKey);
-        //String newHash = encrypt(userId, // TODO KEY ALIAS);
-
-        return null;
-    }
+    */
 
     public static String addNewKeyToKeyStore(String keyAlias) throws NoSuchAlgorithmException, KeyStoreException {
-        secretKey = generateSecretKey("AES", 256);
+        SecretKey secretKey = generateSecretKey("AES", 256);
 
         // Get the entry pass object. keyPassword & entryPassword - password of the entry, not the entire keyStore
         //String keyAlias = getTimestamp();

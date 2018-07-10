@@ -29,11 +29,13 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.diplomska.constants.address.HapiRESTfulServer;
+
 @WebServlet(urlPatterns = {"/hapi.do/Patient"})
 public class hapiPatient extends HttpServlet {
 
-    public static String HapiRESTfulServer = "http://localhost:8080/hapi/baseDstu2";
-    public static String HapiCrypto = "http://localhost:7050/crypto.do/Patient";
+    //public static String HapiRESTfulServer = "http://localhost:8080/hapi/baseDstu2";
+    //public static String HapiCrypto = "http://localhost:7050/crypto.do/Patient";
 
     // Get requesti - iskanje pacientov
     @Override
@@ -43,6 +45,7 @@ public class hapiPatient extends HttpServlet {
         String family = request.getParameter("family");
         String given = request.getParameter("given");
 
+        /*
         HttpClient httpClient = HttpClientBuilder.create().build();
         URIBuilder uri;
         try {
@@ -88,6 +91,7 @@ public class hapiPatient extends HttpServlet {
                 try {
                     // Decrypt the values
                     // TODO Is decryption needed???
+                    */
                     /*
                     uri = new URIBuilder(HapiCrypto);
                     uri.setParameter("encrypt", "false");
@@ -102,7 +106,7 @@ public class hapiPatient extends HttpServlet {
                     String famDecrypt = jObj2.get("given").getAsString();
                     String givDecrypt = jObj2.get("family").getAsString();
                     */
-
+                    /*
                     // Handle the resource conversion and change the value of object p
                     ArrayList<StringDt> famArray = new ArrayList<>();
                     famArray.add(new StringDt(family));
@@ -120,21 +124,38 @@ public class hapiPatient extends HttpServlet {
                     e.printStackTrace();
                 }
             }
+            */
 
+        // Search with encoded parameters
+        FhirContext ctx = FhirContext.forDstu2();
+        IGenericClient client = ctx.newRestfulGenericClient(HapiRESTfulServer);
 
-            // Send response
-            PrintWriter out = response.getWriter();
-            out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(search));
+        // Search for the Patient - hashed value
+        Bundle search = client
+                .search()
+                .forResource(Patient.class)
+                .where(Patient.FAMILY.matches().value(family))
+                .and(Patient.GIVEN.matches().value(given))
+                .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
+                .encodedJson()
+                .execute();
 
+        // Send response
+        PrintWriter out = response.getWriter();
+        out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(search));
+
+            /*
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
+        */
     }
 
     // Ko dobimo POST request - nalaganje resourca na bazo
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
+        /*
         // Encrypt the resource
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpPost requestToCrypto = new HttpPost(HapiCrypto);
@@ -150,6 +171,17 @@ public class hapiPatient extends HttpServlet {
         encryptedToHapi.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
         HttpResponse responseFromHapi = httpClient.execute(encryptedToHapi);
         String responseFromHapiString = EntityUtils.toString(responseFromHapi.getEntity());
+        PrintWriter out = response.getWriter();
+        out.println(responseFromHapiString);
+        */
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpPost requestToHapi = new HttpPost(HapiRESTfulServer);
+        String requestBody = IOUtils.toString(new InputStreamReader(request.getInputStream()));
+        requestToHapi.setEntity(new StringEntity(requestBody));
+        requestToHapi.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
+        HttpResponse responseFromHapi = httpClient.execute(requestToHapi);
+        String responseFromHapiString = EntityUtils.toString(responseFromHapi.getEntity());
+
         PrintWriter out = response.getWriter();
         out.println(responseFromHapiString);
     }

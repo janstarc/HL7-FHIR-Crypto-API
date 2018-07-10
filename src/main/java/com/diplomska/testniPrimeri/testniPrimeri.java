@@ -34,7 +34,7 @@ public class testniPrimeri {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
         String given = "Testni";
-        String family = "Pacient2";
+        String family = "Pacient4";
 
         //addPatient(given, family);
         //getPatientByGivenFamily(given, family);
@@ -52,7 +52,7 @@ public class testniPrimeri {
         //Patient p = getPatientById(1);
         //addResourceToPatient(p);
 
-        //getAllObservationsForPatient("20002");
+        getAllObservationsForPatient("20002");
     }
 
     // GET all observations for Patient ID
@@ -179,8 +179,19 @@ public class testniPrimeri {
 
         // Log the request
         FhirContext ctx = FhirContext.forDstu2();
-        String requestBody = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(patient);
-        System.out.println(requestBody);
+        //String requestBody = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(patient);
+        //System.out.println(requestBody);
+
+        // Create a Bundle, containing the Observation object
+        Bundle bundle = new Bundle();
+        bundle.setType(BundleTypeEnum.TRANSACTION);
+        bundle.addEntry()
+                .setResource(patient)
+                .getRequest()
+                .setUrl("Patient")
+                .setMethod(HTTPVerbEnum.POST);
+
+        String requestBody = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle);
 
         HttpClient httpClient = HttpClientBuilder.create().build();
         try {

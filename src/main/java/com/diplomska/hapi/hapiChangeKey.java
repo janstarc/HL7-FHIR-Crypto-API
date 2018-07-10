@@ -15,7 +15,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +24,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import static com.diplomska.constants.address.HapiCryptoChangeKey;
 import static com.diplomska.constants.address.HapiCryptoObservation;
 import static com.diplomska.constants.address.HapiRESTfulServer;
 
@@ -38,23 +38,27 @@ public class hapiChangeKey extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // Find all Observation for Patient with _id
+        // Find patient and set new key
         String _id = request.getParameter("_id");
-        String newKeyAlias = request.getParameter("keyAlias");
+        String keyAlias = request.getParameter("keyAlias");
 
         try {
             // Send request to crypto --> Encrypt _id
-            uri = new URIBuilder(HapiCryptoObservation);
-            uri.setParameter("encrypt", "true");
+            uri = new URIBuilder(HapiCryptoChangeKey);
+            //uri.setParameter("encrypt", "true");
             uri.setParameter("_id", _id);
+            uri.setParameter("keyAlias", keyAlias);
             HttpGet requestToCrypto = new HttpGet(String.valueOf(uri));
-            HttpResponse encryptedGet = httpClient.execute(requestToCrypto);
+            HttpResponse encryptedId = httpClient.execute(requestToCrypto);
 
             // Crypto returns JSON object with encrypted search parameters
-            String encryptedJson = EntityUtils.toString(encryptedGet.getEntity());
-            JsonObject jObj = new Gson().fromJson(encryptedJson, JsonObject.class);
-            String _idEnc = jObj.get("_id").getAsString();
+            String changeKeyResponse = EntityUtils.toString(encryptedId.getEntity());
 
+
+            //JsonObject jObj = new Gson().fromJson(encryptedJson, JsonObject.class);
+            //String _idEnc = jObj.get("_id").getAsString();
+
+            /*
             // Create FHIR context
             FhirContext ctx = FhirContext.forDstu2();
             IGenericClient client = ctx.newRestfulGenericClient(HapiRESTfulServer);
