@@ -5,6 +5,8 @@ import ca.uhn.fhir.model.api.ExtensionDt;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.Condition;
 import ca.uhn.fhir.model.dstu2.resource.Observation;
+import ca.uhn.fhir.model.dstu2.valueset.BundleTypeEnum;
+import ca.uhn.fhir.model.dstu2.valueset.HTTPVerbEnum;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import ca.uhn.fhir.rest.gclient.StringClientParam;
 import com.google.gson.Gson;
@@ -27,6 +29,7 @@ import java.util.List;
 import static com.diplomska.constants.address.HapiCryptoChangeKey;
 import static com.diplomska.constants.address.HapiCryptoObservation;
 import static com.diplomska.constants.address.HapiRESTfulServer;
+import static com.diplomska.crypto.cryptoDB.updateKeyAlias;
 
 @WebServlet(urlPatterns = {"/hapi.do/ChangeKey"})
 public class hapiChangeKey extends HttpServlet {
@@ -68,6 +71,35 @@ public class hapiChangeKey extends HttpServlet {
             String changeKeyResponse = EntityUtils.toString(changedKeyResources.getEntity());
 
             System.out.println("HAPI Response: \n" + changeKeyResponse);
+
+            FhirContext ctx = FhirContext.forDstu2();
+            IGenericClient client = ctx.newRestfulGenericClient(HapiRESTfulServer);
+
+
+            Bundle encryptedResources = (Bundle) ctx.newJsonParser().setPrettyPrint(true).parseResource(changeKeyResponse);
+            //Bundle bundle = new Bundle();
+            //encryptedResources.setType(BundleTypeEnum.TRANSACTION);
+            //bundle.addEntry()
+            //        .setResource(observation)
+            //        .getRequest()
+            //        .setUrl("Observation")
+            //        .setMethod(HTTPVerbEnum.POST);
+
+            //System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle));
+
+
+
+
+            // Create a client and post the transaction to the server
+            // TODO Uncomment
+            Bundle resp = client.transaction().withBundle(encryptedResources).execute();
+            //resp.setType(BundleTypeEnum.TRANSACTION_RESPONSE);
+            updateKeyAlias(_id, keyAlias);
+
+
+            // Log the response
+            // TODO Uncomment
+            System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(resp));
 
 
             //JsonObject jObj = new Gson().fromJson(encryptedJson, JsonObject.class);

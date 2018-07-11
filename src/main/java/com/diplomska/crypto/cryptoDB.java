@@ -1,6 +1,8 @@
 package com.diplomska.crypto;
 
 //STEP 1. Import required packages
+import com.github.dnault.xmlpatch.internal.Log;
+
 import java.sql.*;
 
 public class cryptoDB {
@@ -75,6 +77,7 @@ public class cryptoDB {
 
         Connection conn = null;
         Statement stmt = null;
+        System.out.println("---------------DBLog: " + userId + " " + keyAlias + "-------------");
 
         try{
             // Register JDBC driver
@@ -87,17 +90,22 @@ public class cryptoDB {
             // Execute a query
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
-            String sql = "SELECT key_alias FROM user_key WHERE user_id = " + userId;
+            String sql = "SELECT COUNT(key_alias) AS userInDB FROM user_key WHERE user_id = " + userId;
             System.out.println("SQL: " + sql);
             ResultSet rs = stmt.executeQuery(sql);
+            rs.next();
+            int count = rs.getInt("userInDB");
+            System.out.println("Count: " + count);
 
-            int columnCount = rs.getMetaData().getColumnCount();
-            System.out.println(columnCount);
+            //int columnCount = rs.getMetaData().getColumnCount();
+            //System.out.println(columnCount);
 
-            if(columnCount == 1){
+            if(count == 1){
                 // Existing user
-                sql = "UPDATE user_key SET key_alias = " + keyAlias + " WHERE user_id =" +  userId;
-                rs = stmt.executeQuery(sql);
+                sql = "UPDATE user_key SET key_alias = '" + keyAlias + "' WHERE user_id =" +  userId;
+                System.out.println("Update statement: " + sql);
+                int output = stmt.executeUpdate(sql);
+                System.out.println("Query out: " + output);
             } else {
                 sql = "INSERT INTO user_key VALUES (" + userId + ", '" + keyAlias + "')";
                 rs = stmt.executeQuery(sql);

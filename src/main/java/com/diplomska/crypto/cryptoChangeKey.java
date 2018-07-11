@@ -2,10 +2,8 @@ package com.diplomska.crypto;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.api.ExtensionDt;
-import ca.uhn.fhir.model.dstu2.resource.Bundle;
-import ca.uhn.fhir.model.dstu2.resource.Condition;
-import ca.uhn.fhir.model.dstu2.resource.Observation;
-import ca.uhn.fhir.model.dstu2.resource.Patient;
+import ca.uhn.fhir.model.api.IResource;
+import ca.uhn.fhir.model.dstu2.resource.*;
 import ca.uhn.fhir.model.dstu2.valueset.BundleTypeEnum;
 import ca.uhn.fhir.model.dstu2.valueset.HTTPVerbEnum;
 import ca.uhn.fhir.model.primitive.StringDt;
@@ -76,46 +74,32 @@ public class cryptoChangeKey extends HttpServlet {
         List<Observation> observationsList = searchObservation.getAllPopulatedChildElementsOfType(Observation.class);
         List<Condition> conditionsList = searchCondition.getAllPopulatedChildElementsOfType(Condition.class);
         System.out.println("ObservationSize: " + observationsList.size() + " | ConditionsSize: " + conditionsList.size());
+        Bundle toUpload = new Bundle();
+
 
         for (Observation o : observationsList){
             List<ExtensionDt> extList = o.getUndeclaredExtensions();
-            if(extList.size() > 0){
-                for(ExtensionDt ext : extList){
-                    if(ext.getElementSpecificId().equals("encryptedReference")){
-                        System.out.println("Plain: " + _id + "Prev Hash: " + ext.getValue() + " Test: " + _idEnc);
-                        try {
-                            String newHash = crypto.encryptWithNewKey(_id, keyAlias);
-                            System.out.println("New hash: " + newHash);
-                            ext.setValue(new StringDt("Patient/" + newHash));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            response.sendError(500, "Encryption Error");
-                        }
-                    }
-                }
-            }
+            extList = encryptResourceWithNewKey(extList, _id, keyAlias);
+            System.out.println("Ext output2 (size): " + extList.size());
+
+            System.out.println("Observation URL: " + HapiRESTfulServer + "/Observation/" + o.getId().getIdPart());
+            toUpload.addEntry().setResource(o).getRequest().setUrl(HapiRESTfulServer + "/Observation/" + o.getId().getIdPart()).setMethod(HTTPVerbEnum.PUT);
         }
+
+
 
         for (Condition c : conditionsList){
             List<ExtensionDt> extList = c.getUndeclaredExtensions();
-            if(extList.size() > 0){
-                for(ExtensionDt ext : extList){
-                    if(ext.getElementSpecificId().equals("encryptedReference")){
-                        System.out.println("Plain: " + _id + "Prev Hash: " + ext.getValue() + " Test: " + _idEnc);
-                        try {
-                            String newHash = crypto.encryptWithNewKey(_id, keyAlias);
-                            System.out.println("New hash: " + newHash);
-                            ext.setValue(new StringDt("Patient/" + newHash));
-                            String krneki;
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            response.sendError(500, "Encryption Error");
-                        }
-                    }
-                }
-            }
+            extList = encryptResourceWithNewKey(extList, _id, keyAlias);
+            System.out.println("Ext output (size): " + extList.size());
+
+            System.out.println("Condition URL: " + HapiRESTfulServer + "/Condition/" + c.getId().getIdPart());
+            toUpload.addEntry().setResource(c).getRequest().setUrl(HapiRESTfulServer + "/Condition/" + c.getId().getIdPart()).setMethod(HTTPVerbEnum.PUT);
         }
 
+        searchCondition.setType(BundleTypeEnum.MESSAGE);
+        searchObservation.setType(BundleTypeEnum.MESSAGE);
+        /*
         Bundle bundle = new Bundle();
         bundle.setType(BundleTypeEnum.TRANSACTION);
         bundle.addEntry()
@@ -128,12 +112,43 @@ public class cryptoChangeKey extends HttpServlet {
                 .getRequest()
                 .setUrl("Condition")
                 .setMethod(HTTPVerbEnum.POST);
+                */
 
-        String bundleOut = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle);
+        // TODO Test - line below commented
+        //String bundleOut = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle);
+
+        toUpload.setType(BundleTypeEnum.TRANSACTION);
+        List<IResource> list = toUpload.getAllPopulatedChildElementsOfType(IResource.class);
+        System.out.println("List len: " + list.size());
+        System.out.println();
+
+        String bundleOut = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(toUpload);
         //System.out.println(bundleOut);
 
 
         PrintWriter out = response.getWriter();
         out.println(bundleOut);
+    }
+
+    private List<ExtensionDt> encryptResourceWithNewKey(List<ExtensionDt> extList, String _id, String keyAlias){
+        if(extList.size() > 0){
+            for(ExtensionDt ext : extList){
+                if(ext.getElementSpecificId().equals("encryptedReference")){
+                    //System.out.println("Plain: " + _id + "Prev Hash: " + ext.getValue() + " Test: " + _idEnc);
+                    try {
+                        String newHash = crypto.encryptWithNewKey(_id, keyAlias);
+                        System.out.println("New hash: " + newHash);
+                        ext.setValue(new StringDt("Patient/" + newHash));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        //response.sendError(500, "Encryption Error");
+                        return null;
+                    }
+                }
+            }
+        } else {
+            return null;
+        }
+        return extList;
     }
 }
