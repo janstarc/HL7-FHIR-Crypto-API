@@ -36,7 +36,7 @@ public class testniPrimeri {
         String given = "Testni";
         String family = "Pacient4";
 
-        //addPatient(given, family);
+        addPatient(given, family);
         //getPatientByGivenFamily(given, family);
 
         /*
@@ -52,7 +52,7 @@ public class testniPrimeri {
         //Patient p = getPatientById(1);
         //addResourceToPatient(p);
 
-        getAllObservationsForPatient("20002");
+        //getAllObservationsForPatient("20002");
     }
 
     // GET all observations for Patient ID
@@ -203,9 +203,9 @@ public class testniPrimeri {
             HttpEntity entity = response.getEntity();
             String responseString = EntityUtils.toString(entity, "UTF-8");
             System.out.println("----- RESPONSE -----\n" + responseString);
-
         } catch (Exception e) {
             e.printStackTrace();
+            return;
         }
     }
 

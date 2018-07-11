@@ -41,10 +41,14 @@ public class cryptoChangeKey extends HttpServlet {
         String keyAlias = request.getParameter("keyAlias");
         String _idEnc = null;
 
-
         try {
             crypto.init(getServletContext());
             _idEnc = crypto.encrypt(_id);
+
+            if(_idEnc == null){
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+                return;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -99,24 +103,8 @@ public class cryptoChangeKey extends HttpServlet {
 
         searchCondition.setType(BundleTypeEnum.MESSAGE);
         searchObservation.setType(BundleTypeEnum.MESSAGE);
-        /*
-        Bundle bundle = new Bundle();
-        bundle.setType(BundleTypeEnum.TRANSACTION);
-        bundle.addEntry()
-                .setResource(searchObservation)
-                .getRequest()
-                .setUrl("Observation")
-                .setMethod(HTTPVerbEnum.POST);
-        bundle.addEntry()
-                .setResource(searchCondition)
-                .getRequest()
-                .setUrl("Condition")
-                .setMethod(HTTPVerbEnum.POST);
-                */
 
         // TODO Test - line below commented
-        //String bundleOut = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle);
-
         toUpload.setType(BundleTypeEnum.TRANSACTION);
         List<IResource> list = toUpload.getAllPopulatedChildElementsOfType(IResource.class);
         System.out.println("List len: " + list.size());

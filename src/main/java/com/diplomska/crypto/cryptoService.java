@@ -47,15 +47,29 @@ public class cryptoService {
     // Convert Array->String
     // https://stackoverflow.com/questions/9098022/problems-converting-byte-array-to-string-and-back-to-byte-array
         // Plain text --> V resnici gre za user_id
-    public static String encrypt(String patientId) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, UnrecoverableEntryException, NoSuchAlgorithmException, KeyStoreException {
+    public static String encrypt(String patientId) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
 
         String keyAlias = getKeyAlias(patientId);
-        SecretKey secKey = (SecretKey) getEntryFromKeyStore(keyAlias, "keyPassword", keyStore);
+        if(keyAlias == null) return null;
 
-        cipher.init(Cipher.ENCRYPT_MODE, secKey);
-        byte[] textToArray = patientId.getBytes();                          // Convert from plainText to byte[]
-        byte[] cipherText = cipher.doFinal(textToArray);                    // Encrypt to byte[]
-        String cipherString = Base64.encodeToString(cipherText, Base64.NO_WRAP);        // Convert byte[] to hash String without loss
+        SecretKey secKey;
+        try{
+            secKey = (SecretKey) getEntryFromKeyStore(keyAlias, "keyPassword", keyStore);
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
+        String cipherString;
+        try{
+            cipher.init(Cipher.ENCRYPT_MODE, secKey);
+            byte[] textToArray = patientId.getBytes();                          // Convert from plainText to byte[]
+            byte[] cipherText = cipher.doFinal(textToArray);                    // Encrypt to byte[]
+            cipherString = Base64.encodeToString(cipherText, Base64.NO_WRAP);        // Convert byte[] to hash String without loss
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
 
         return cipherString;
     }
@@ -182,10 +196,5 @@ public class cryptoService {
         SecretKey secretKey = keyGenerator.generateKey();
 
         return secretKey;
-    }
-
-    private static String getTimestamp(){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss-SSS");
-        return sdf.format(new Date());
     }
 }

@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.diplomska.constants.address.HapiRESTfulServer;
+import static com.diplomska.crypto.cryptoDB.updateKeyAlias;
 
 @WebServlet(urlPatterns = {"/hapi.do/Patient"})
 public class hapiPatient extends HttpServlet {
@@ -180,9 +181,26 @@ public class hapiPatient extends HttpServlet {
         requestToHapi.setEntity(new StringEntity(requestBody));
         requestToHapi.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
         HttpResponse responseFromHapi = httpClient.execute(requestToHapi);
+        int statusCode = responseFromHapi.getStatusLine().getStatusCode();
+
+        if(statusCode != 200){
+            System.out.println("Status code: " + statusCode);
+            response.sendError(statusCode);
+            return;
+        }
+
+        FhirContext ctx = FhirContext.forDstu2();
+
         String responseFromHapiString = EntityUtils.toString(responseFromHapi.getEntity());
+        Bundle resp = (Bundle) ctx.newJsonParser().parseResource(responseFromHapiString);
+        Bundle.Entry entry = resp.getEntryFirstRep();
+        String[] entryString = entry.getResponse().getLocation().split("/");
+        String idPart = entryString[1];
+        System.out.println("-----> User ID: " + idPart);
+        boolean err = updateKeyAlias(idPart, "key1");
 
         PrintWriter out = response.getWriter();
         out.println(responseFromHapiString);
+        if(err) out.println("DB Error - Keys not added!");
     }
 }

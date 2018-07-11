@@ -53,6 +53,15 @@ public class hapiChangeKey extends HttpServlet {
             uri.setParameter("keyAlias", keyAlias);
             HttpGet requestToCrypto = new HttpGet(String.valueOf(uri));
             HttpResponse changedKeyResources = httpClient.execute(requestToCrypto);
+            int statusCode = changedKeyResources.getStatusLine().getStatusCode();
+
+            if(statusCode != 200){
+                System.out.println("Status code: " + statusCode);
+                response.sendError(statusCode);
+                return;
+            }
+
+
             //System.out.println("Response code: " + changedKeyResources.co);
             /**
              *  TODO
@@ -62,12 +71,9 @@ public class hapiChangeKey extends HttpServlet {
              *
              *  TODO 2
              *  -Shandlaj dodajanje novega userja - s katerim kljucem se kriptira
-             *  -
              *
              *
              */
-
-
             String changeKeyResponse = EntityUtils.toString(changedKeyResources.getEntity());
 
             System.out.println("HAPI Response: \n" + changeKeyResponse);
@@ -75,148 +81,17 @@ public class hapiChangeKey extends HttpServlet {
             FhirContext ctx = FhirContext.forDstu2();
             IGenericClient client = ctx.newRestfulGenericClient(HapiRESTfulServer);
 
-
             Bundle encryptedResources = (Bundle) ctx.newJsonParser().setPrettyPrint(true).parseResource(changeKeyResponse);
-            //Bundle bundle = new Bundle();
-            //encryptedResources.setType(BundleTypeEnum.TRANSACTION);
-            //bundle.addEntry()
-            //        .setResource(observation)
-            //        .getRequest()
-            //        .setUrl("Observation")
-            //        .setMethod(HTTPVerbEnum.POST);
-
-            //System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle));
-
-
-
 
             // Create a client and post the transaction to the server
-            // TODO Uncomment
             Bundle resp = client.transaction().withBundle(encryptedResources).execute();
-            //resp.setType(BundleTypeEnum.TRANSACTION_RESPONSE);
             updateKeyAlias(_id, keyAlias);
 
-
             // Log the response
-            // TODO Uncomment
             System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(resp));
-
-
-            //JsonObject jObj = new Gson().fromJson(encryptedJson, JsonObject.class);
-            //String _idEnc = jObj.get("_id").getAsString();
-
-            /*
-            // Create FHIR context
-            FhirContext ctx = FhirContext.forDstu2();
-            IGenericClient client = ctx.newRestfulGenericClient(HapiRESTfulServer);
-
-            // Search with encoded parameters
-            Bundle searchObservation = client
-                    .search()
-                    .forResource(Observation.class)
-                    .where(new StringClientParam("_content").matches().value("Patient/" + _idEnc))
-                    .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
-                    .encodedJson()
-                    .execute();
-
-            Bundle searchCondition = client
-                    .search()
-                    .forResource(Condition.class)
-                    .where(new StringClientParam("_content").matches().value("Patient/" + _idEnc))
-                    .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
-                    .encodedJson()
-                    .execute();
-
-            // Convert bundle to List<Observation>
-            List<Observation> observationsList = searchObservation.getAllPopulatedChildElementsOfType(Observation.class);
-            List<Condition> conditionsList = searchCondition.getAllPopulatedChildElementsOfType(Condition.class);
-            System.out.println("ObservationSize: " + observationsList.size() + " | ConditionsSize: " + conditionsList.size());
-
-            for (Observation o : observationsList){
-                List<ExtensionDt> extList = o.getUndeclaredExtensions();
-                if(extList.size() > 0){
-                    for(ExtensionDt ext : extList){
-                        if(ext.getElementSpecificId().equals("encryptedReference")){
-                            System.out.println(ext.getValue());
-                            // TODO Reencrypt here
-                        }
-                    }
-                }
-            }
-
-            for (Condition c : conditionsList){
-                List<ExtensionDt> extList = c.getUndeclaredExtensions();
-                if(extList.size() > 0){
-                    for(ExtensionDt ext : extList){
-                        if(ext.getElementSpecificId().equals("encryptedReference")){
-                            System.out.println(ext.getValue());
-                            // TODO Reencrypt here
-                        }
-                    }
-                }
-            }
-
-            // TODO Build bundle
-            // TODO Commit bundle
-            /*
-            // Loop through the Observation list, decrypt hashed parameters
-            for (Observation o : resultArray) {
-
-                // Decrypt the values
-                try {
-                    // Find the right extension, decrypt the value
-                    List<ExtensionDt> extList = o.getUndeclaredExtensions();
-                    if(extList.size() > 0){
-                        for(ExtensionDt ext : extList){
-                            if(ext.getElementSpecificId().equals("encryptedReference")){
-                                ext.setValue(new StringDt("Patient/" + _id));
-                            }
-                        }
-                    }
-
-                    // Write log
-                    System.out.println("Found " + search.getEntry().size() + " results.");
-                    System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(search));
-
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-
-            // Send response
-            PrintWriter out = response.getWriter();
-            out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(search));
-            */
 
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
     }
-    /*
-    // Ko dobimo POST request - nalaganje resourca na bazo
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
-        // Encrypt the resource
-        HttpClient httpClient = HttpClientBuilder.create().build();
-        HttpPost requestToCrypto = new HttpPost(HapiCryptoObservation);
-        String requestBody = IOUtils.toString(new InputStreamReader(request.getInputStream()));
-        System.out.println("Req - HAPI" + requestBody);
-        requestToCrypto.setEntity(new StringEntity(requestBody));
-
-        // Get the response, generate a usable form out of it
-        HttpResponse encryptedResource = httpClient.execute(requestToCrypto);
-
-        // Send the encrypted response to HAPI endpoint
-        HttpPost encryptedToHapi = new HttpPost(HapiRESTfulServer);
-        encryptedToHapi.setEntity(encryptedResource.getEntity());
-        encryptedToHapi.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
-        HttpResponse responseFromHapi = httpClient.execute(encryptedToHapi);
-        String responseFromHapiString = EntityUtils.toString(responseFromHapi.getEntity());
-        System.out.println("Response from HAPI: " + responseFromHapiString);
-        PrintWriter out = response.getWriter();
-        out.println(responseFromHapiString);
-    }
-    */
-
 }

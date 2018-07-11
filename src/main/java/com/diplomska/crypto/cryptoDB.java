@@ -4,6 +4,8 @@ package com.diplomska.crypto;
 import com.github.dnault.xmlpatch.internal.Log;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class cryptoDB {
     // JDBC driver name and database URL
@@ -19,6 +21,8 @@ public class cryptoDB {
         Connection conn = null;
         Statement stmt = null;
         String keyAlias = null;
+        boolean err = false;
+
         try{
             // Register JDBC driver
             Class.forName(JDBC_DRIVER);
@@ -44,39 +48,42 @@ public class cryptoDB {
 
             } else {
                 System.out.println("Oops - sth weird is happening");
+                err = true;
             }
 
             // Clean-up environment
             rs.close();
             stmt.close();
             conn.close();
-        }catch(SQLException se){
-            //Handle errors for JDBC
-            se.printStackTrace();
-        }catch(Exception e){
+        } catch(Exception e){
             //Handle errors for Class.forName
             e.printStackTrace();
+            err = true;
         }finally{
             //finally block used to close resources
             try{
                 if(stmt!=null)
                     stmt.close();
             }catch(SQLException se2){
-            }// nothing we can do
+                err = true;
+            }
             try{
                 if(conn!=null)
                     conn.close();
             }catch(SQLException se){
                 se.printStackTrace();
+                err = true;
             }
         }
-        return keyAlias;
+        if(!err) return keyAlias;
+        return null;
     }
 
-    public static void updateKeyAlias(String userId, String keyAlias){
+    public static boolean updateKeyAlias(String userId, String keyAlias){
 
         Connection conn = null;
         Statement stmt = null;
+        boolean err = false;
         System.out.println("---------------DBLog: " + userId + " " + keyAlias + "-------------");
 
         try{
@@ -97,9 +104,6 @@ public class cryptoDB {
             int count = rs.getInt("userInDB");
             System.out.println("Count: " + count);
 
-            //int columnCount = rs.getMetaData().getColumnCount();
-            //System.out.println(columnCount);
-
             if(count == 1){
                 // Existing user
                 sql = "UPDATE user_key SET key_alias = '" + keyAlias + "' WHERE user_id =" +  userId;
@@ -107,33 +111,42 @@ public class cryptoDB {
                 int output = stmt.executeUpdate(sql);
                 System.out.println("Query out: " + output);
             } else {
-                sql = "INSERT INTO user_key VALUES (" + userId + ", '" + keyAlias + "')";
-                rs = stmt.executeQuery(sql);
+                System.out.println("HERE!!!");
+                sql = "INSERT INTO user_key(user_id, key_alias, key_assigned) VALUES (" + userId + ", '" + keyAlias + "', '" + getTimestamp() + "')";
+                System.out.println("SQL Statement: " + sql);
+                int output = stmt.executeUpdate(sql);
+                System.out.println("Insert Query Out: " + output);
             }
 
             // Clean-up environment
             rs.close();
             stmt.close();
             conn.close();
-        }catch(SQLException se){
-            //Handle errors for JDBC
-            se.printStackTrace();
-        }catch(Exception e){
+        } catch(Exception e){
             //Handle errors for Class.forName
             e.printStackTrace();
+            err = true;
         }finally{
             //finally block used to close resources
             try{
                 if(stmt!=null)
                     stmt.close();
+                    err = true;
             }catch(SQLException se2){
             }// nothing we can do
             try{
                 if(conn!=null)
                     conn.close();
             }catch(SQLException se){
+                err = true;
                 se.printStackTrace();
             }
         }
+        return err;
+    }
+
+    private static String getTimestamp(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+        return sdf.format(new Date());
     }
 }
