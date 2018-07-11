@@ -38,7 +38,8 @@ public class hapiObservation extends HttpServlet {
 
 
         HttpClient httpClient = HttpClientBuilder.create().build();
-        URIBuilder uri;         // Get requesti - iskanje pacientov
+        URIBuilder uri;
+
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -57,6 +58,8 @@ public class hapiObservation extends HttpServlet {
             String encryptedJson = EntityUtils.toString(encryptedGet.getEntity());
             JsonObject jObj = new Gson().fromJson(encryptedJson, JsonObject.class);
             String _idEnc = jObj.get("_id").getAsString();
+
+
 
             // Create FHIR context
             FhirContext ctx = FhirContext.forDstu2();

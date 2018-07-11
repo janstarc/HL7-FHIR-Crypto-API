@@ -36,12 +36,12 @@ public class testniPrimeri {
         String given = "Testni";
         String family = "Pacient4";
 
-        addPatient(given, family);
+        //addPatient(given, family);
         //getPatientByGivenFamily(given, family);
 
         /*
         try{
-            Patient p = getPatientById(20004);
+            Patient p = getPatientById(20035);
             System.out.println("Test --> _id: " + p.getId().getIdPartAsLong());
             addObservationToPat(p);
         } catch (Exception e){
@@ -49,10 +49,11 @@ public class testniPrimeri {
         }
         */
 
+
         //Patient p = getPatientById(1);
         //addResourceToPatient(p);
 
-        //getAllObservationsForPatient("20002");
+        getAllObservationsForPatient("20035");
     }
 
     // GET all observations for Patient ID

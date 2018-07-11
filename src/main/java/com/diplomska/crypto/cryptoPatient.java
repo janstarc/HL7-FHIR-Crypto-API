@@ -29,6 +29,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableEntryException;
 import java.security.cert.CertificateException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @WebServlet(urlPatterns = "/crypto.do/Patient")
@@ -51,7 +52,7 @@ public class cryptoPatient extends HttpServlet {
                 crypto.init(context);
                 given =  crypto.encrypt(given);
                 family = crypto.encrypt(family);
-            } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException | CertificateException | NoSuchAlgorithmException | NoSuchPaddingException | UnrecoverableEntryException | KeyStoreException e) {
+            } catch (CertificateException | NoSuchAlgorithmException | NoSuchPaddingException | UnrecoverableEntryException | KeyStoreException | SQLException e) {
                 e.printStackTrace();
             }
 
@@ -119,10 +120,12 @@ public class cryptoPatient extends HttpServlet {
             familyName = crypto.encrypt(familyName);
             givenName = crypto.encrypt(givenName);
         } catch (NoSuchPaddingException | NoSuchAlgorithmException | KeyStoreException | UnrecoverableEntryException |
-                CertificateException | BadPaddingException | IllegalBlockSizeException | InvalidKeyException e) {
+                CertificateException e) {
             System.out.println("Encryption Error");
             e.printStackTrace();
             return;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         // Handle data types

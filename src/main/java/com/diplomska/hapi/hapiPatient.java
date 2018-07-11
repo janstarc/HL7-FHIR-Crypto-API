@@ -3,17 +3,12 @@ package com.diplomska.hapi;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
-import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
@@ -25,9 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.SQLException;
 
 import static com.diplomska.constants.address.HapiRESTfulServer;
 import static com.diplomska.crypto.cryptoDB.updateKeyAlias;
@@ -197,7 +190,14 @@ public class hapiPatient extends HttpServlet {
         String[] entryString = entry.getResponse().getLocation().split("/");
         String idPart = entryString[1];
         System.out.println("-----> User ID: " + idPart);
-        boolean err = updateKeyAlias(idPart, "key1");
+        boolean err = false;
+
+        try {
+            updateKeyAlias(idPart, "key1");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            err = true;
+        }
 
         PrintWriter out = response.getWriter();
         out.println(responseFromHapiString);

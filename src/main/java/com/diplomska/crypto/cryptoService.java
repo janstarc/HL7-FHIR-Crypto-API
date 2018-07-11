@@ -6,15 +6,13 @@ import javax.servlet.ServletContext;
 import java.io.*;
 import java.security.*;
 import java.security.cert.CertificateException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import java.sql.SQLException;
 import static com.diplomska.crypto.cryptoDB.getKeyAlias;
 
 public class cryptoService {
 
     private static Cipher cipher;
-    private static SecretKey secretKey;
+    //private static SecretKey secretKey;
     private static KeyStore keyStore;
     private static ServletContext ctx;
 
@@ -27,27 +25,14 @@ public class cryptoService {
         cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
 
         // Create/Load a KeyStore
-            // TODO Figure out what to do if the keystore is not avaliable!
         keyStore = getKeyStore("123abc", "/WEB-INF/crypto/keystore.ks", context);
         System.out.println("KeyStore: " + keyStore);
-
-        /*
-        // Get the key from the keystore
-        Key keyEntry = getEntryFromKeyStore("keyAlias", "keyPassword", keyStore);
-        System.out.println("KeyEntry: " + keyEntry);
-
-        if(keyEntry != null){
-            // Assign the key from the keyStore to the secret key
-            secretKey = (SecretKey) keyEntry;
-            System.out.println("Secret key HASH: " + secretKey.hashCode());
-        }
-        */
     }
 
     // Convert Array->String
     // https://stackoverflow.com/questions/9098022/problems-converting-byte-array-to-string-and-back-to-byte-array
         // Plain text --> V resnici gre za user_id
-    public static String encrypt(String patientId) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+    public static String encrypt(String patientId) throws SQLException {
 
         String keyAlias = getKeyAlias(patientId);
         if(keyAlias == null) return null;
@@ -67,6 +52,7 @@ public class cryptoService {
             byte[] cipherText = cipher.doFinal(textToArray);                    // Encrypt to byte[]
             cipherString = Base64.encodeToString(cipherText, Base64.NO_WRAP);        // Convert byte[] to hash String without loss
         } catch (Exception e){
+            System.out.println("Encrpyt err!");
             e.printStackTrace();
             return null;
         }
@@ -76,41 +62,28 @@ public class cryptoService {
 
     public static String encryptWithNewKey (String patientId, String newKeyAlias) throws UnrecoverableEntryException, NoSuchAlgorithmException, KeyStoreException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
 
-        // Get old key
-        SecretKey secKey = (SecretKey) getEntryFromKeyStore(newKeyAlias, "keyPassword", keyStore);
-        cipher.init(Cipher.ENCRYPT_MODE, secKey);
+        // Get the new key
+        SecretKey secKey;
+        try{
+            secKey = (SecretKey) getEntryFromKeyStore(newKeyAlias, "keyPassword", keyStore);
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
 
-        byte[] textToArray = patientId.getBytes();                          // Convert from plainText to byte[]
-        byte[] cipherText = cipher.doFinal(textToArray);                    // Encrypt to byte[]
-        String cipherString = Base64.encodeToString(cipherText, Base64.NO_WRAP);        // Convert byte[] to hash String without loss
+        String cipherString;
+        try{
+            cipher.init(Cipher.ENCRYPT_MODE, secKey);
+            byte[] textToArray = patientId.getBytes();                          // Convert from plainText to byte[]
+            byte[] cipherText = cipher.doFinal(textToArray);                    // Encrypt to byte[]
+            cipherString = Base64.encodeToString(cipherText, Base64.NO_WRAP);        // Convert byte[] to hash String without loss
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
 
         return cipherString;
     }
-
-    // TODO Change or delete this!
-    public static String encryptName(String patientId) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, UnrecoverableEntryException, NoSuchAlgorithmException, KeyStoreException {
-
-        SecretKey secKey = (SecretKey) getEntryFromKeyStore("keyAlias", "keyPassword", keyStore);
-
-        cipher.init(Cipher.ENCRYPT_MODE, secKey);
-        byte[] textToArray = patientId.getBytes();                          // Convert from plainText to byte[]
-        byte[] cipherText = cipher.doFinal(textToArray);                    // Encrypt to byte[]
-        String cipherString = Base64.encodeToString(cipherText, Base64.NO_WRAP);        // Convert byte[] to hash String without loss
-
-        return cipherString;
-    }
-
-    /*
-    public static String decrypt(String cipherText) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
-
-        cipher.init(Cipher.DECRYPT_MODE, secretKey);                            // Set DECRYPT mode
-        byte[] encryptedArray = Base64.decode(cipherText, Base64.NO_WRAP);      // 1 to 1 conversion from hash String to byte[]
-        byte[] decryptedArray = cipher.doFinal(encryptedArray);                 // Decryption of byte[]
-        String decryptedString = new String(decryptedArray);                    // Convert from byte[] to plainText
-
-        return decryptedString;
-    }
-    */
 
     public static String addNewKeyToKeyStore(String keyAlias) throws NoSuchAlgorithmException, KeyStoreException {
         SecretKey secretKey = generateSecretKey("AES", 256);
@@ -197,4 +170,30 @@ public class cryptoService {
 
         return secretKey;
     }
+
+    /*
+    public static String encryptName(String patientId) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, UnrecoverableEntryException, NoSuchAlgorithmException, KeyStoreException {
+
+        SecretKey secKey = (SecretKey) getEntryFromKeyStore("keyAlias", "keyPassword", keyStore);
+
+        cipher.init(Cipher.ENCRYPT_MODE, secKey);
+        byte[] textToArray = patientId.getBytes();                          // Convert from plainText to byte[]
+        byte[] cipherText = cipher.doFinal(textToArray);                    // Encrypt to byte[]
+        String cipherString = Base64.encodeToString(cipherText, Base64.NO_WRAP);        // Convert byte[] to hash String without loss
+
+        return cipherString;
+    }
+    */
+
+    /*
+    public static String decrypt(String cipherText) throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
+
+        cipher.init(Cipher.DECRYPT_MODE, secretKey);                            // Set DECRYPT mode
+        byte[] encryptedArray = Base64.decode(cipherText, Base64.NO_WRAP);      // 1 to 1 conversion from hash String to byte[]
+        byte[] decryptedArray = cipher.doFinal(encryptedArray);                 // Decryption of byte[]
+        String decryptedString = new String(decryptedArray);                    // Convert from byte[] to plainText
+
+        return decryptedString;
+    }
+    */
 }

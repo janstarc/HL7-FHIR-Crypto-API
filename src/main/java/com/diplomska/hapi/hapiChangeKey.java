@@ -1,16 +1,8 @@
 package com.diplomska.hapi;
 
 import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.model.api.ExtensionDt;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
-import ca.uhn.fhir.model.dstu2.resource.Condition;
-import ca.uhn.fhir.model.dstu2.resource.Observation;
-import ca.uhn.fhir.model.dstu2.valueset.BundleTypeEnum;
-import ca.uhn.fhir.model.dstu2.valueset.HTTPVerbEnum;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
-import ca.uhn.fhir.rest.gclient.StringClientParam;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -24,10 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.List;
+import java.sql.SQLException;
 
 import static com.diplomska.constants.address.HapiCryptoChangeKey;
-import static com.diplomska.constants.address.HapiCryptoObservation;
 import static com.diplomska.constants.address.HapiRESTfulServer;
 import static com.diplomska.crypto.cryptoDB.updateKeyAlias;
 
@@ -61,19 +52,6 @@ public class hapiChangeKey extends HttpServlet {
                 return;
             }
 
-
-            //System.out.println("Response code: " + changedKeyResources.co);
-            /**
-             *  TODO
-             *  -Nastavi error code, ce enkripcija ni uspesna/kljuc ne obstaja
-             *  -Nalozi resource na HAPI Server
-             *  -Ce je response od HAPIja OK, popravi keyAlias vnos v bazi za userja
-             *
-             *  TODO 2
-             *  -Shandlaj dodajanje novega userja - s katerim kljucem se kriptira
-             *
-             *
-             */
             String changeKeyResponse = EntityUtils.toString(changedKeyResources.getEntity());
 
             System.out.println("HAPI Response: \n" + changeKeyResponse);
@@ -90,7 +68,7 @@ public class hapiChangeKey extends HttpServlet {
             // Log the response
             System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(resp));
 
-        } catch (URISyntaxException e) {
+        } catch (URISyntaxException | SQLException e) {
             e.printStackTrace();
         }
     }

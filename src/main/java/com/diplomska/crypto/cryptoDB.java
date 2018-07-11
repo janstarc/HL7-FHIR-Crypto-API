@@ -1,152 +1,131 @@
 package com.diplomska.crypto;
 
-//STEP 1. Import required packages
-import com.github.dnault.xmlpatch.internal.Log;
-
 import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class cryptoDB {
-    // JDBC driver name and database URL
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost:3306/cryptoDB";
 
-    //  Database credentials
-    static final String USER = "root";
-    static final String PASS = "";
+    private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
+    private static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/cryptoDB";
+    private static final String DB_USER = "root";
+    private static final String DB_PASSWORD = "";
 
-    public static String getKeyAlias(String patientId){
 
-        Connection conn = null;
-        Statement stmt = null;
+    public static String getKeyAlias(String patientId) throws SQLException {
+        Connection dbConnection = null;
+        PreparedStatement preparedStatement = null;
         String keyAlias = null;
-        boolean err = false;
 
         try{
-            // Register JDBC driver
-            Class.forName(JDBC_DRIVER);
+            String selectStatement = "SELECT key_alias FROM user_key WHERE user_id = ?";
 
-            // Open a connection
-            System.out.println("Connecting to database...");
-            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            dbConnection = getDBConnection();
+            preparedStatement = dbConnection.prepareStatement(selectStatement);
+            preparedStatement.setString(1, patientId);
 
-            // Execute a query
-            System.out.println("Creating statement...");
-            stmt = conn.createStatement();
-            String sql = "SELECT key_alias FROM user_key WHERE user_id = " + patientId;
-            System.out.println("SQL: " + sql);
-            ResultSet rs = stmt.executeQuery(sql);
-
+            ResultSet rs = preparedStatement.executeQuery();
             int columnCount = rs.getMetaData().getColumnCount();
-            System.out.println(columnCount);
 
             if(columnCount == 1){
                 rs.next();
-                keyAlias = rs.getString("key_alias");
+                try{
+                    keyAlias = rs.getString("key_alias");
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+
                 System.out.println("KeyAlias: " + keyAlias);
-
-            } else {
-                System.out.println("Oops - sth weird is happening");
-                err = true;
             }
-
-            // Clean-up environment
-            rs.close();
-            stmt.close();
-            conn.close();
-        } catch(Exception e){
-            //Handle errors for Class.forName
+        } catch (SQLException e){
             e.printStackTrace();
-            err = true;
-        }finally{
-            //finally block used to close resources
-            try{
-                if(stmt!=null)
-                    stmt.close();
-            }catch(SQLException se2){
-                err = true;
+        } finally {
+
+            if (preparedStatement != null) {
+                preparedStatement.close();
             }
-            try{
-                if(conn!=null)
-                    conn.close();
-            }catch(SQLException se){
-                se.printStackTrace();
-                err = true;
+
+            if (dbConnection != null) {
+                dbConnection.close();
             }
         }
-        if(!err) return keyAlias;
-        return null;
+
+        return keyAlias;
     }
 
-    public static boolean updateKeyAlias(String userId, String keyAlias){
+    public static boolean updateKeyAlias(String userId, String keyAlias) throws SQLException {
 
-        Connection conn = null;
-        Statement stmt = null;
+        Connection dbConnection = null;
+        PreparedStatement preparedStatement = null;
         boolean err = false;
-        System.out.println("---------------DBLog: " + userId + " " + keyAlias + "-------------");
 
         try{
-            // Register JDBC driver
-            Class.forName(JDBC_DRIVER);
+            String selectStatement = "SELECT COUNT(key_alias) AS userInDB FROM user_key WHERE user_id = ?";
+            dbConnection = getDBConnection();
+            preparedStatement = dbConnection.prepareStatement(selectStatement);
+            preparedStatement.setString(1, userId);
 
-            // Open a connection
-            System.out.println("Connecting to database...");
-            conn = DriverManager.getConnection(DB_URL,USER,PASS);
-
-            // Execute a query
-            System.out.println("Creating statement...");
-            stmt = conn.createStatement();
-            String sql = "SELECT COUNT(key_alias) AS userInDB FROM user_key WHERE user_id = " + userId;
-            System.out.println("SQL: " + sql);
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = preparedStatement.executeQuery();
             rs.next();
             int count = rs.getInt("userInDB");
             System.out.println("Count: " + count);
 
             if(count == 1){
-                // Existing user
-                sql = "UPDATE user_key SET key_alias = '" + keyAlias + "' WHERE user_id =" +  userId;
-                System.out.println("Update statement: " + sql);
-                int output = stmt.executeUpdate(sql);
-                System.out.println("Query out: " + output);
+                String updateStatment = "UPDATE user_key SET key_alias = ? WHERE user_id = ?";
+                preparedStatement = dbConnection.prepareStatement(updateStatment);
+                preparedStatement.setString(1, keyAlias);
+                preparedStatement.setString(2, userId);
+                preparedStatement.executeUpdate();
             } else {
-                System.out.println("HERE!!!");
-                sql = "INSERT INTO user_key(user_id, key_alias, key_assigned) VALUES (" + userId + ", '" + keyAlias + "', '" + getTimestamp() + "')";
-                System.out.println("SQL Statement: " + sql);
-                int output = stmt.executeUpdate(sql);
-                System.out.println("Insert Query Out: " + output);
+                String insertStatement = "INSERT INTO user_key(user_id, key_alias, key_assigned) VALUES (?,?,?)";
+                preparedStatement = dbConnection.prepareStatement(insertStatement);
+                preparedStatement.setString(1, userId);
+                preparedStatement.setString(2, keyAlias);
+                preparedStatement.setTimestamp(3, getCurrentTimeStamp());
+                preparedStatement.executeUpdate();
             }
 
-            // Clean-up environment
-            rs.close();
-            stmt.close();
-            conn.close();
-        } catch(Exception e){
-            //Handle errors for Class.forName
+        } catch (SQLException e){
             e.printStackTrace();
             err = true;
-        }finally{
-            //finally block used to close resources
-            try{
-                if(stmt!=null)
-                    stmt.close();
-                    err = true;
-            }catch(SQLException se2){
-            }// nothing we can do
-            try{
-                if(conn!=null)
-                    conn.close();
-            }catch(SQLException se){
-                err = true;
-                se.printStackTrace();
+        } finally {
+
+            if (preparedStatement != null) {
+                preparedStatement.close();
             }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
         }
+
         return err;
+
     }
 
-    private static String getTimestamp(){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-        return sdf.format(new Date());
+    private static Connection getDBConnection() {
+
+        Connection dbConnection = null;
+
+        try {
+            Class.forName(DB_DRIVER);
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER,DB_PASSWORD);
+            return dbConnection;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return dbConnection;
     }
+
+    private static java.sql.Timestamp getCurrentTimeStamp() {
+
+        java.util.Date today = new java.util.Date();
+        return new java.sql.Timestamp(today.getTime());
+    }
+
 }

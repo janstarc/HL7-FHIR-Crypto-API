@@ -9,6 +9,7 @@ import ca.uhn.fhir.model.dstu2.valueset.HTTPVerbEnum;
 import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import ca.uhn.fhir.rest.gclient.StringClientParam;
+import org.apache.http.HttpStatus;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -84,6 +85,10 @@ public class cryptoChangeKey extends HttpServlet {
         for (Observation o : observationsList){
             List<ExtensionDt> extList = o.getUndeclaredExtensions();
             extList = encryptResourceWithNewKey(extList, _id, keyAlias);
+            if(extList == null){
+                response.sendError(HttpStatus.SC_NOT_FOUND);
+                return;
+            }
             System.out.println("Ext output2 (size): " + extList.size());
 
             System.out.println("Observation URL: " + HapiRESTfulServer + "/Observation/" + o.getId().getIdPart());
@@ -91,10 +96,13 @@ public class cryptoChangeKey extends HttpServlet {
         }
 
 
-
         for (Condition c : conditionsList){
             List<ExtensionDt> extList = c.getUndeclaredExtensions();
             extList = encryptResourceWithNewKey(extList, _id, keyAlias);
+            if(extList == null){
+                response.sendError(HttpStatus.SC_NOT_FOUND);
+                return;
+            }
             System.out.println("Ext output (size): " + extList.size());
 
             System.out.println("Condition URL: " + HapiRESTfulServer + "/Condition/" + c.getId().getIdPart());
@@ -106,13 +114,8 @@ public class cryptoChangeKey extends HttpServlet {
 
         // TODO Test - line below commented
         toUpload.setType(BundleTypeEnum.TRANSACTION);
-        List<IResource> list = toUpload.getAllPopulatedChildElementsOfType(IResource.class);
-        System.out.println("List len: " + list.size());
-        System.out.println();
 
         String bundleOut = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(toUpload);
-        //System.out.println(bundleOut);
-
 
         PrintWriter out = response.getWriter();
         out.println(bundleOut);
@@ -125,6 +128,7 @@ public class cryptoChangeKey extends HttpServlet {
                     //System.out.println("Plain: " + _id + "Prev Hash: " + ext.getValue() + " Test: " + _idEnc);
                     try {
                         String newHash = crypto.encryptWithNewKey(_id, keyAlias);
+                        if(newHash == null) return null;
                         System.out.println("New hash: " + newHash);
                         ext.setValue(new StringDt("Patient/" + newHash));
                     } catch (Exception e) {

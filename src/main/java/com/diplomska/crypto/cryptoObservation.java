@@ -26,6 +26,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableEntryException;
 import java.security.cert.CertificateException;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/crypto.do/Observation")
@@ -49,7 +50,7 @@ public class cryptoObservation extends HttpServlet {
             try {
                 crypto.init(context);
                 _id =  crypto.encrypt(_id);
-            } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException | CertificateException | NoSuchAlgorithmException | NoSuchPaddingException | UnrecoverableEntryException | KeyStoreException e) {
+            } catch (CertificateException | NoSuchAlgorithmException | NoSuchPaddingException | UnrecoverableEntryException | KeyStoreException | SQLException e) {
                 e.printStackTrace();
             }
 
