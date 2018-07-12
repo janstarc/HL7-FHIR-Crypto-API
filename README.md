@@ -49,6 +49,6 @@ nato se kriptira referenca na pacienta in se v kripitrani obliki shrani na stre�
 
 ## 3. Menjava ključev
 - Nov ključ se lahko generira preko APIja. (http://localhost:7050/crypto.do/GenerateNewKey?keyAlias=imeKljuca).
-- Vsi resourci enega pacienta so kriptirani pod istim ključem (trenutno je v KeyStoru 15 testnih ključev: key1 - key15).\
-- Menjavo ključa za vse observatione nekega pacienta se izvede kot transakcija (npr. menjava ključa za pacienta z id=20002 in ključ=key12)
-izvedemo kot: http://localhost:7050/hapi.do/ChangeKey?_id=20002&keyAlias=key12
+- Vsi resourci enega pacienta so kriptirani pod istim ključem (trenutno je v KeyStoru 15 testnih ključev: key1 - key15).
+- Menjavo ključa za vse observatione nekega pacienta se izvede kot transakcija 
+    - Menjavo ključa za pacienta z id=20002 in ključ=key12 izvedemo kot: http://localhost:7050/hapi.do/ChangeKey?_id=20002&keyAlias=key12

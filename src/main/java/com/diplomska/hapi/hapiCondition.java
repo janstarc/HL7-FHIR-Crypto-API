@@ -39,13 +39,13 @@ import static com.diplomska.constants.address.HapiRESTfulServer;
 @WebServlet(urlPatterns = {"/hapi.do/Condition"})
 public class hapiCondition extends HttpServlet {
 
-
         HttpClient httpClient = HttpClientBuilder.create().build();
         URIBuilder uri;
 
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+            System.out.println("HERE conditon for patient : " + request.getParameter("patient"));
             // Find all Observation for Patient with _id
             String _id = request.getParameter("patient");
 

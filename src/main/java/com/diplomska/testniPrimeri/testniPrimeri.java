@@ -35,10 +35,10 @@ public class testniPrimeri {
         String given = "Testni";
         String family = "Pacient4";
 
-        /** Test 1.1 */
+        /** Test 1.1: Kreiranje resourcev - Patient */
         //addPatient(given, family);
 
-        /** Test 1.2 */
+        /** Test 1.2: Kreiranje resourcev - Observation */
         /*
         try{
             Patient p = getPatientById("11579");
@@ -49,7 +49,7 @@ public class testniPrimeri {
         }
         */
 
-        /** Test 1.3 */
+        /** Test 1.3: Kreiranje resourcev - Condition */
         /*
         try{
             Patient p = getPatientById("11579");
@@ -60,18 +60,17 @@ public class testniPrimeri {
         }
         */
 
-        /** Test 2.1.1 */
+        /** Test 2.1.1: Iskanje resourcev - Patient po ID */
         //Patient p = getPatientById("11579");
 
-        /** Test 2.1.2 */
+        /** Test 2.1.2: Iskanje resourcev - Patient po imenu in priimku */
         //getPatientByGivenFamily(given, family);
 
-        /** Test 2.2 */
+        /** Test 2.2: Iskanje resourcev - Observation  */
         //getAllObservationsForPatient("11579");
 
-        /** Test 2.3 */
-        getAllConditionsForPatient("11579");
-
+        /** Test 2.3: Iskanje resourcev - Condition */
+        //getAllConditionsForPatient("11579");
 
     }
 
