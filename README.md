@@ -37,18 +37,18 @@ nato se kriptira referenca na pacienta in se v kripitrani obliki shrani na stre�
 
 ### 2.2 Observation
 *V vseh resourcih je pri izvedbi GET requesta referenca na pacienta za clienta vidna v nekriptirani obliki, na HAPI strežniku je referenca shranjena v kripitirani obliki.*
-- Iskanje po Patient IDju: **GET** request, npr. za pacienta z *_id = 100* http://localhost:7050/hapi.do/Observation?patient=100
+- Iskanje po Patient IDju: **GET** request, npr. za pacienta z *_id = 100* http://localhost:7050/hapi.do/Observation?patient=100\
 *ali*\
 **testniPrimeri.java --> getAllObservationsForPatient()**
 
 ### 2.3 Condition
 *Glede kriptiranja/referenc rešeno enako kot pri Observationu*
-- Iskanje po Patient IDju: **GET** request, npr. za pacienta z *_id = 100* http://localhost:7050/hapi.do/Condition?patient=100
+- Iskanje po Patient IDju: **GET** request, npr. za pacienta z *_id = 100* http://localhost:7050/hapi.do/Condition?patient=100\
 *ali*\
 **testniPrimeri.java --> getAllConditionsForPatient()**
 
 ## 3. Menjava ključev
 - Nov ključ se lahko generira preko APIja. (http://localhost:7050/crypto.do/GenerateNewKey?keyAlias=imeKljuca).
 - Vsi resourci enega pacienta so kriptirani pod istim ključem (trenutno je v KeyStoru 15 testnih ključev: key1 - key15).
-- Menjavo ključa za vse observatione nekega pacienta se izvede kot transakcija 
+- Menjavo ključa za vse resource nekega pacienta (trenutno implementirano za Observation in Condition) se izvede kot transakcija 
     - Menjavo ključa za pacienta z id=20002 in ključ=key12 izvedemo kot: http://localhost:7050/hapi.do/ChangeKey?_id=20002&keyAlias=key12

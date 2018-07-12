@@ -75,10 +75,11 @@ public class cryptoDB {
             System.out.println("Count: " + count);
 
             if(count == 1){
-                String updateStatment = "UPDATE user_key SET key_alias = ? WHERE user_id = ?";
+                String updateStatment = "UPDATE user_key SET key_alias = ?, key_assigned = ? WHERE user_id = ?";
                 preparedStatement = dbConnection.prepareStatement(updateStatment);
                 preparedStatement.setString(1, keyAlias);
-                preparedStatement.setString(2, userId);
+                preparedStatement.setTimestamp(2, getCurrentTimeStamp());
+                preparedStatement.setString(3, userId);
                 preparedStatement.executeUpdate();
             } else {
                 String insertStatement = "INSERT INTO user_key(user_id, key_alias, key_assigned) VALUES (?,?,?)";

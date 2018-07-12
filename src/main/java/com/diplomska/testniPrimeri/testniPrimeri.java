@@ -33,7 +33,7 @@ public class testniPrimeri {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
         String given = "Testni";
-        String family = "Pacient4";
+        String family = "Pacient6";
 
         /** Test 1.1: Kreiranje resourcev - Patient */
         //addPatient(given, family);
@@ -41,7 +41,7 @@ public class testniPrimeri {
         /** Test 1.2: Kreiranje resourcev - Observation */
         /*
         try{
-            Patient p = getPatientById("11579");
+            Patient p = getPatientById("11588");
             System.out.println("Test --> _id: " + p.getId().getIdPartAsLong());
             addObservationToPatient(p);
         } catch (Exception e){
@@ -61,16 +61,16 @@ public class testniPrimeri {
         */
 
         /** Test 2.1.1: Iskanje resourcev - Patient po ID */
-        //Patient p = getPatientById("11579");
+        //Patient p = getPatientById("11588");
 
         /** Test 2.1.2: Iskanje resourcev - Patient po imenu in priimku */
         //getPatientByGivenFamily(given, family);
 
         /** Test 2.2: Iskanje resourcev - Observation  */
-        //getAllObservationsForPatient("11579");
+        //getAllObservationsForPatient("11588");
 
         /** Test 2.3: Iskanje resourcev - Condition */
-        //getAllConditionsForPatient("11579");
+        //getAllConditionsForPatient("11588");
 
     }
 
