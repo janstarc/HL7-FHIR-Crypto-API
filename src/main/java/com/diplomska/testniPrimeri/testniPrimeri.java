@@ -39,19 +39,16 @@ public class testniPrimeri {
         //addPatient(given, family);
         //getPatientByGivenFamily(given, family);
 
-        /*
+
         try{
             Patient p = getPatientById(20035);
             System.out.println("Test --> _id: " + p.getId().getIdPartAsLong());
-            addObservationToPat(p);
+            addObservationToPatient(p);
         } catch (Exception e){
             e.printStackTrace();
         }
-        */
 
-
-        //Patient p = getPatientById(1);
-        //addResourceToPatient(p);
+        Patient p = getPatientById(1);
 
         getAllObservationsForPatient("20035");
     }
@@ -70,7 +67,7 @@ public class testniPrimeri {
     }
 
     // POST observation
-    public static void addObservationToPat(Patient p){
+    public static void addObservationToPatient(Patient p){
 
         // Get the patient ID
         String _id = String.valueOf(p.getId().getIdPartAsLong());
@@ -109,7 +106,7 @@ public class testniPrimeri {
 
         FhirContext ctx = FhirContext.forDstu2();
         String requestBody = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle);
-        //System.out.println("Req body: " + requestBody);
+        System.out.println("Req body: " + requestBody);
 
         // Send a POST request to the server
         HttpClient httpClient = HttpClientBuilder.create().build();

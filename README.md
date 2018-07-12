@@ -1,0 +1,38 @@
+# Diplomska
+## 0. Build
+- Projekt se builda z Mavenom, pom.xml je v root mapi.
+- Testiral sem s Tomcatom 9.0.4. HTTP port: 7050, JMX port: 1999.
+- Vsi naslovi so definirani v com.diplomska.constants --> address.java
+- Dodana je mySQL podatkovna baza. SQL datoteka je v mapi com.diplomska.testniPrimeri --> db.sql
+
+## 1. Kreiranje resourcev
+### 1.1 Patient
+**POST** z JSON objektom na http://localhost:7050/hapi.do/Patient \
+*ali*\
+**testniPrimeri.java --> addPatient()** (Kreira JSON resource in pošlje POST request na zgornji naslov)
+
+### 1.2 Observation
+**POST** z JSON objektom (s pravilno dodanim extensionom z referenco) na http://localhost:7050/hapi.do/Observation \
+*ali*\
+**testniPrimeri.java --> addObservationToPatient()** (Kreira JSON resource in pošlje POST request na zgornji naslov, 
+nato se kriptira referenca na pacienta in se v kripitrani obliki shrani na strežnik)
+
+## 2. Iskanje resourcev
+### 2.1 Patient
+- POPRAVI!!! Iskanje po IDju: **GET** request, npr. za pacienta z *_id = 100* http://localhost:7050/hapi.do/Patient?_id=100 \
+*ali*\
+**testniPrimeri.java --> getPatientById()**
+
+- Iskanje po imenu in priimku: **GET** request, npr. za pacienta Testni Pacient http://localhost:7050/hapi.do/Patient?given=Testni&family=Pacient \
+*ali*\
+**testniPrimeri.java --> getPatientByGivenFamily()**
+
+### 2.2 Observation
+- POPRAVI!!! Iskanje po Patient IDju: **GET** request, npr. za pacienta z *_id = 100* http://localhost:7050/hapi.do/Observation?patient=100
+*ali*\
+**testniPrimeri.java --> getAllObservationsForPatient()**
+
+## 3. Menjava ključev
+Vsi resourci z referenco na pacienta so kriptirani pod istim ključem (trenutno je v KeyStoru 15 testnih ključev: key1 - key15).\
+Menjavo ključa za vse observatione nekega pacienta (npr. menjava ključa za pacienta z id=20002 in ključ=key12)
+izvedemo kot: http://localhost:7050/hapi.do/ChangeKey?_id=20002&keyAlias=key12
