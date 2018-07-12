@@ -6,14 +6,10 @@ import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.valueset.BundleTypeEnum;
 import ca.uhn.fhir.model.dstu2.valueset.HTTPVerbEnum;
 import ca.uhn.fhir.model.primitive.StringDt;
-import com.diplomska.crypto.cryptoService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import org.hl7.fhir.instance.model.api.IBaseResource;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -24,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.security.InvalidKeyException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableEntryException;
@@ -43,7 +38,7 @@ public class cryptoPatient extends HttpServlet {
         String encrypt = request.getParameter("encrypt");
 
         if(encrypt.equals("true")){
-            System.out.println("Here 1");
+
             String given = request.getParameter("given");
             String family = request.getParameter("family");
             ServletContext context = getServletContext();
@@ -65,36 +60,13 @@ public class cryptoPatient extends HttpServlet {
             PrintWriter out = response.getWriter();
             out.println(gson.toJson(jObj));
 
-        } /*else if (encrypt.equals("false")) {
-
-            System.out.println("Here 2");
-            String given = request.getParameter("given");
-            String family = request.getParameter("family");
-            ServletContext context = getServletContext();
-
-            try {
-                crypto.init(context);
-                given =  crypto.decrypt(given);
-                family = crypto.decrypt(family);
-            } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException | CertificateException | NoSuchAlgorithmException | NoSuchPaddingException | UnrecoverableEntryException | KeyStoreException e) {
-                e.printStackTrace();
-            }
-
-            JsonObject jObj = new JsonObject();
-            jObj.addProperty("given", given);
-            jObj.addProperty("family", family);
-            Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-
-            PrintWriter out = response.getWriter();
-            out.println(gson.toJson(jObj));
-        }*/
+        }
     }
 
     // Ko dobimo POST request - nalaganje resource na bazo
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        System.out.println("-------- CRYPTO START --------");
         FhirContext ctx = FhirContext.forDstu2();
 
         // Convert request to resource and cast resource to Patient

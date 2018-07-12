@@ -1,7 +1,5 @@
 package com.diplomska.crypto;
 
-import com.diplomska.crypto.cryptoService;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +13,7 @@ public class cryptoGenerateNewKey extends HttpServlet {
 
     private cryptoService crypto = new cryptoService();
 
-    // Get requesti - iskanje pacientov
+    // Generates a new key and saves it into the keystore
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletContext context = getServletContext();

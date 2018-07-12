@@ -2,18 +2,15 @@ package com.diplomska.crypto;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.api.ExtensionDt;
-import ca.uhn.fhir.model.api.IResource;
-import ca.uhn.fhir.model.dstu2.resource.*;
+import ca.uhn.fhir.model.dstu2.resource.Bundle;
+import ca.uhn.fhir.model.dstu2.resource.Condition;
+import ca.uhn.fhir.model.dstu2.resource.Observation;
 import ca.uhn.fhir.model.dstu2.valueset.BundleTypeEnum;
 import ca.uhn.fhir.model.dstu2.valueset.HTTPVerbEnum;
 import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import ca.uhn.fhir.rest.gclient.StringClientParam;
 import org.apache.http.HttpStatus;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,11 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.InvalidKeyException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.UnrecoverableEntryException;
-import java.security.cert.CertificateException;
 import java.util.List;
 
 import static com.diplomska.constants.address.HapiRESTfulServer;
@@ -42,6 +34,7 @@ public class cryptoChangeKey extends HttpServlet {
         String keyAlias = request.getParameter("keyAlias");
         String _idEnc = null;
 
+        // Encrypts patient id with the right key
         try {
             crypto.init(getServletContext());
             _idEnc = crypto.encrypt(_id);
@@ -81,7 +74,7 @@ public class cryptoChangeKey extends HttpServlet {
         System.out.println("ObservationSize: " + observationsList.size() + " | ConditionsSize: " + conditionsList.size());
         Bundle toUpload = new Bundle();
 
-
+        // Get extensions, find encryptedReference extension, update hash
         for (Observation o : observationsList){
             List<ExtensionDt> extList = o.getUndeclaredExtensions();
             extList = encryptResourceWithNewKey(extList, _id, keyAlias);
@@ -92,10 +85,11 @@ public class cryptoChangeKey extends HttpServlet {
             System.out.println("Ext output2 (size): " + extList.size());
 
             System.out.println("Observation URL: " + HapiRESTfulServer + "/Observation/" + o.getId().getIdPart());
+            // Add each resource separately
             toUpload.addEntry().setResource(o).getRequest().setUrl(HapiRESTfulServer + "/Observation/" + o.getId().getIdPart()).setMethod(HTTPVerbEnum.PUT);
         }
 
-
+        // Get extensions, find encryptedReference extension, update hash
         for (Condition c : conditionsList){
             List<ExtensionDt> extList = c.getUndeclaredExtensions();
             extList = encryptResourceWithNewKey(extList, _id, keyAlias);
@@ -106,13 +100,13 @@ public class cryptoChangeKey extends HttpServlet {
             System.out.println("Ext output (size): " + extList.size());
 
             System.out.println("Condition URL: " + HapiRESTfulServer + "/Condition/" + c.getId().getIdPart());
+            // Add each resource separately
             toUpload.addEntry().setResource(c).getRequest().setUrl(HapiRESTfulServer + "/Condition/" + c.getId().getIdPart()).setMethod(HTTPVerbEnum.PUT);
         }
 
         searchCondition.setType(BundleTypeEnum.MESSAGE);
         searchObservation.setType(BundleTypeEnum.MESSAGE);
 
-        // TODO Test - line below commented
         toUpload.setType(BundleTypeEnum.TRANSACTION);
 
         String bundleOut = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(toUpload);
@@ -121,6 +115,7 @@ public class cryptoChangeKey extends HttpServlet {
         out.println(bundleOut);
     }
 
+    // Checks if encryptedReference extension exists, re-encrypts Patient reference with new key
     private List<ExtensionDt> encryptResourceWithNewKey(List<ExtensionDt> extList, String _id, String keyAlias){
         if(extList.size() > 0){
             for(ExtensionDt ext : extList){
@@ -133,7 +128,6 @@ public class cryptoChangeKey extends HttpServlet {
                         ext.setValue(new StringDt("Patient/" + newHash));
                     } catch (Exception e) {
                         e.printStackTrace();
-                        //response.sendError(500, "Encryption Error");
                         return null;
                     }
                 }

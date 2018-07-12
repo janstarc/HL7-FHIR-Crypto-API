@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Set;
 
 import static com.diplomska.constants.address.HapiRESTfulServer;
@@ -29,9 +28,6 @@ import static com.diplomska.crypto.cryptoDB.updateKeyAlias;
 
 @WebServlet(urlPatterns = {"/hapi.do/Patient"})
 public class hapiPatient extends HttpServlet {
-
-    //public static String HapiRESTfulServer = "http://localhost:8080/hapi/baseDstu2";
-    //public static String HapiCrypto = "http://localhost:7050/crypto.do/Patient";
 
     // Get requesti - iskanje pacientov
     @Override
@@ -82,25 +78,6 @@ public class hapiPatient extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        /*
-        // Encrypt the resource
-        HttpClient httpClient = HttpClientBuilder.create().build();
-        HttpPost requestToCrypto = new HttpPost(HapiCrypto);
-        String requestBody = IOUtils.toString(new InputStreamReader(request.getInputStream()));
-        requestToCrypto.setEntity(new StringEntity(requestBody));
-
-        // Get the response, generate a usable form out of it
-        HttpResponse encryptedResource = httpClient.execute(requestToCrypto);
-
-        // Send the encrypted response to HAPI endpoint
-        HttpPost encryptedToHapi = new HttpPost(HapiRESTfulServer);
-        encryptedToHapi.setEntity(encryptedResource.getEntity());
-        encryptedToHapi.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
-        HttpResponse responseFromHapi = httpClient.execute(encryptedToHapi);
-        String responseFromHapiString = EntityUtils.toString(responseFromHapi.getEntity());
-        PrintWriter out = response.getWriter();
-        out.println(responseFromHapiString);
-        */
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpPost requestToHapi = new HttpPost(HapiRESTfulServer);
         String requestBody = IOUtils.toString(new InputStreamReader(request.getInputStream()));

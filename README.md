@@ -1,18 +1,20 @@
 # Diplomska
 ## 0. Build
 - Projekt se builda z Mavenom, pom.xml je v root mapi.
-- Testiral sem s Tomcatom 9.0.4. HTTP port: 7050, JMX port: 1999.
+- Testiral sem s Tomcatom 9.0.4. 
+    - HTTP port: 7050, 
+    - JMX port: 1999.
 - Vsi naslovi so definirani v com.diplomska.constants --> address.java
 - Dodana je MySQL podatkovna baza. SQL datoteka (struktura tabel in inserti) je v mapi com.diplomska.testniPrimeri --> db.sql
 
 ## 1. Kreiranje resourcev
 ### 1.1 Patient
-**POST** z JSON objektom na http://localhost:7050/hapi.do/Patient \
+**POST** z veljavnim FHIR JSON objektom na http://localhost:7050/hapi.do/Patient \
 *ali*\
 **testniPrimeri.java --> addPatient()** (Kreira JSON resource in pošlje POST request na zgornji naslov)
 
 ### 1.2 Observation
-**POST** z JSON objektom (s pravilno dodanim extensionom z referenco) na http://localhost:7050/hapi.do/Observation \
+**POST** z veljavnim FHIR JSON objektom (s pravilno dodanim extensionom z referenco) na http://localhost:7050/hapi.do/Observation \
 *ali*\
 **testniPrimeri.java --> addObservationToPatient()** (Kreira JSON resource in pošlje POST request na zgornji naslov, 
 nato se kriptira referenca na pacienta in se v kripitrani obliki shrani na strežnik)

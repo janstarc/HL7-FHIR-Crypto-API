@@ -12,7 +12,6 @@ import static com.diplomska.crypto.cryptoDB.getKeyAlias;
 public class cryptoService {
 
     private static Cipher cipher;
-    //private static SecretKey secretKey;
     private static KeyStore keyStore;
     private static ServletContext ctx;
 
@@ -31,12 +30,13 @@ public class cryptoService {
 
     // Convert Array->String
     // https://stackoverflow.com/questions/9098022/problems-converting-byte-array-to-string-and-back-to-byte-array
-        // Plain text --> V resnici gre za user_id
     public static String encrypt(String patientId) throws SQLException {
 
+        // Get keyAlias from the DB
         String keyAlias = getKeyAlias(patientId);
         if(keyAlias == null) return null;
 
+        // Get secretKey, based on keyAlias from the DB
         SecretKey secKey;
         try{
             secKey = (SecretKey) getEntryFromKeyStore(keyAlias, "keyPassword", keyStore);
@@ -45,6 +45,7 @@ public class cryptoService {
             return null;
         }
 
+        // Encrypt patientId with secret key, convert it to string
         String cipherString;
         try{
             cipher.init(Cipher.ENCRYPT_MODE, secKey);
@@ -62,7 +63,7 @@ public class cryptoService {
 
     public static String encryptWithNewKey (String patientId, String newKeyAlias) throws UnrecoverableEntryException, NoSuchAlgorithmException, KeyStoreException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
 
-        // Get the new key
+        // Get the new key from the keyStore
         SecretKey secKey;
         try{
             secKey = (SecretKey) getEntryFromKeyStore(newKeyAlias, "keyPassword", keyStore);
@@ -71,6 +72,7 @@ public class cryptoService {
             return null;
         }
 
+        // Encrypt patient_id, convert it to String
         String cipherString;
         try{
             cipher.init(Cipher.ENCRYPT_MODE, secKey);
@@ -89,7 +91,6 @@ public class cryptoService {
         SecretKey secretKey = generateSecretKey("AES", 256);
 
         // Get the entry pass object. keyPassword & entryPassword - password of the entry, not the entire keyStore
-        //String keyAlias = getTimestamp();
         saveKeyToKeystore(secretKey, "keyPassword", keyAlias, keyStore);
 
         // Save the keystore to file

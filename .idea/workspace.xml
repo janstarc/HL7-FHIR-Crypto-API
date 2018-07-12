@@ -6,16 +6,18 @@
     </artifacts-to-build>
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoChangeKey.java" line="93" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoChangeKey.java" line="86" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09cfb8d0-a032-49fd-8d82-a8b218719caa" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/db.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/hapi/hapiObservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/hapi/hapiObservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoChangeKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoChangeKey.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoGenerateNewKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoGenerateNewKey.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoObservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoObservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoPatient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoPatient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/hapi/hapiPatient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/hapi/hapiPatient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -64,157 +66,116 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.8459488">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="hapiPatient.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/hapi/hapiPatient.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="263">
-                  <caret line="74" selection-start-line="74" selection-end-line="74" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="cryptoDB.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoDB.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="576">
-                  <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="hapiChangeKey.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/hapi/hapiChangeKey.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="110">
-                  <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="address.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/constants/address.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="220">
-                  <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/README.md">
-              <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-                <state split_layout="SPLIT">
-                  <first_editor relative-caret-position="389">
-                    <caret line="21" column="2" selection-start-line="21" selection-start-column="2" selection-end-line="21" selection-end-column="2" />
-                  </first_editor>
-                  <second_editor />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="cryptoGenerateNewKey.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoGenerateNewKey.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="110">
-                  <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="directAccessTODELETE.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/directAccessTODELETE.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1032">
-                  <caret line="187" column="98" lean-forward="true" selection-start-line="173" selection-start-column="8" selection-end-line="187" selection-end-column="98" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="hapiObservation.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/hapi/hapiObservation.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="163">
-                  <caret line="46" column="54" selection-start-line="46" selection-start-column="54" selection-end-line="46" selection-end-column="54" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="testniPrimeri.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="528">
-                  <caret line="50" column="10" selection-start-line="50" selection-start-column="10" selection-end-line="50" selection-end-column="10" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="cryptoDB.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoDB.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1368">
-                  <caret line="102" column="5" selection-start-line="102" selection-start-column="5" selection-end-line="102" selection-end-column="5" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="cryptoObservation.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoObservation.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="528">
-                  <caret line="51" column="37" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="37" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="cryptoService.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoService.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="228">
-                  <caret line="62" column="33" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="cryptoChangeKey.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoChangeKey.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="426">
-                  <caret line="97" selection-start-line="97" selection-end-line="97" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="cryptoPatient.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoPatient.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-415">
-                  <caret line="120" column="38" selection-start-line="120" selection-start-column="38" selection-end-line="120" selection-end-column="38" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="cryptoDB.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoDB.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1254">
+              <caret line="57" column="6" selection-start-line="57" selection-start-column="6" selection-end-line="57" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cryptoPatient.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoPatient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-728">
+              <caret line="68" selection-start-line="68" selection-end-line="68" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cryptoService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="458">
+              <caret line="74" column="46" selection-start-line="74" selection-start-column="46" selection-end-line="74" selection-end-column="46" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hapiChangeKey.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/hapi/hapiChangeKey.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="110">
+              <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hapiObservation.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/hapi/hapiObservation.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-280">
+              <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cryptoChangeKey.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoChangeKey.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="434">
+              <caret line="117" column="96" selection-start-line="117" selection-start-column="96" selection-end-line="117" selection-end-column="96" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="address.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/constants/address.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Base64.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/Base64.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="400">
+              <caret line="60" column="18" selection-start-line="60" selection-start-column="18" selection-end-line="60" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cryptoGenerateNewKey.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoGenerateNewKey.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="15" column="57" selection-start-line="15" selection-start-column="57" selection-end-line="15" selection-end-column="57" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cryptoObservation.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoObservation.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1772">
+              <caret line="103" column="13" lean-forward="true" selection-start-line="103" selection-start-column="13" selection-end-line="103" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -227,7 +188,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getRealPath</find>
       <find>org.apache.http.impl.conn.PoolingHttpClientConnectionManager  -</find>
       <find>starc</find>
       <find>8080</find>
@@ -257,6 +217,7 @@
       <find>addPatient</find>
       <find>forDstu</find>
       <find>ofType</find>
+      <find>getAllOb</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -265,7 +226,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/list-todos.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/todo/todo/AddTodoServlet.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/todo/encryptDecrypt/EncryptDecrypt.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/todo/intercept/RequestIntercept.java" />
@@ -304,18 +264,19 @@
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/cryptoService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/constants/address.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoDB22.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoObservation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoPatient.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/hapi/hapiChangeKey.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoChangeKey.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoDB2.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoDB.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/db.sql" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/hapi/hapiObservation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/hapi/hapiPatient.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/hapi/hapiPatient.java" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoObservation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoChangeKey.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoDB.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoGenerateNewKey.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoPatient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoService.java" />
       </list>
     </option>
   </component>
@@ -897,12 +858,12 @@
       <workItem from="1530452303148" duration="15993000" />
       <workItem from="1530536239164" duration="14540000" />
       <workItem from="1530653599431" duration="104000" />
-      <workItem from="1530654052442" duration="135773000" />
+      <workItem from="1530654052442" duration="137743000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="352514000" />
+    <option name="totallyTimeSpent" value="354484000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -929,8 +890,8 @@
       <window_info anchor="bottom" id="Version Control" order="12" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.8169935" />
       <window_info anchor="bottom" id="Spring" order="14" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.2962963" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49857143" weight="0.14712153" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.30610022" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49857143" visible="true" weight="0.16791044" />
       <window_info anchor="right" id="Bean Validation" order="10" />
       <window_info id="Web" order="6" sideWeight="0.50142854" side_tool="true" weight="0.18600954" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32942098" />
@@ -1043,13 +1004,6 @@
     <entry file="jar://$MAVEN_REPOSITORY$/ca/uhn/hapi/fhir/hapi-fhir-base/3.3.0/hapi-fhir-base-3.3.0-sources.jar!/ca/uhn/fhir/rest/gclient/IClientExecutable.java" />
     <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.4.6/httpcore-4.4.6.jar!/org/apache/http/message/AbstractHttpMessage.class" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/krnekiLogback.xml" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/Base64.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="453" column="25" selection-start-line="453" selection-start-column="25" selection-end-line="453" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/encryptDecrypt/TODELTE_EncryptDecryptServlet.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/login/LoginService.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/login/LoginServlet.java" />
@@ -1140,30 +1094,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoGenerateNewKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoPatient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-415">
-          <caret line="120" column="38" selection-start-line="120" selection-start-column="38" selection-end-line="120" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="62" column="33" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoDB.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1782">
@@ -1174,20 +1104,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoChangeKey.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/db.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="97" selection-start-line="97" selection-end-line="97" />
+        <state relative-caret-position="747">
+          <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="50" column="10" selection-start-line="50" selection-start-column="10" selection-end-line="50" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="264">
+            <caret line="12" column="6" lean-forward="true" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/hapi/hapiPatient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1738">
+          <caret line="79" selection-start-line="79" selection-end-line="79" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoObservation.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/hapi/hapiObservation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="51" column="37" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="37" />
+        <state relative-caret-position="-280">
+          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1198,37 +1155,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/db.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="747">
-          <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/hapi/hapiObservation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="46" column="54" selection-start-line="46" selection-start-column="54" selection-end-line="46" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoDB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/hapi/hapiPatient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="74" selection-start-line="74" selection-end-line="74" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/constants/address.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
@@ -1236,20 +1162,67 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/testniPrimeri/testniPrimeri.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/Base64.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="50" column="10" selection-start-line="50" selection-start-column="10" selection-end-line="50" selection-end-column="10" />
+        <state relative-caret-position="400">
+          <caret line="60" column="18" selection-start-line="60" selection-start-column="18" selection-end-line="60" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="389">
-            <caret line="21" column="2" selection-start-line="21" selection-start-column="2" selection-end-line="21" selection-end-column="2" />
-          </first_editor>
-          <second_editor />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoChangeKey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="117" column="96" selection-start-line="117" selection-start-column="96" selection-end-line="117" selection-end-column="96" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoDB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1254">
+          <caret line="57" column="6" selection-start-line="57" selection-start-column="6" selection-end-line="57" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoGenerateNewKey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="15" column="57" selection-start-line="15" selection-start-column="57" selection-end-line="15" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoObservation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1772">
+          <caret line="103" column="13" lean-forward="true" selection-start-line="103" selection-start-column="13" selection-end-line="103" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoPatient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-728">
+          <caret line="68" selection-start-line="68" selection-end-line="68" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/diplomska/crypto/cryptoService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="458">
+          <caret line="74" column="46" selection-start-line="74" selection-start-column="46" selection-end-line="74" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

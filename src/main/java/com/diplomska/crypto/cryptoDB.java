@@ -9,7 +9,7 @@ public class cryptoDB {
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "";
 
-
+    // Used for encryption - get the right keyAlias, to encrypt the reference with the right key
     public static String getKeyAlias(String patientId) throws SQLException {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
@@ -51,6 +51,12 @@ public class cryptoDB {
         return keyAlias;
     }
 
+    /**
+     *      Checks, if Patient exists in the DB
+     *          -If it exists - It UPDATEs the value
+     *          -If it doesn't exist yet (creation of new Patient) - It inserts a new Patient with given userId
+     *
+     */
     public static boolean updateKeyAlias(String userId, String keyAlias) throws SQLException {
 
         Connection dbConnection = null;
@@ -95,7 +101,6 @@ public class cryptoDB {
             if (dbConnection != null) {
                 dbConnection.close();
             }
-
         }
 
         return err;

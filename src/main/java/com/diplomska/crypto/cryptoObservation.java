@@ -5,12 +5,9 @@ import ca.uhn.fhir.model.api.ExtensionDt;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.Observation;
 import ca.uhn.fhir.model.primitive.StringDt;
-import com.diplomska.crypto.cryptoService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -21,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.security.InvalidKeyException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableEntryException;
@@ -63,29 +59,7 @@ public class cryptoObservation extends HttpServlet {
             PrintWriter out = response.getWriter();
             out.println(gson.toJson(jObj));
 
-        } /* else if (encrypt.equals("false")) {
-
-            // Get the encrypted ID from GET request
-            String _id = request.getParameter("_id");
-            ServletContext context = getServletContext();
-
-            // Decrypt the ID
-            try {
-                crypto.init(context);
-                _id =  crypto.decrypt(_id);
-            } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException | CertificateException | NoSuchAlgorithmException | NoSuchPaddingException | UnrecoverableEntryException | KeyStoreException e) {
-                e.printStackTrace();
-            }
-
-            // Put decrypted value to JSON object
-            JsonObject jObj = new JsonObject();
-            jObj.addProperty("_id", _id);
-            Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-
-            // Send it back to hapi.do
-            PrintWriter out = response.getWriter();
-            out.println(gson.toJson(jObj));
-        } */
+        }
     }
 
     @Override

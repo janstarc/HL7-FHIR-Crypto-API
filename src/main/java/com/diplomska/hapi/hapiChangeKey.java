@@ -39,7 +39,6 @@ public class hapiChangeKey extends HttpServlet {
         try {
             // Send request to crypto --> Encrypt _id
             uri = new URIBuilder(HapiCryptoChangeKey);
-            //uri.setParameter("encrypt", "true");
             uri.setParameter("_id", _id);
             uri.setParameter("keyAlias", keyAlias);
             HttpGet requestToCrypto = new HttpGet(String.valueOf(uri));
