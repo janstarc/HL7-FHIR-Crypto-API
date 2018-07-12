@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 @WebServlet(urlPatterns = "/crypto.do/Patient")
 public class cryptoPatient extends HttpServlet {
-
+    /*
     private cryptoService crypto = new cryptoService();
 
     @Override
@@ -132,4 +132,5 @@ public class cryptoPatient extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println(bundleString);
     }
+    */
 }

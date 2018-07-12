@@ -2,10 +2,10 @@
 ## 0. Build
 - Projekt se builda z Mavenom, pom.xml je v root mapi.
 - Testiral sem s Tomcatom 9.0.4. 
-    - HTTP port: 7050, 
-    - JMX port: 1999.
-- Vsi naslovi so definirani v com.diplomska.constants --> address.java
-- Dodana je MySQL podatkovna baza. SQL datoteka (struktura tabel in inserti) je v mapi com.diplomska.testniPrimeri --> db.sql
+    - HTTP port: 7050
+    - JMX port: 1999
+- Vsi naslovi so definirani v **com.diplomska.constants --> address.java**
+- Dodana je MySQL podatkovna baza. SQL datoteka (struktura tabel in inserti) je v mapi **com.diplomska.testniPrimeri --> db.sql**
 
 ## 1. Kreiranje resourcev
 ### 1.1 Patient
@@ -30,7 +30,7 @@ nato se kriptira referenca na pacienta in se v kripitrani obliki shrani na streÅ
 **testniPrimeri.java --> getPatientByGivenFamily()**
 
 ### 2.2 Observation
-*V vseh resourcih je pri izvedbi GET requesta referenca na pacienta vidna v nekriptirani obliki, na bazi je shranjena v kripitirani.*
+*V vseh resourcih je pri izvedbi GET requesta referenca na pacienta za clienta vidna v nekriptirani obliki, na HAPI streÅ¾niku je referenca shranjena v kripitirani obliki.*
 - Iskanje po Patient IDju: **GET** request, npr. za pacienta z *_id = 100* http://localhost:7050/hapi.do/Observation?patient=100
 *ali*\
 **testniPrimeri.java --> getAllObservationsForPatient()**

@@ -36,21 +36,30 @@ public class testniPrimeri {
         String given = "Testni";
         String family = "Pacient4";
 
+        /** Test 1.1 */
         //addPatient(given, family);
-        //getPatientByGivenFamily(given, family);
 
-
+        /** Test 1.2 */
+        /*
         try{
-            Patient p = getPatientById("20003");
+            Patient p = getPatientById("11579");
             System.out.println("Test --> _id: " + p.getId().getIdPartAsLong());
             addObservationToPatient(p);
         } catch (Exception e){
             e.printStackTrace();
         }
+        */
 
-        //Patient p = getPatientById("1");
+        /** Test 2.1.1 */
+        //Patient p = getPatientById("11579");
 
-        //getAllObservationsForPatient("20035");
+        /** Test 2.1.2 */
+        //getPatientByGivenFamily(given, family);
+
+        /** Test 2.2 */
+        //getAllObservationsForPatient("11579");
+
+
     }
 
     // GET all observations for Patient ID
