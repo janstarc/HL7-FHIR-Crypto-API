@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Set;
 
 import static com.diplomska.constants.address.HapiRESTfulServer;
 import static com.diplomska.crypto.cryptoDB.updateKeyAlias;
@@ -35,114 +37,45 @@ public class hapiPatient extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // Get the parameter
-        String family = request.getParameter("family");
-        String given = request.getParameter("given");
+        // Search with encoded parameters
+        FhirContext ctx = FhirContext.forDstu2();
+        IGenericClient client = ctx.newRestfulGenericClient(HapiRESTfulServer);
+        Set<String> parameterNames = request.getParameterMap().keySet();
+        Bundle search = null;
 
-        /*
-        HttpClient httpClient = HttpClientBuilder.create().build();
-        URIBuilder uri;
-        try {
-            // Send request to crypto --> Encrypt search parameters
-            uri = new URIBuilder(HapiCrypto);
-            uri.setParameter("encrypt", "true");
-            uri.setParameter("given", given);
-            uri.setParameter("family", family);
-            HttpGet requestToCrypto = new HttpGet(String.valueOf(uri));
-            HttpResponse encryptedGet = httpClient.execute(requestToCrypto);
+        if(parameterNames.contains("_id")){
 
-            // Crypto returns JSON object with encrypted search parameters
-            String encryptedJson = EntityUtils.toString(encryptedGet.getEntity());
-            JsonObject jObj = new Gson().fromJson(encryptedJson, JsonObject.class);
-            String familyEnc = jObj.get("family").getAsString();
-            String givenEnc = jObj.get("given").getAsString();
-            System.out.println("Given enc: " + givenEnc + " Family enc: " + familyEnc);
-
-            // Search with encoded parameters
-            FhirContext ctx = FhirContext.forDstu2();
-            IGenericClient client = ctx.newRestfulGenericClient(HapiRESTfulServer);
+            // Get the parameter
+            String _id = request.getParameter("_id");
 
             // Search for the Patient - hashed value
-            Bundle search = client
+            search = client
                     .search()
-                    .forResource(Patient.class)
-                    .where(Patient.FAMILY.matches().value(familyEnc))
-                    .and(Patient.GIVEN.matches().value(givenEnc))
+                    .byUrl(HapiRESTfulServer + "/Patient?_id=" + _id)
                     .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
                     .encodedJson()
                     .execute();
 
-            // Convert bundle to List<Patient>
-            List<Patient> resultArray = search.getAllPopulatedChildElementsOfType(Patient.class);
-            System.out.println("Result Array size: " + resultArray.size());
+        } else if (parameterNames.contains("family") && parameterNames.contains("given")) {
 
-            // Loop through the patient list, decrypt hashed parameters
-            for (Patient p : resultArray) {
-                String fam = p.getName().get(0).getFamilyAsSingleString();
-                String giv = p.getName().get(0).getGivenAsSingleString();
-                System.out.println("Here?");
+            // Get the parameter
+            String family = request.getParameter("family");
+            String given = request.getParameter("given");
 
-                try {
-                    // Decrypt the values
-                    // TODO Is decryption needed???
-                    */
-                    /*
-                    uri = new URIBuilder(HapiCrypto);
-                    uri.setParameter("encrypt", "false");
-                    uri.setParameter("given", fam);
-                    uri.setParameter("family", giv);
-                    HttpGet requestToCrypto2 = new HttpGet(String.valueOf(uri));
-                    HttpResponse encryptedGet2 = httpClient.execute(requestToCrypto2);
-
-                    // Crypto returns JSON object with encrypted search parameters
-                    String encryptedJson2 = EntityUtils.toString(encryptedGet2.getEntity());
-                    JsonObject jObj2 = new Gson().fromJson(encryptedJson2, JsonObject.class);
-                    String famDecrypt = jObj2.get("given").getAsString();
-                    String givDecrypt = jObj2.get("family").getAsString();
-                    */
-                    /*
-                    // Handle the resource conversion and change the value of object p
-                    ArrayList<StringDt> famArray = new ArrayList<>();
-                    famArray.add(new StringDt(family));
-                    p.getName().get(0).setFamily(famArray);
-                    ArrayList<StringDt> givArray = new ArrayList<>();
-                    givArray.add(new StringDt(given));
-                    p.getName().get(0).setGiven(givArray);
-
-                    // Write log
-                    System.out.println("Found " + search.getEntry().size() + " results.");
-                    String result = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(search);
-                    //System.out.println("RESULT: " + result);
-
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-            */
-
-        // Search with encoded parameters
-        FhirContext ctx = FhirContext.forDstu2();
-        IGenericClient client = ctx.newRestfulGenericClient(HapiRESTfulServer);
-
-        // Search for the Patient - hashed value
-        Bundle search = client
-                .search()
-                .forResource(Patient.class)
-                .where(Patient.FAMILY.matches().value(family))
-                .and(Patient.GIVEN.matches().value(given))
-                .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
-                .encodedJson()
-                .execute();
+            // Search for the Patient - hashed value
+            search = client
+                    .search()
+                    .forResource(Patient.class)
+                    .where(Patient.FAMILY.matches().value(family))
+                    .and(Patient.GIVEN.matches().value(given))
+                    .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
+                    .encodedJson()
+                    .execute();
+        }
 
         // Send response
         PrintWriter out = response.getWriter();
         out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(search));
-
-            /*
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        */
     }
 
     // Ko dobimo POST request - nalaganje resourca na bazo

@@ -44,7 +44,7 @@ public class hapiObservation extends HttpServlet {
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
             // Find all Observation for Patient with _id
-            String _id = request.getParameter("_id");
+            String _id = request.getParameter("patient");
 
             try {
             // Send request to crypto --> Encrypt _id

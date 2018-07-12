@@ -41,16 +41,16 @@ public class testniPrimeri {
 
 
         try{
-            Patient p = getPatientById(20035);
+            Patient p = getPatientById("20003");
             System.out.println("Test --> _id: " + p.getId().getIdPartAsLong());
             addObservationToPatient(p);
         } catch (Exception e){
             e.printStackTrace();
         }
 
-        Patient p = getPatientById(1);
+        //Patient p = getPatientById("1");
 
-        getAllObservationsForPatient("20035");
+        //getAllObservationsForPatient("20035");
     }
 
     // GET all observations for Patient ID
@@ -58,7 +58,7 @@ public class testniPrimeri {
 
         HttpClient httpClient = HttpClientBuilder.create().build();
         URIBuilder url = new URIBuilder(HapiAccessPointObservation);
-        url.setParameter("_id", _id);
+        url.setParameter("patient", _id);
         HttpGet request = new HttpGet(String.valueOf(url));
         HttpResponse response = httpClient.execute(request);
         HttpEntity entity = response.getEntity();
@@ -140,8 +140,34 @@ public class testniPrimeri {
     }
 
     // GET Patient by ID
-    public static Patient getPatientById(int id) throws IOException, URISyntaxException {
+    public static Patient getPatientById(String id) throws IOException, URISyntaxException {
 
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        URIBuilder url = new URIBuilder(HapiAccessPointPatient);
+        url.setParameter("_id", id);
+        System.out.println("Value of URL = " + String.valueOf(url));
+        HttpGet request = new HttpGet(String.valueOf(url));
+        HttpResponse response = httpClient.execute(request);
+        HttpEntity entity = response.getEntity();
+        String responseString = EntityUtils.toString(entity, "UTF-8");
+        System.out.println("----- RESPONSE -----\n" + responseString);
+
+        FhirContext ctx = FhirContext.forDstu2();
+        System.out.println("------------TEST------------");
+        System.out.println(responseString);
+        System.out.println("------------TEST------------");
+        Bundle result = (Bundle) ctx.newJsonParser().parseResource(responseString);
+        List<Patient> patientList = result.getAllPopulatedChildElementsOfType(Patient.class);
+        Patient p;
+        if(patientList.size() == 1){
+            p = patientList.get(0);
+            return p;
+        } else {
+            System.out.println("No result");
+        }
+
+        return null;
+        /*
         // We're connecting to a DSTU1 compliant server in this example
         FhirContext ctx = FhirContext.forDstu2();
         String serverBase = HapiRESTfulServer;
@@ -165,6 +191,7 @@ public class testniPrimeri {
         }
 
         return null;
+        */
     }
 
     // POST new Patient, encrypt First and Last
