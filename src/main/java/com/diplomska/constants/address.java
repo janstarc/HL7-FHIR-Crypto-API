@@ -12,8 +12,12 @@ public class address {
 
     public static String HapiAccessPointPatient = HapiAccessPoint + "/Patient";
     public static String HapiAccessPointObservation = HapiAccessPoint + "/Observation";
+    public static String HapiAccessPointCondition = HapiAccessPoint + "/Condition";
     public static String HapiCryptoPatient = HapiCrypto + "/Patient";
     public static String HapiCryptoObservation = HapiCrypto + "/Observation";
+    public static String HapiCryptoCondition = HapiCrypto + "/Condition";
     public static String HapiCryptoChangeKey = HapiCrypto + "/ChangeKey";
+
+
 
 }

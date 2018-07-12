@@ -19,6 +19,12 @@
 **testniPrimeri.java --> addObservationToPatient()** (Kreira JSON resource in pošlje POST request na zgornji naslov, 
 nato se kriptira referenca na pacienta in se v kripitrani obliki shrani na strežnik)
 
+### 1.3 Condition
+**POST** z veljavnim FHIR JSON objektom (s pravilno dodanim extensionom z referenco) na http://localhost:7050/hapi.do/Condition \
+*ali*\
+**testniPrimeri.java --> addConditionToPatient()** (Kreira JSON resource in pošlje POST request na zgornji naslov, 
+nato se kriptira referenca na pacienta in se v kripitrani obliki shrani na strežnik)
+
 ## 2. Iskanje resourcev
 ### 2.1 Patient
 - Iskanje po IDju: **GET** request, npr. za pacienta z *_id = 100* http://localhost:7050/hapi.do/Patient?_id=100 \
@@ -35,7 +41,14 @@ nato se kriptira referenca na pacienta in se v kripitrani obliki shrani na stre�
 *ali*\
 **testniPrimeri.java --> getAllObservationsForPatient()**
 
+### 2.3 Condition
+*Glede kriptiranja/referenc rešeno enako kot pri Observationu*
+- Iskanje po Patient IDju: **GET** request, npr. za pacienta z *_id = 100* http://localhost:7050/hapi.do/Condition?patient=100
+*ali*\
+**testniPrimeri.java --> getAllConditionsForPatient()**
+
 ## 3. Menjava ključev
-Vsi resourci z referenco na pacienta so kriptirani pod istim ključem (trenutno je v KeyStoru 15 testnih ključev: key1 - key15).\
-Menjavo ključa za vse observatione nekega pacienta (npr. menjava ključa za pacienta z id=20002 in ključ=key12)
+- Nov ključ se lahko generira preko APIja. (http://localhost:7050/crypto.do/GenerateNewKey?keyAlias=imeKljuca).
+- Vsi resourci enega pacienta so kriptirani pod istim ključem (trenutno je v KeyStoru 15 testnih ključev: key1 - key15).\
+- Menjavo ključa za vse observatione nekega pacienta se izvede kot transakcija (npr. menjava ključa za pacienta z id=20002 in ključ=key12)
 izvedemo kot: http://localhost:7050/hapi.do/ChangeKey?_id=20002&keyAlias=key12

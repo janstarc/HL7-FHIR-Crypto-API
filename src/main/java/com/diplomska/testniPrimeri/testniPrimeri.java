@@ -4,11 +4,10 @@ import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.api.ExtensionDt;
 import ca.uhn.fhir.model.dstu2.composite.QuantityDt;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
+import ca.uhn.fhir.model.dstu2.resource.Condition;
 import ca.uhn.fhir.model.dstu2.resource.Observation;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
-import ca.uhn.fhir.model.dstu2.valueset.BundleTypeEnum;
-import ca.uhn.fhir.model.dstu2.valueset.HTTPVerbEnum;
-import ca.uhn.fhir.model.dstu2.valueset.ObservationStatusEnum;
+import ca.uhn.fhir.model.dstu2.valueset.*;
 import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import com.diplomska.crypto.cryptoService;
@@ -50,6 +49,17 @@ public class testniPrimeri {
         }
         */
 
+        /** Test 1.3 */
+        /*
+        try{
+            Patient p = getPatientById("11579");
+            System.out.println("Test --> _id: " + p.getId().getIdPartAsLong());
+            addConditionToPatient(p);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        */
+
         /** Test 2.1.1 */
         //Patient p = getPatientById("11579");
 
@@ -59,7 +69,22 @@ public class testniPrimeri {
         /** Test 2.2 */
         //getAllObservationsForPatient("11579");
 
+        /** Test 2.3 */
+        getAllConditionsForPatient("11579");
 
+
+    }
+
+    public static void getAllConditionsForPatient(String _id) throws URISyntaxException, IOException {
+
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        URIBuilder url = new URIBuilder(HapiAccessPointCondition);
+        url.setParameter("patient", _id);
+        HttpGet request = new HttpGet(String.valueOf(url));
+        HttpResponse response = httpClient.execute(request);
+        HttpEntity entity = response.getEntity();
+        String responseString = EntityUtils.toString(entity, "UTF-8");
+        System.out.println("---RESPONSE---\n" + responseString);
     }
 
     // GET all observations for Patient ID
@@ -72,7 +97,7 @@ public class testniPrimeri {
         HttpResponse response = httpClient.execute(request);
         HttpEntity entity = response.getEntity();
         String responseString = EntityUtils.toString(entity, "UTF-8");
-        System.out.println("----- RESPONSE -----\n" + responseString);
+        System.out.println("---- RESPONSE -----\n" + responseString);
     }
 
     // POST observation
@@ -121,6 +146,53 @@ public class testniPrimeri {
         HttpClient httpClient = HttpClientBuilder.create().build();
         try{
             HttpPost request = new HttpPost(HapiAccessPointObservation);
+            StringEntity params = new StringEntity(requestBody);
+            request.addHeader("content-type", "application/json");
+            request.setEntity(params);
+            HttpResponse response = httpClient.execute(request);
+            HttpEntity entity = response.getEntity();
+            String responseString = EntityUtils.toString(entity, "UTF-8");
+            System.out.println("---- RESPONSE ----\n" + responseString);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void addConditionToPatient(Patient p){
+
+        // Get the patient ID
+        String _id = String.valueOf(p.getId().getIdPartAsLong());
+
+        // Create an observation object
+        Condition condition = new Condition();
+        condition.setClinicalStatus(ConditionClinicalStatusCodesEnum.ACTIVE);
+        condition.setCategory(ConditionCategoryCodesEnum.COMPLAINT);
+        condition.setNotes("Test Condition");
+
+        //observation.setSubject(new ResourceReferenceDt(p.getId()));
+        ExtensionDt ext = new ExtensionDt();
+        ext.setElementSpecificId("encryptedReference");
+        ext.setValue(new StringDt("Patient/" + _id));
+        condition.addUndeclaredExtension(ext);
+
+
+        // Create a Bundle, containing the Observation object
+        Bundle bundle = new Bundle();
+        bundle.setType(BundleTypeEnum.TRANSACTION);
+        bundle.addEntry()
+                .setResource(condition)
+                .getRequest()
+                .setUrl("Condition")
+                .setMethod(HTTPVerbEnum.POST);
+
+        FhirContext ctx = FhirContext.forDstu2();
+        String requestBody = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle);
+        System.out.println("Req body: " + requestBody);
+
+        // Send a POST request to the server
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        try{
+            HttpPost request = new HttpPost(HapiAccessPointCondition);
             StringEntity params = new StringEntity(requestBody);
             request.addHeader("content-type", "application/json");
             request.setEntity(params);
@@ -176,31 +248,6 @@ public class testniPrimeri {
         }
 
         return null;
-        /*
-        // We're connecting to a DSTU1 compliant server in this example
-        FhirContext ctx = FhirContext.forDstu2();
-        String serverBase = HapiRESTfulServer;
-
-        IGenericClient client = ctx.newRestfulGenericClient(serverBase);
-
-        // Perform a search
-        Bundle results = client
-                .search()
-                .byUrl(HapiRESTfulServer + "/Patient?_id=" + id)
-                .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
-                .execute();
-
-        List<Patient> patientList = results.getAllPopulatedChildElementsOfType(Patient.class);
-        Patient p;
-        if(patientList.size() > 0){
-            p = patientList.get(0);
-            return p;
-        } else {
-            System.out.println("No result");
-        }
-
-        return null;
-        */
     }
 
     // POST new Patient, encrypt First and Last
