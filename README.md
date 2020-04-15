@@ -1,54 +1,55 @@
-# Diplomska
+# HL7 FHIR Resource Encryptor/Decryptor Microservice API
 ## 0. Build
-- Projekt se builda z Mavenom, pom.xml je v root mapi.
-- Testiral sem s Tomcatom 9.0.4. 
+- Project is built with Maven, **pom.xml** is in the root folder.
+- Last version was tested with Tomcat 9.0.4. 
     - HTTP port: 7050
     - JMX port: 1999
-- Vsi naslovi so definirani v **com.diplomska.constants --> address.java**
-- Dodana je MySQL podatkovna baza. SQL datoteka (struktura tabel in inserti) je v mapi **com.diplomska.testniPrimeri --> db.sql**
+- All addresses are defined in **com.diplomska.constants --> address.java**
+- This solution needs MySQL database in order to work. SQL file (DB structure and INSERT statements of test data) is in **com.diplomska.testniPrimeri --> db.sql** file.
 
-## 1. Kreiranje resourcev
+# Features
+## 1. POST resources
 ### 1.1 Patient
-**POST** z veljavnim FHIR JSON objektom na http://localhost:7050/hapi.do/Patient \
-*ali*\
-**testniPrimeri.java --> addPatient()** (Kreira JSON resource in pošlje POST request na zgornji naslov)
+**POST** request with a valid FHIR Patient resource (in JSON format) to http://localhost:7050/hapi.do/Patient \
+*or*\
+**testniPrimeri.java --> addPatient()** (Creates a sample FHIR Patient resource (in JSON format) and sends the POST request to the address above)
 
 ### 1.2 Observation
-**POST** z veljavnim FHIR JSON objektom (s pravilno dodanim extensionom z referenco) na http://localhost:7050/hapi.do/Observation \
-*ali*\
-**testniPrimeri.java --> addObservationToPatient()** (Kreira JSON resource in pošlje POST request na zgornji naslov, 
-nato se kriptira referenca na pacienta in se v kripitrani obliki shrani na strežnik)
+**POST** request with a valid FHIR Observation resource (in JSON format, with correctly added reference extension) to http://localhost:7050/hapi.do/Observation \
+*or*\
+**testniPrimeri.java --> addObservationToPatient()** (Creates a sample FHIR Observation resource (in JSON format) and sends the POST request to the address above. 
+Patient reference is encrypted before sending the Observation to the server. So the server never gets a non-encrypted version of the Patient reference).
 
 ### 1.3 Condition
-**POST** z veljavnim FHIR JSON objektom (s pravilno dodanim extensionom z referenco) na http://localhost:7050/hapi.do/Condition \
-*ali*\
-**testniPrimeri.java --> addConditionToPatient()** (Kreira JSON resource in pošlje POST request na zgornji naslov, 
-nato se kriptira referenca na pacienta in se v kripitrani obliki shrani na strežnik)
+**POST** request with a valid FHIR Condition resource (in JSON format, with correctly added reference extension) to http://localhost:7050/hapi.do/Condition \
+*or*\
+**testniPrimeri.java --> addConditionToPatient()** (Creates a sample FHIR Condition resource (in JSON format) and sends the POST request to the address above. 
+Patient reference is encrypted before sending the Condition to the server. So the server never gets a non-encrypted version of the Patient reference).
 
-## 2. Iskanje resourcev
+## 2. GET resources
 ### 2.1 Patient
-- Iskanje po IDju: **GET** request, npr. za pacienta z *_id = 100* http://localhost:7050/hapi.do/Patient?_id=100 \
-*ali*\
+- Search by ID: **GET** request, example for a patient with *_id = 100* http://localhost:7050/hapi.do/Patient?_id=100 \
+*or*\
 **testniPrimeri.java --> getPatientById()**
 
-- Iskanje po imenu in priimku: **GET** request, npr. za pacienta Testni Pacient http://localhost:7050/hapi.do/Patient?given=Testni&family=Pacient \
+- Search by name and surname: **GET** request, example for a patient *John Doe* http://localhost:7050/hapi.do/Patient?given=John&family=Doe \
 *ali*\
 **testniPrimeri.java --> getPatientByGivenFamily()**
 
 ### 2.2 Observation
-*V vseh resourcih je pri izvedbi GET requesta referenca na pacienta za clienta vidna v nekriptirani obliki, na HAPI strežniku je referenca shranjena v kripitirani obliki.*
-- Iskanje po Patient IDju: **GET** request, npr. za pacienta z *_id = 100* http://localhost:7050/hapi.do/Observation?patient=100\
-*ali*\
+*When a resource (of type Observation or Condition) is requested by an authorized user, it contains a decrypted Patient reference. But on the HAPI server, a Patient reference is never saved in an unencrypted form* 
+- Searching by Patient ID (get all Observations for a patient): **GET** request, example for a patient with *_id = 100* http://localhost:7050/hapi.do/Observation?patient=100\
+*or*\
 **testniPrimeri.java --> getAllObservationsForPatient()**
 
 ### 2.3 Condition
-*Glede kriptiranja/referenc rešeno enako kot pri Observationu*
-- Iskanje po Patient IDju: **GET** request, npr. za pacienta z *_id = 100* http://localhost:7050/hapi.do/Condition?patient=100\
-*ali*\
+*When a resource (of type Observation or Condition) is requested by an authorized user, it contains a decrypted Patient reference. But on the HAPI server, a Patient reference is never saved in an unencrypted form* 
+- Searching by Patient ID (get all Conditions for a patient): **GET** request, example for a patient with *_id = 100* http://localhost:7050/hapi.do/Condition?patient=100\
+*or*\
 **testniPrimeri.java --> getAllConditionsForPatient()**
 
-## 3. Menjava ključev
-- Nov ključ se lahko generira preko APIja. (http://localhost:7050/crypto.do/GenerateNewKey?keyAlias=imeKljuca).
-- Vsi resourci enega pacienta so kriptirani pod istim ključem (trenutno je v KeyStoru 15 testnih ključev: key1 - key15).
-- Menjavo ključa za vse resource nekega pacienta (trenutno implementirano za Observation in Condition) se izvede kot transakcija 
-    - Menjavo ključa za pacienta z id=20002 in ključ=key12 izvedemo kot: http://localhost:7050/hapi.do/ChangeKey?_id=20002&keyAlias=key12
+## 3. Encryption key change
+- A new encryption key can be generated with API (Example for a key with a name *sampleKey* http://localhost:7050/crypto.do/GenerateNewKey?keyAlias=sampleKey).
+- All resources of some patient are encrypted with the *same* key. (Currently, there are 15 test keys in the KeyStore: key1 - key15).
+- Key exchange for a patient (currently implemented for Observation and Condition resource) is executed as a transaction.
+    - Example: Change key for a patient with *id=20002* from current key to *key12*: http://localhost:7050/hapi.do/ChangeKey?_id=20002&keyAlias=key12
