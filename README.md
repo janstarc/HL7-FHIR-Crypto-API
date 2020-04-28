@@ -1,12 +1,12 @@
 # HL7 FHIR Resource Encryptor/Decryptor Microservice API
-The project is described in detail this [thesis](https://repozitorij.uni-lj.si/IzpisGradiva.php?id=103201&lang=eng) *(in Slovenian language)*
+The project is described in detail in this [thesis](https://repozitorij.uni-lj.si/IzpisGradiva.php?id=103201&lang=eng) *(in Slovenian language)*
 
 # Main goals and architecture
-The main goal of the **HL7 FHIR Crypto API Microservice** is to ensure a safe transfer of HL7 FHIR resources, without the end-user experiencing any change in the use of the app. The Crypto API microservice is exposed outwards as a standard HL7 FHIR API interface.
+The main goal of the **HL7 FHIR Crypto API Microservice** is to ensure a safe transfer of HL7 FHIR resources from the app to FHIR  server, without the end-user experiencing any change in the use of the app. The Crypto API microservice is exposed outwards as a standard HL7 FHIR API interface.
 
-The only change for the user is that access point for HAPI server is no longer the HAPI server itself, but instead the microservice in this repository. There is no change in the database itself - all data is saved in the same way, no matter that some data on the DB is encrypted.
+The only change for the user is that access point for HAPI server is no longer the HAPI server itself, but instead the microservice in this repository. There is also no change in the database itself - all data is saved in the same way, no matter that some data on the DB is encrypted.
 
-The goal is that the DB server never gets a decryption key, but only stores encrypted data. So, even if attacker gets full access to the DB, the data is useless, because the resources are impossible to be interpreted due to encrypted Patient reference.
+The goal is that the DB server stores encrypted data and never gets a decryption key. So, even if an attacker gets a full access to the DB, the data is useless, because the resources are impossible to be interpreted due to encrypted Patient reference.
 
 ## Architecture
 
@@ -20,7 +20,7 @@ The goal is that the DB server never gets a decryption key, but only stores encr
     - HTTP port: 7050
     - JMX port: 1999
 - All addresses are defined in **com.diplomska.constants --> address.java**
-- This solution needs MySQL database in order to work. SQL file (DB structure and INSERT statements of test data) is in **com.diplomska.testniPrimeri --> db.sql** file.
+- This solution needs MySQL database in order to work. SQL file (DB structure and all INSERT statements for test data) is in **com.diplomska.testniPrimeri --> db.sql** file.
 
 ## 1. POST resources
 ### 1.1 Patient
@@ -32,13 +32,13 @@ The goal is that the DB server never gets a decryption key, but only stores encr
 **POST** request with a valid FHIR Observation resource (in JSON format, with correctly added reference extension) to http://localhost:7050/hapi.do/Observation \
 *or*\
 **testniPrimeri.java --> addObservationToPatient()** (Creates a sample FHIR Observation resource (in JSON format) and sends the POST request to the address above. 
-Patient reference is encrypted before sending the Observation to the server. So the server never gets a non-encrypted version of the Patient reference).
+Patient reference is encrypted before sending the Observation to the server. The server never gets a non-encrypted version of the Patient reference).
 
 ### 1.3 Condition
 **POST** request with a valid FHIR Condition resource (in JSON format, with correctly added reference extension) to http://localhost:7050/hapi.do/Condition \
 *or*\
 **testniPrimeri.java --> addConditionToPatient()** (Creates a sample FHIR Condition resource (in JSON format) and sends the POST request to the address above. 
-Patient reference is encrypted before sending the Condition to the server. So the server never gets a non-encrypted version of the Patient reference).
+Patient reference is encrypted before sending the Condition to the server. The server never gets a non-encrypted version of the Patient reference).
 
 ## 2. GET resources
 ### 2.1 Patient
