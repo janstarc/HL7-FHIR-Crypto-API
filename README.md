@@ -1,16 +1,16 @@
 # HL7 FHIR Resource Encryptor/Decryptor Microservice API
-The project is described in detail in this [thesis](https://repozitorij.uni-lj.si/IzpisGradiva.php?id=103201&lang=eng) *(in Slovenian language)*
+The project is described in detail in this <a href="https://repozitorij.uni-lj.si/IzpisGradiva.php?id=103201&lang=eng" target="_blank">thesis</a> *(in Slovenian language)*
 
-# Main goals and architecture
+# Main goals
 The main goal of the **HL7 FHIR Crypto API Microservice** is to ensure a safe transfer of HL7 FHIR resources from the app to FHIR  server, without the end-user experiencing any change in the use of the app. The Crypto API microservice is exposed outwards as a standard HL7 FHIR API interface.
 
-The only change for the user is that access point for HAPI server is no longer the HAPI server itself, but instead the microservice in this repository. There is also no change in the database itself - all data is saved in the same way, no matter that some data on the DB is encrypted.
+The only change for the end user is that access point for HAPI server is no longer the HAPI server itself, but instead the HL7 FHIR Crypto API Microservice described in this repository. There is also no change in the database itself - all data is saved in the same way and no change in the queries is needed, even though some data in the DB is encrypted.
 
-The goal is that the DB server stores encrypted data and never gets a decryption key. So, even if an attacker gets a full access to the DB, the data is useless, because the resources are impossible to be interpreted due to encrypted Patient reference.
+The goal is that the DB server only stores encrypted data but never gets a decryption key, because encryption/decryption is done exclusively by this microservice. So, even if an attacker gets a full access to the DB, the data is useless, because the resources are impossible to be interpreted due to encrypted Patient reference.
 
-## Architecture
+The microservice also enables to change the encryption key for the patient (see [Encryption Key Change](#keyChange)).
 
-
+# Architecture
 
 
 # Features
@@ -57,12 +57,13 @@ Patient reference is encrypted before sending the Condition to the server. The s
 **testniPrimeri.java --> getAllObservationsForPatient()**
 
 ### 2.3 Condition
-*When a resource (of type Observation or Condition) is requested by an authorized user, it contains a decrypted Patient reference. But on the HAPI server, a Patient reference is never saved in an unencrypted form* 
+*When a resource (of type Observation or Condition) is requested by an authorized user, it contains a decrypted Patient reference. But on the HAPI server, a Patient reference is never saved in an unencrypted form*
 - Searching by Patient ID (get all Conditions for a patient): **GET** request, example for a patient with *_id = 100* http://localhost:7050/hapi.do/Condition?patient=100\
 *or*\
 **testniPrimeri.java --> getAllConditionsForPatient()**
 
 ## 3. Encryption key change
+<a name="keyChange"></a>
 - A new encryption key can be generated with API (Example for a key with a name *sampleKey* http://localhost:7050/crypto.do/GenerateNewKey?keyAlias=sampleKey).
 - All resources of some patient are encrypted with the *same* key. (Currently, there are 15 test keys in the KeyStore: key1 - key15).
 - Key exchange for a patient (currently implemented for Observation and Condition resource) is executed as a transaction.

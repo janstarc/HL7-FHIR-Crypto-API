@@ -2,14 +2,18 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="cryptoDB@localhost" uuid="012f0f67-51d1-4221-b123-f640b4f4e36b">
-      <database-info product="MySQL" version="5.5.5-10.1.31-MariaDB" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.46 ( Revision: 9cc87a48e75c2d2e87c1a293b2862ce651cb256e )">
+      <database-info product="MySQL" version="5.5.5-10.1.31-MariaDB" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.46 ( Revision: 9cc87a48e75c2d2e87c1a293b2862ce651cb256e )" dbms="MARIADB" exact-version="10.1.31">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
-      <introspection-schemas>*:cryptodb</introspection-schemas>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema" qname="cryptodb" />
+        </introspection-scope>
+      </schema-mapping>
     </data-source>
   </component>
 </project>

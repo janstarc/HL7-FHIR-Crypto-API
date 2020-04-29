@@ -6,9 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="HL7-FHIR-Crypto-API" />
+        <module name="ToDoApp" />
         <module name="Diplomska2" />
         <module name="diplomskaHapiCrypto" />
-        <module name="ToDoApp" />
       </profile>
     </annotationProcessing>
   </component>
