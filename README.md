@@ -11,26 +11,25 @@ The goal is that the DB server only stores encrypted data but never gets a decry
 The microservice also enables to change the encryption key for the patient (see [Encryption Key Change](#keyChange)).
 
 # Architecture
-## Default architecture
+## Default Architecture
 The most basic architecture described in <a href="https://www.hl7.org/fhir/" target="_blank">HL7 FHIR Specification</a> 
 only requires 2 components - eHealth application using HL7 FHIR standard and FHIR Server, which exposes FHIR RESTful API interface.
 
-<img src="img/basicArchitecture.JPG" alt="Basic Architecture"  height="200">
+<img src="img/basicArchitecture.JPG" alt="Basic Architecture"  height="160">
 
-## HL7 FHIR Resource Encryptor/Decryptor architecture
-The main goal of this solution is, that there are no changes needed in the eHealth app (except for changing the access point to Crypto Microservice).
+## HL7 FHIR Resource Encryptor/Decryptor Architecture
+The main goal of this solution is, that there are no changes needed in the eHealth app (except for changing the access point to **Crypto Microservice**).
 
-In this architecture, 2 additional components are added to the default setup - **Crypto Microservice Access Point** and **Encryptor/Decryptor Microservice**.
+In this architecture, two additional components are added to the default setup: **Crypto Microservice Access Point** and **Encryptor/Decryptor Microservice**.
 
 <img src="img/appArchitectureNew.jpg" alt="App Architecture"  height="300">
 
-**Crypto Microservice AP** serves as access point of the entire solution and exposes (a subset of) standardized HL7 FHIR API interface. Its job is to route reuqests between the eHealth app, Encryptor/Decryptor and FHIR Server.
+- **Crypto Microservice AP** serves as an access point of the entire solution and exposes (a subset of) standardized HL7 FHIR API interface. Its job is to route reuqests between the **eHealth app**, **Encryptor/Decryptor** and **FHIR Server**.
 
-**Encryptor/Decryptor Microservice** ensures that the queries can be executed in the same (unencryped) way, no matter if some data being queried is encrypted or not in the DB - so no change is needed in the eHealth App. It is the only component, that can access the KeyStore. It doesn't store any data, and it doesn't communicate directly with FHIR Server or database. The task of this microservice is, put simply, to "translate" between encrypted and unencrypted data.
+- **Encryptor/Decryptor Microservice** ensures that the requests (from the perspective of the **eHealth app**) can be executed in the same way as in the *Default Architecture*, no matter if the data queried is being stored in encrypted or plain-text format in the DB. 
+    - In the **Patient-Key Table** there aren't any actual encryption keys stored - this table only maintains the relationship between Key Aliases and Patient resources. Encryption keys are safely stored in the (Java) **Keystore**.  
 
-In the **Patient-Key Table** there aren't any actual encryption keys being stored - this table only contains Key Aliases of the encryption keys, safely stored in the (Java) **Keystore**.
-
-There aren't any significant changes in the **FHIR server**. The only difference is, that in this setup, it communicates with Crypto Microservice AP instead of with the eHealth app directly.
+There aren't any significant changes in the **FHIR server**. The only difference is, that in this setup, it communicates with **Crypto Microservice AP** instead of with the **eHealth app** directly.
 
 
 
@@ -45,16 +44,16 @@ There aren't any significant changes in the **FHIR server**. The only difference
 # 1. POST resources
 ## 1.1 How does it work?
 1. Assume *Observation* resource is created by the **eHealth App**, containing unencrypted *Patient* reference.
-1. *Observation* resource POST request is sent to the **Crypto Microservice**, which redirects it to **Encryptor/Decryptor**.
+1. *Observation* resource POST request is sent to the **Crypto Microservice AP**, which redirects it to **Encryptor/Decryptor**.
 1. **Encryptor/Decryptor (ED)** detects unencrypted *Patient* reference in the *Observation* resource.
     1. **ED** checks in the **Patient-Key Table**, which key is used for this *Patient*'s medical record.
     1. **ED** accesses the **KeyStore**, gets the right key and encrypts the *Patient* reference. 
     1. When *Patient* reference is encrypted, **ED** modifies the resource and replaces unencrypted *Patient* reference with the encrypted one.
 1. Encrpted *Observation* resource POST request is sent back to **Crypto Microservice AP**
-1. **Crypto Microservice AP** redirects *Observation* resource POST request with encrypted *Patient* reference to the **FHIR Server**, which accesses the DB and stores it.
+1. **Crypto Microservice AP** redirects *Observation* resource POST request (with encrypted *Patient* reference) to the **FHIR Server**, which accesses the **DB** and stores it.
 1. **FHIR Server**'s response is then sent back to **eHealth** app. 
-    - In case of success, it returns unique identifier of the *Observation* resource, 
-    - In case of failure it returns an error message.
+    - In case of success, it returns a unique identifier of the *Observation* resource.
+    - In case of failure, it returns an error message.
 
 <img src="img/POST_request.jpg" alt="POST Request"  height="300">
 
@@ -80,7 +79,7 @@ Patient reference is encrypted before sending the Condition to the server. The s
 ## 2.1 How does it work?
 ### GET request
 1. Assume *Observation* resource is being queried by the **eHealth App**. The only encrypted attribute of the *Observation* resource in the **DB** is encrypted *Patient* reference.
-1. *Observation* resource GET request is intercepted by **Crypto Microservice**, which redirects it to **Encryptor/Decryptor**.
+1. *Observation* resource GET request is intercepted by **Crypto Microservice AP**, which redirects it to **Encryptor/Decryptor**.
 1. **Encryptor/Decryptor (ED)** detects unencrypted *Patient* reference in the GET request.
     1. **ED** checks in the **Patient-Key Table**, which key is used for this *Patient*'s medical record.
     1. **ED** accesses the **KeyStore**, gets the right key and encrypts the *Patient* reference. 
@@ -98,7 +97,7 @@ Patient reference is encrypted before sending the Condition to the server. The s
     - In case of success, **eHealth** app receives the *Observation* resource with decrypted *Patient* reference
     - In case of failure **eHealth** app receives an error message.
     
-<img src="img/GET_request.JPG" alt="GET Request"  height="300">
+<img src="img/GET_response.jpg" alt="GET Response"  height="300">
 
 ## 2.2 Examples (GET)
 ### 2.2.1 GET Patient
