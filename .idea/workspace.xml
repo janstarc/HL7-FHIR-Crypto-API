@@ -7,15 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09cfb8d0-a032-49fd-8d82-a8b218719caa" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/markdown-navigator-enh.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/markdown-navigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -482,7 +474,8 @@
       <workItem from="1530654052442" duration="145520000" />
       <workItem from="1588106377032" duration="3661000" />
       <workItem from="1588182956434" duration="410000" />
-      <workItem from="1588183393414" duration="29000" />
+      <workItem from="1588183393414" duration="3421000" />
+      <workItem from="1589105647522" duration="49000" />
     </task>
     <servers />
   </component>
@@ -494,10 +487,19 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="552" y="165" key="#Plugins/0.0.1920.1050@0.0.1920.1050" timestamp="1588183420034" />
+    <state x="739" y="266" key="FileChooserDialogImpl" timestamp="1588321132448">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="739" y="266" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1588321132448" />
     <state x="461" y="169" key="SettingsEditor" timestamp="1588183364785">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="461" y="169" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1588183364785" />
+    <state x="342" y="145" key="new project wizard" timestamp="1589105685204">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="342" y="145" key="new project wizard/0.0.1920.1050/1920.54.1280.994@0.0.1920.1050" timestamp="1589105685204" />
+    <state x="342" y="145" key="new project wizard/0.0.1920.1050@0.0.1920.1050" timestamp="1588321134244" />
   </component>
   <component name="masterDetails">
     <states>
