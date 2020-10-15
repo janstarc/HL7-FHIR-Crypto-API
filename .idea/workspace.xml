@@ -5,17 +5,17 @@
       <artifact name="diplomskaHapiCrypto:war exploded" />
     </artifacts-to-build>
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="09cfb8d0-a032-49fd-8d82-a8b218719caa" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/markdown-navigator-enh.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/markdown-navigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/GET_request.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/img/GET_request.JPG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/noAppArchitecture.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/img/basicArchitecture.JPG" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,6 +112,13 @@
     <option name="FILTER_DEBUG" value="false" />
     <option name="CUSTOM_FILTER" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Users\janst\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\202.7660.26\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectId" id="1bBXGwy7gAfx5cZMpdXcKoY9AXa" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -128,10 +135,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../hapi-fhir-jpaserver-example" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Markdown" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/src/main/java/com/todo/login/LoginServlet.java" />
   </component>
   <component name="RecentsManager">
@@ -442,20 +450,22 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.testniPrimeri" />
-      <item itemvalue="Application.directAccessTODELETE" />
       <item itemvalue="Application.cryptoDB" />
-      <item itemvalue="Tomcat Server.TestTomcat" />
+      <item itemvalue="Application.directAccessTODELETE" />
+      <item itemvalue="Application.testniPrimeri" />
       <item itemvalue="Tomcat Server.TestTomcat2" />
+      <item itemvalue="Tomcat Server.TestTomcat" />
       <item itemvalue="Tomcat Server.Tomcat 9" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.cryptoDB" />
+        <item itemvalue="Application.testniPrimeri" />
         <item itemvalue="Application.directAccessTODELETE" />
+        <item itemvalue="Application.cryptoDB" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -483,21 +493,29 @@
       <workItem from="1588106377032" duration="3661000" />
       <workItem from="1588182956434" duration="410000" />
       <workItem from="1588183393414" duration="29000" />
+      <workItem from="1602686834617" duration="656000" />
+      <workItem from="1602746564052" duration="907000" />
+      <workItem from="1602748406721" duration="449000" />
+      <workItem from="1602748908642" duration="8753000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="165" key="#Plugins" timestamp="1588183420034">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="872" y="345" key="#Plugins" timestamp="1602748933091">
+      <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state x="552" y="165" key="#Plugins/0.0.1920.1050@0.0.1920.1050" timestamp="1588183420034" />
-    <state x="461" y="169" key="SettingsEditor" timestamp="1588183364785">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="872" y="345" key="#Plugins/0.0.2560.1410/2560.0.1280.994@0.0.2560.1410" timestamp="1602748933091" />
+    <state x="1060" y="445" key="FileChooserDialogImpl" timestamp="1602748504355">
+      <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state x="461" y="169" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1588183364785" />
+    <state x="1060" y="445" key="FileChooserDialogImpl/0.0.2560.1410/2560.0.1280.994@0.0.2560.1410" timestamp="1602748504355" />
+    <state x="781" y="349" width="1499" height="711" key="SettingsEditor" timestamp="1602750755894">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="781" y="349" width="1499" height="711" key="SettingsEditor/0.0.2560.1410/2560.0.1280.994@0.0.2560.1410" timestamp="1602750755894" />
   </component>
   <component name="masterDetails">
     <states>
