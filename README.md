@@ -15,14 +15,14 @@ The microservice also enables to change the encryption key for the patient (see 
 The most basic architecture described in <a href="https://www.hl7.org/fhir/" target="_blank">HL7 FHIR Specification</a> 
 only requires 2 components - eHealth application using HL7 FHIR standard and FHIR Server, which exposes FHIR RESTful API interface.
 
-<img src="img/basicArchitecture.JPG" alt="Basic Architecture"  height="160">
+<img src="img/basicArchitecture.JPG" alt="Basic Architecture">
 
 ## HL7 FHIR Resource Encryptor/Decryptor Architecture
 The main goal of this solution is, that there are no changes needed in the eHealth app (except for changing the access point to **Crypto Microservice**).
 
 In this architecture, two additional components are added to the default setup: **Crypto Microservice Access Point** and **Encryptor/Decryptor Microservice**.
 
-<img src="img/appArchitectureNew.jpg" alt="App Architecture"  height="300">
+<img src="img/appArchitectureNew.jpg" alt="App Architecture">
 
 - **Crypto Microservice AP** serves as an access point of the entire solution and exposes (a subset of) standardized HL7 FHIR API interface. Its job is to route reuqests between the **eHealth app**, **Encryptor/Decryptor** and **FHIR Server**.
 
