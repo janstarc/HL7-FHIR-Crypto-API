@@ -15,14 +15,14 @@ The microservice also enables to change the encryption key for the patient (see 
 The most basic architecture described in <a href="https://www.hl7.org/fhir/" target="_blank">HL7 FHIR Specification</a> 
 only requires 2 components - eHealth application using HL7 FHIR standard and FHIR Server, which exposes FHIR RESTful API interface.
 
-<img src="img/basicArchitecture.JPG" alt="Basic Architecture"  height="550">
+<img src="img/basicArchitecture.JPG" alt="Basic Architecture"  height="200">
 
 ## HL7 FHIR Resource Encryptor/Decryptor architecture
 The main goal of this solution is, that there are no changes needed in the eHealth app (except for changing the access point to Crypto Microservice).
 
 In this architecture, 2 additional components are added to the default setup - **Crypto Microservice Access Point** and **Encryptor/Decryptor Microservice**.
 
-<img src="img/appArchitectureNew.jpg" alt="App Architecture"  height="550">
+<img src="img/appArchitectureNew.jpg" alt="App Architecture"  height="300">
 
 **Crypto Microservice AP** serves as access point of the entire solution and exposes (a subset of) standardized HL7 FHIR API interface. Its job is to route reuqests between the eHealth app, Encryptor/Decryptor and FHIR Server.
 
@@ -56,7 +56,7 @@ There aren't any significant changes in the **FHIR server**. The only difference
     - In case of success, it returns unique identifier of the *Observation* resource, 
     - In case of failure it returns an error message.
 
-<img src="img/POST_request.jpg" alt="POST Request"  height="550">
+<img src="img/POST_request.jpg" alt="POST Request"  height="300">
 
 ## 1.2 Examples (POST)
 ### 1.2.1 POST Patient
@@ -88,7 +88,7 @@ Patient reference is encrypted before sending the Condition to the server. The s
 1. *Observation* GET request with encrpted *Patient* reference is sent back to **Crypto Microservice AP**
 1. **Crypto Microservice AP** redirects *Observation* GET request with encrypted *Patient* reference to the **FHIR Server**, which accesses the DB.
 
-<img src="img/GET_request.JPG" alt="GET Request"  height="550">
+<img src="img/GET_request.JPG" alt="GET Request"  height="300">
 
 ### GET response
 
@@ -98,7 +98,7 @@ Patient reference is encrypted before sending the Condition to the server. The s
     - In case of success, **eHealth** app receives the *Observation* resource with decrypted *Patient* reference
     - In case of failure **eHealth** app receives an error message.
     
-<img src="img/GET_request.JPG" alt="GET Request"  height="550">
+<img src="img/GET_request.JPG" alt="GET Request"  height="300">
 
 ## 2.2 Examples (GET)
 ### 2.2.1 GET Patient
