@@ -22,7 +22,7 @@ The main goal of this solution is, that there are no changes needed in the eHeal
 
 In this architecture, two additional components are added to the default setup: **Crypto Microservice Access Point** and **Encryptor/Decryptor Microservice**.
 
-<img src="img/appArchitectureNew.jpg" alt="App Architecture" height="300">
+<img src="img/appArchitecture.JPG" alt="App Architecture" height="300">
 
 - **Crypto Microservice AP** serves as an access point of the entire solution and exposes (a subset of) standardized HL7 FHIR API interface. Its job is to route reuqests between the **eHealth app**, **Encryptor/Decryptor** and **FHIR Server**.
 
