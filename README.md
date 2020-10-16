@@ -2,11 +2,11 @@
 The project is described in detail in this <a href="https://repozitorij.uni-lj.si/IzpisGradiva.php?id=103201&lang=eng" target="_blank">thesis</a> *(in Slovenian language)*
 
 # Main goals
-The main goal of the **HL7 FHIR Crypto API Microservice** is to ensure a safe transfer of HL7 FHIR resources from the app to FHIR  server, without the end-user experiencing any change in the use of the app. The Crypto API microservice is exposed outwards as a standard HL7 FHIR API interface.
+The main goal of the **HL7 FHIR Crypto API Microservice** is to ensure a safe transfer of HL7 FHIR resources from the app to FHIR  server, without the end-user (and developer of the eHealth app) experiencing any change in the use of the app. The **Crypto API Microservice** is exposed outwards as a standard HL7 FHIR API interface.
 
-The only change for the end user is that access point for HAPI server is no longer the HAPI server itself, but instead the HL7 FHIR Crypto API Microservice described in this repository. There is also no change in the database itself - all data is saved in the same way and no change in the queries is needed, even though some data in the DB is encrypted.
+The only change for the end user is that access point for **FHIR server** is no longer the FHIR server itself, but instead the **HL7 FHIR Crypto API Microservice** described in this repository. There is also no change in the database itself - all data is saved in the same way and no change in the queries is needed, even though some data in the DB is encrypted.
 
-The goal is that the DB server only stores encrypted data but never gets a decryption key, because encryption/decryption is done exclusively by this microservice. So, even if an attacker gets a full access to the DB, the data is useless, because the resources are impossible to be interpreted due to encrypted Patient reference.
+The goal is that the DB server only stores encrypted data but never gets a decryption key, because encryption/decryption is done exclusively by the **Encryptor/Decryptor** component. So, even if an attacker gets a full access to the DB, the data is useless, because the resources are impossible to be interpreted due to encrypted *Patient* reference.
 
 The microservice also enables to change the encryption key for the patient (see [Encryption Key Change](#keyChange)).
 
